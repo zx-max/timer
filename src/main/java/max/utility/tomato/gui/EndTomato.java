@@ -30,6 +30,7 @@ public class EndTomato extends JFrame {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
+		this.setTitle("end timer");
 
 		jLabel1 = new javax.swing.JLabel();
 

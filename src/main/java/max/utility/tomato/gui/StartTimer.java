@@ -42,6 +42,7 @@ public class StartTimer extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
+		this.setTitle("start timer");
 
 		lbl_focusOn = new javax.swing.JLabel();
 		jScrollPane1 = new javax.swing.JScrollPane();
@@ -121,15 +122,15 @@ public class StartTimer extends javax.swing.JFrame {
 	void saveTomato(String focusOn) {
 		logger.debug("save tomato");
 //		tomatoDao.save(new Tomato(focusOn));
-        WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+//        WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+//        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
         setVisible(false);
         dispose();
         countDown();
 	}
 	
 	private void countDown() {
-		Countdown beeperControl = new Countdown();
+		Countdown beeperControl = new Countdown(this);
 		beeperControl.start();
 	}
 	
