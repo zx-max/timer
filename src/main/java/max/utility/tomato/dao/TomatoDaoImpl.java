@@ -10,10 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import max.utility.tomato.domain.Tomato;
 
-public class TomatoDaoImpl{
+public class TomatoDaoImpl {
 
-	public static final Logger logger = LoggerFactory
-			.getLogger(TomatoDaoImpl.class);
+	public static final Logger logger = LoggerFactory.getLogger(TomatoDaoImpl.class);
 
 	private EntityManager entityManager;
 

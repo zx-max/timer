@@ -12,21 +12,19 @@ import org.joda.time.LocalDateTime;
 @Entity
 public class Tomato {
 
-    @Id
-    @Column(name = "ID", unique = true, nullable = false, scale = 0)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@Column(name = "ID", unique = true, nullable = false, scale = 0)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String focusOn;
-	 
-	@Column(nullable=false)
-//	@Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
-	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+
+	@Column(nullable = false)
+	// @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 	private LocalDateTime startTime;
-	
-	
-	
+
 	public Tomato() {
 		super();
 	}
@@ -48,11 +46,5 @@ public class Tomato {
 		builder.append("]");
 		return builder.toString();
 	}
-
-	
-	
-	
-	
-	
 
 }

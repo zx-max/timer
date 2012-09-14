@@ -9,53 +9,49 @@ import javax.persistence.Persistence;
 
 import max.utility.tomato.dao.TomatoDaoImpl;
 import max.utility.tomato.domain.Tomato;
+import max.utility.tomato.gui.EndTomato;
+import max.utility.tomato.gui.StartTimer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Main {
 
-	private TomatoDaoImpl tomatoDao;
+	private  TomatoDaoImpl tomatoDao;
 
 	public static final Logger logger = LoggerFactory.getLogger(Main.class);
 
 	public Main() {
 		super();
-		EntityManagerFactory emFactory = Persistence
-				.createEntityManagerFactory("tomatoPU");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("tomatoPU");
 		EntityManager entityManager = emFactory.createEntityManager();
 		tomatoDao = new TomatoDaoImpl(entityManager);
+		StartTimer timer = new StartTimer(tomatoDao);
+		timer.setVisible(true);
+		timer.openWindow();
 	}
 
 	public static void main(String[] args) {
 
-//		String focusOn = args[0];
-		
-		countDown(args);
-		
-//		new Main().saveTomato(focusOn);
-//		new Main().list();
+		// String focusOn = args[0];
+
+		new Main();
+
+		// new Main().saveTomato(focusOn);
+		// new Main().list();
 
 	}
 
-	private static void countDown(String[] args) {
-		BeeperControl beeperControl = new BeeperControl();
-		beeperControl.beepForAnHour();
-//		int duration = Integer.parseInt(args[1]);
-//		logger.info("end timer");
-	}
+
 
 	private void list() {
 		List<Tomato> list = tomatoDao.list();
 		if (logger.isDebugEnabled()) {
-			logger.debug(Arrays.toString(list.toArray()).replace("Tomato [",
-					"\nTomato ["));
+			logger.debug(Arrays.toString(list.toArray()).replace("Tomato [", "\nTomato ["));
 		}
 
 	}
 
-	private void saveTomato(String focusOn) {
-		tomatoDao.save(new Tomato(focusOn));
-	}
+
 
 }
