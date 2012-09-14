@@ -31,7 +31,6 @@ public class Countdown {
 
 			logger.debug("before timer");
 			ScheduledFuture scheduledFuture = scheduledExecutorService.schedule(actionToPerform, 3, TimeUnit.SECONDS);
-			Object object = scheduledFuture.get();
 			logger.debug("after timer");
 			
 		} catch (Exception e) {

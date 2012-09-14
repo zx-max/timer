@@ -19,8 +19,7 @@ public class EndTomato extends JFrame {
 	public EndTomato() {
 		initComponents();
 		setVisible(true);
-		pack();
-		setVisible(true);
+//		pack();
 	}
 
 	/**
