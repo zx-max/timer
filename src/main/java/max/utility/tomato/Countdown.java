@@ -5,6 +5,8 @@ import static java.util.concurrent.TimeUnit.*;
 import java.util.Date;
 import java.util.concurrent.*;
 
+import javax.swing.JFrame;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,17 +21,17 @@ public class Countdown {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void start() {
 		try {
-			Callable actionToPerform = new Callable() {
-				public Object call() throws Exception {
+			Callable actionToPerform = new Callable<JFrame>() {
+				public JFrame call() throws Exception {
 					EndTomato endTomato = new EndTomato();
-					endTomato.openWindow();
-					logger.debug("after open endTomato");
-					return "timer ended...";
+					logger.debug("open endTomato");
+					return endTomato.openWindow();
 				}
 			};
 
 			logger.debug("before timer");
 			ScheduledFuture scheduledFuture = scheduledExecutorService.schedule(actionToPerform, 3, TimeUnit.SECONDS);
+			Object object = scheduledFuture.get();
 			logger.debug("after timer");
 			
 		} catch (Exception e) {

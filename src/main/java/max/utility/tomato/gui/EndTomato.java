@@ -1,10 +1,16 @@
 package max.utility.tomato.gui;
 
+import javax.swing.JFrame;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EndTomato extends javax.swing.JFrame {
+public class EndTomato extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8849013985135065049L;
 	public static final Logger logger = LoggerFactory.getLogger(EndTomato.class);
 
 	/**
@@ -48,7 +54,7 @@ public class EndTomato extends javax.swing.JFrame {
 	 * @param args
 	 *            the command line arguments
 	 */
-	public void openWindow() {
+	public JFrame openWindow() {
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed"
 		// desc=" Look and feel setting code (optional) ">
@@ -68,6 +74,7 @@ public class EndTomato extends javax.swing.JFrame {
 		} catch (Exception ex) {
 			logger.error(null, ex);
 		}
+		return this;
 		// </editor-fold>
 
 		/* Create and display the form */
