@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>max.utility.tomato</groupId>
+	<artifactId>tomato</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>max.utility.tomato.Main</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<!-- data base -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.0.60</version>
+		</dependency>
+
+		<!-- date / time management -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>3.0.0.CR1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.jodatime</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<!-- orm: jpa + hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.1.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.1.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.5.6-Final</version>
+		</dependency>
+
+		<!-- java.lang.ClassFormatError: Absent Code attribute in method that is not native 
+			or abstract in class file javax/transaction/SystemException -->
+		<!-- I had the same error. I found that hibernate has the (Maven-) -->
+		<!-- transitive Dependency to ebj-persistence-*.jar. Additionally, I needed -->
+		<!-- javaee-api-5.jar in the classpath (for EJBException,...). Now, -->
+		<!-- ebj-persistence.jar is a subset of javaee-api-5.jar, and if they are -->
+		<!-- not compatible, a ClassFormatError raises when javaee-api-5.jar is -->
+		<!-- loaded first. I found, that the Apache-Implementation of javaee-api-5 -->
+		<!-- is compatible with Hibernate: -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0b</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<!-- logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+	</dependencies>
+</project>
