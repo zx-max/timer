@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 
 import max.utility.tomato.dao.TomatoDaoImpl;
 import max.utility.tomato.domain.Tomato;
-import max.utility.tomato.gui.EndTomato;
 import max.utility.tomato.gui.StartTimer;
 
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class Main {
 
-	private  TomatoDaoImpl tomatoDao;
+	private TomatoDaoImpl tomatoDao;
 
 	public static final Logger logger = LoggerFactory.getLogger(Main.class);
 
@@ -32,17 +31,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-
-		// String focusOn = args[0];
-
 		new Main();
-
-		// new Main().saveTomato(focusOn);
-		// new Main().list();
-
 	}
-
-
 
 	private void list() {
 		List<Tomato> list = tomatoDao.list();
@@ -51,7 +41,5 @@ public class Main {
 		}
 
 	}
-
-
 
 }

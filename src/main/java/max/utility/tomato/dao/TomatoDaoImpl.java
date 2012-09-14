@@ -5,10 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import max.utility.tomato.domain.Tomato;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import max.utility.tomato.domain.Tomato;
 
 public class TomatoDaoImpl {
 

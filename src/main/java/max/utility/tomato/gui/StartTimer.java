@@ -1,14 +1,10 @@
 package max.utility.tomato.gui;
 
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
+import max.utility.tomato.Countdown;
+import max.utility.tomato.dao.TomatoDaoImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import max.utility.tomato.Countdown;
-import max.utility.tomato.dao.TomatoDaoImpl;
-import max.utility.tomato.domain.Tomato;
 
 public class StartTimer extends javax.swing.JFrame {
 
@@ -19,9 +15,8 @@ public class StartTimer extends javax.swing.JFrame {
 
 	public static final Logger logger = LoggerFactory.getLogger(StartTimer.class);
 
-	private  TomatoDaoImpl tomatoDao;
+	private TomatoDaoImpl tomatoDao;
 
-	
 	/**
 	 * Creates new form StartTimer
 	 */
@@ -110,7 +105,6 @@ public class StartTimer extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>
 
-
 	private void btnStartTomatoMouseClicked(java.awt.event.MouseEvent evt) {
 		saveTomato(ta_focusOn.getText());
 	}
@@ -121,19 +115,19 @@ public class StartTimer extends javax.swing.JFrame {
 
 	void saveTomato(String focusOn) {
 		logger.debug("save tomato");
-//		tomatoDao.save(new Tomato(focusOn));
-//        WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-//        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-        setVisible(false);
-        dispose();
-        countDown();
+		// tomatoDao.save(new Tomato(focusOn));
+		// WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+		// Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+		setVisible(false);
+		dispose();
+		countDown();
 	}
-	
+
 	private void countDown() {
 		Countdown beeperControl = new Countdown(this);
 		beeperControl.start();
 	}
-	
+
 	public void openWindow() {
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed"
@@ -153,15 +147,15 @@ public class StartTimer extends javax.swing.JFrame {
 			}
 		} catch (Exception ex) {
 			logger.error(null, ex);
-		} 
+		}
 		// </editor-fold>
 
 		/* Create and display the form */
-//		java.awt.EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				new StartTimer().setVisible(true);
-//			}
-//		});
+		// java.awt.EventQueue.invokeLater(new Runnable() {
+		// public void run() {
+		// new StartTimer().setVisible(true);
+		// }
+		// });
 	}
 
 	// Variables declaration - do not modify

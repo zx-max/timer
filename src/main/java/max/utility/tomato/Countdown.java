@@ -1,17 +1,19 @@
 package max.utility.tomato;
 
-
-import java.awt.event.WindowAdapter;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import max.utility.tomato.gui.EndTomato;
 import max.utility.tomato.gui.StartTimer;
 import max.utility.tomato.gui.window.listener.CloseTimersListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Countdown {
 
@@ -31,7 +33,7 @@ public class Countdown {
 			Callable actionToPerform = new Callable<JFrame>() {
 				public JFrame call() throws Exception {
 					EndTomato endTomato = new EndTomato();
-					endTomato.addWindowListener(new CloseTimersListener(new JFrame[]{endTomato,startTimer} ));
+					endTomato.addWindowListener(new CloseTimersListener(new JFrame[] { endTomato, startTimer }));
 					logger.debug("open endTomato");
 					return endTomato.openWindow();
 				}

@@ -1,6 +1,6 @@
 package max.utility.tomato.gui;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,10 +11,9 @@ import max.utility.tomato.dao.TomatoDaoImpl;
 import org.junit.Test;
 
 public class StartTimerTest {
-	private  TomatoDaoImpl tomatoDao;
+	private TomatoDaoImpl tomatoDao;
 
-	
-	public StartTimerTest(){
+	public StartTimerTest() {
 		super();
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("tomatoPU");
 		EntityManager entityManager = emFactory.createEntityManager();
