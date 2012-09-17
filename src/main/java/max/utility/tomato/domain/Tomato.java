@@ -12,7 +12,7 @@ import org.joda.time.LocalDateTime;
 @Entity
 public class Tomato {
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 500)
 	private String focusOn;
 
 	@Id

@@ -1,11 +1,11 @@
 package max.utility.tomato.dao;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import max.utility.tomato.domain.Tomato;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,14 +24,40 @@ public class HibernateBasicDaoImpl {
 		this.entityManager = entityManager;
 	}
 
-	public org.hibernate.Session getSession() {
-		return ((org.hibernate.Session) entityManager.getDelegate());
+	private Long convertToLong(Object number) {
+		if (null == number) {
+			return 0L;
+		}
+		if (number instanceof Number) {
+			return ((Number) number).longValue();
+		}
+		if (number instanceof BigDecimal) {
+			return ((BigDecimal) number).longValue();
+		}
+		if (number instanceof BigInteger) {
+			return ((BigInteger) number).longValue();
+		}
+		if (number instanceof Integer) {
+			return ((Integer) number).longValue();
+		}
+		if (number instanceof Double) {
+			return ((Double) number).longValue();
+		}
+		if (number instanceof Float) {
+			return ((Float) number).longValue();
+		}
+
+		return Long.valueOf(number.toString());
 	}
 
-	public List<Tomato> list() {
-		Query query = entityManager.createNamedQuery("TomatoDaoImpl.list");
-		List<Tomato> list = query.getResultList();
-		return list;
+	public Long count(String namedQuery) {
+		Query query = entityManager.createNamedQuery(namedQuery);
+
+		return convertToLong(query.getSingleResult());
+	}
+
+	public org.hibernate.Session getSession() {
+		return ((org.hibernate.Session) entityManager.getDelegate());
 	}
 
 	public <T> T load(Class<T> entityClass, Long id) {
@@ -39,6 +65,12 @@ public class HibernateBasicDaoImpl {
 		logger.debug("loaded [{}], with id:[{}]", new Object[] { entityClass, id });
 		return reference;
 
+	}
+
+	public List namedQuery(String namedQuery) {
+		Query query = entityManager.createNamedQuery(namedQuery);
+		List list = query.getResultList();
+		return list;
 	}
 
 	public void save(Object entity) {

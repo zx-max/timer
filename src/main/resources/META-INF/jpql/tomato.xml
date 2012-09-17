@@ -10,4 +10,8 @@
 		<description>list all tomato. Show firstly last created.</description>
 		<query>FROM Tomato tomato order by  tomato.startTime desc</query>
 	</named-query>
+	<named-query name="Tomato.count">
+		<description>count tomatos.</description>
+		<query>SELECT COUNT(t) FROM Tomato t</query>
+	</named-query>
 </entity-mappings>

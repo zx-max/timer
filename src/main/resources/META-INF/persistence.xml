@@ -19,12 +19,12 @@
 			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
 
 			<!-- h2 file -->
-			<property name="hibernate.connection.url" value="jdbc:h2:file:/tomato/db" />
+			<property name="hibernate.connection.url" value="jdbc:h2:file:~/.timer-manager/sqlDataBase/timer_manager_db" />
 			<property name="hibernate.connection.username" value="sa" />
 			<property name="hibernate.connection.password" value="" />
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 
 
 			<!-- hsqldb in memory -->
