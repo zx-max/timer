@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
-import max.utility.tomato.gui.EndTomato;
+import max.utility.tomato.gui.EndTimer;
 import max.utility.tomato.gui.StartTimer;
 import max.utility.tomato.gui.window.listener.CloseTimersListener;
 
@@ -19,28 +19,29 @@ public class Countdown {
 
 	public static final Logger logger = LoggerFactory.getLogger(Countdown.class);
 
-	private ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+	private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
 
-	private StartTimer startTimer;
+	private final StartTimer startTimer;
 
 	public Countdown(StartTimer startTimer) {
 		this.startTimer = startTimer;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void start() {
+	public void start(final Long tomatoId) {
 		try {
 			Callable actionToPerform = new Callable<JFrame>() {
 				public JFrame call() throws Exception {
-					EndTomato endTomato = new EndTomato();
-					endTomato.addWindowListener(new CloseTimersListener(new JFrame[] { endTomato, startTimer }));
+					EndTimer endTimer = new EndTimer(tomatoId);
+					endTimer.addWindowListener(new CloseTimersListener(new JFrame[] { endTimer, startTimer }));
 					logger.debug("open endTomato");
-					return endTomato.openWindow();
+					return endTimer.openWindow();
 				}
 			};
 
 			logger.debug("before timer");
-			ScheduledFuture scheduledFuture = scheduledExecutorService.schedule(actionToPerform, 3, TimeUnit.SECONDS);
+			ScheduledFuture future = scheduledExecutorService.schedule(actionToPerform, 3, TimeUnit.SECONDS);
+			future.get(); // throw exceptions if happened
 			logger.debug("after timer");
 
 		} catch (Exception e) {

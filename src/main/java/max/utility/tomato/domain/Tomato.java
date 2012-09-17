@@ -12,13 +12,13 @@ import org.joda.time.LocalDateTime;
 @Entity
 public class Tomato {
 
+	@Column(nullable = false)
+	private String focusOn;
+
 	@Id
 	@Column(name = "ID", unique = true, nullable = false, scale = 0)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@Column(nullable = false)
-	private String focusOn;
 
 	@Column(nullable = false)
 	// @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
@@ -32,6 +32,30 @@ public class Tomato {
 	public Tomato(String focusOn) {
 		this.focusOn = focusOn;
 		startTime = new LocalDateTime();
+	}
+
+	public String getFocusOn() {
+		return focusOn;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
+	public void setFocusOn(String focusOn) {
+		this.focusOn = focusOn;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
 	}
 
 	@Override

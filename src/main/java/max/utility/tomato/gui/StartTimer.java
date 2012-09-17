@@ -1,32 +1,64 @@
 package max.utility.tomato.gui;
 
+import java.awt.event.KeyEvent;
+
 import max.utility.tomato.Countdown;
-import max.utility.tomato.dao.TomatoDaoImpl;
+import max.utility.tomato.DaoRegister;
+import max.utility.tomato.dao.HibernateBasicDaoImpl;
+import max.utility.tomato.domain.Tomato;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class StartTimer extends javax.swing.JFrame {
 
+	public static final Logger logger = LoggerFactory.getLogger(StartTimer.class);
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4105760033118242900L;
 
-	public static final Logger logger = LoggerFactory.getLogger(StartTimer.class);
+	private final HibernateBasicDaoImpl basicDao;
 
-	private TomatoDaoImpl tomatoDao;
+	// Variables declaration - do not modify
+	private javax.swing.JButton btnStartTomato;
+
+	private javax.swing.JScrollPane jScrollPane1;
+
+	private javax.swing.JLabel lbl_focusOn;
+
+	private javax.swing.JTextArea ta_focusOn;
+
+	// End of variables declaration
 
 	/**
 	 * Creates new form StartTimer
 	 */
 	public StartTimer() {
 		initComponents();
+		basicDao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
 	}
 
-	public StartTimer(TomatoDaoImpl tomatoDao) {
-		this.tomatoDao = tomatoDao;
+	public StartTimer(HibernateBasicDaoImpl tomatoDao) {
 		initComponents();
+		basicDao = tomatoDao;
+	}
+
+	private void btnStartTomatoKeyPressed(java.awt.event.KeyEvent evt) {
+		logger.debug(evt.getKeyCode() + ", " + evt.getKeyChar());
+		if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
+			saveTomato(ta_focusOn.getText());
+		}
+	}
+
+	private void btnStartTomatoMouseClicked(java.awt.event.MouseEvent evt) {
+		saveTomato(ta_focusOn.getText());
+	}
+
+	private void countDown(final Long tomatoId) {
+		Countdown beeperControl = new Countdown(this);
+		beeperControl.start(tomatoId);
 	}
 
 	/**
@@ -37,7 +69,7 @@ public class StartTimer extends javax.swing.JFrame {
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
-		this.setTitle("start timer");
+		setTitle("start timer");
 
 		lbl_focusOn = new javax.swing.JLabel();
 		jScrollPane1 = new javax.swing.JScrollPane();
@@ -62,11 +94,13 @@ public class StartTimer extends javax.swing.JFrame {
 
 		btnStartTomato.setText("inizia");
 		btnStartTomato.addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				btnStartTomatoMouseClicked(evt);
 			}
 		});
 		btnStartTomato.addKeyListener(new java.awt.event.KeyAdapter() {
+			@Override
 			public void keyPressed(java.awt.event.KeyEvent evt) {
 				btnStartTomatoKeyPressed(evt);
 			}
@@ -105,29 +139,6 @@ public class StartTimer extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>
 
-	private void btnStartTomatoMouseClicked(java.awt.event.MouseEvent evt) {
-		saveTomato(ta_focusOn.getText());
-	}
-
-	private void btnStartTomatoKeyPressed(java.awt.event.KeyEvent evt) {
-		System.out.println("btnStartTomatoKeyPressed");
-	}
-
-	void saveTomato(String focusOn) {
-		logger.debug("save tomato");
-		// tomatoDao.save(new Tomato(focusOn));
-		// WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-		// Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-		setVisible(false);
-		dispose();
-		countDown();
-	}
-
-	private void countDown() {
-		Countdown beeperControl = new Countdown(this);
-		beeperControl.start();
-	}
-
 	public void openWindow() {
 		/* Set the Nimbus look and feel */
 		// <editor-fold defaultstate="collapsed"
@@ -158,10 +169,12 @@ public class StartTimer extends javax.swing.JFrame {
 		// });
 	}
 
-	// Variables declaration - do not modify
-	private javax.swing.JButton btnStartTomato;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JLabel lbl_focusOn;
-	private javax.swing.JTextArea ta_focusOn;
-	// End of variables declaration
+	void saveTomato(String focusOn) {
+		logger.debug("save tomato");
+		Tomato tomato = new Tomato(focusOn);
+		basicDao.save(tomato);
+		setVisible(false);
+		dispose();
+		countDown(tomato.getId());
+	}
 }

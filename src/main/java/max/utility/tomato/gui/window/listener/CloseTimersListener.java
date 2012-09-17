@@ -12,19 +12,20 @@ import org.slf4j.LoggerFactory;
 public class CloseTimersListener extends WindowAdapter {
 
 	public static final Logger logger = LoggerFactory.getLogger(CloseTimersListener.class);
-	private JFrame[] jFrames;
+	private final JFrame[] jFrames;
 
 	public CloseTimersListener(JFrame[] jFrames) {
 		this.jFrames = jFrames;
 	}
 
+	@Override
 	public void windowClosing(WindowEvent arg0) {
 		logger.debug("start closing windows..");
-		for (int i = 0; i < jFrames.length; i++) {
-			jFrames[i].setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			WindowEvent wev = new WindowEvent(jFrames[i], WindowEvent.WINDOW_CLOSING);
+		for (JFrame jFrame : jFrames) {
+			jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			WindowEvent wev = new WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING);
 			Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-			logger.debug(jFrames[i].getTitle());
+			logger.debug(jFrame.getTitle());
 		}
 
 		// http://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe

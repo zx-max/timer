@@ -10,6 +10,7 @@
 		<mapping-file>META-INF/jpql/tomato.xml</mapping-file>
 		
 		<class>max.utility.tomato.domain.Tomato</class>
+		<class>max.utility.tomato.domain.TomatoReview</class>
 
 		<properties>
 			<property name="hibernate.format_sql" value="true" />
