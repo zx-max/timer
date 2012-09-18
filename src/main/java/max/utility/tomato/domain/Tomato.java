@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
@@ -13,6 +14,7 @@ import org.joda.time.LocalDateTime;
 public class Tomato {
 
 	@Column(nullable = false, length = 500)
+	@Size(min = 1, max = 500)
 	private String focusOn;
 
 	@Id
