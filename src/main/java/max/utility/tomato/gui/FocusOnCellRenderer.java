@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 import javax.swing.table.TableCellRenderer;
 
 //http://www.coderanch.com/t/340609/GUI/java/JTable-Custom-Cell-Renderer-JTextArea
+//http://stackoverflow.com/questions/10098274/jtextarea-as-cell-renderer-does-not-seem-to-work-with-wrap-style-word
 public class FocusOnCellRenderer extends JTextArea implements TableCellRenderer {
 
 	private final Color evenColor = new Color(230, 240, 255);
