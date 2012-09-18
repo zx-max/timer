@@ -1,6 +1,14 @@
 package max.utility.tomato.gui;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 import max.utility.tomato.Countdown;
 import max.utility.tomato.DaoRegister;
@@ -77,12 +85,33 @@ public class StartTimer extends javax.swing.JFrame {
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
 
-		// jTable1.setRowHeight(40);
+		jTable1.setRowHeight(40);
 		jTable1.setModel(new JPAPaginationTableModel());
 		jTable1.setDefaultRenderer(Object.class, new EvenOddRowCellRenderer());
-		// TableColumn focusOnColumn = jTable1.getColumnModel().getColumn(1);
-		// focusOnColumn.setCellRenderer(new FocusOnCellRenderer());
-		// focusOnColumn.setCellEditor(new FocusOnCellEditor());
+		jTable1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					JTable target = (JTable) e.getSource();
+					int row = target.getSelectedRow();
+					int column = target.getSelectedColumn();
+					JTextArea ta = new JTextArea();
+					ta.setLineWrap(true);
+					int constant = 400;
+					int constant1 = 300;
+					ta.setSize(constant, constant1);
+					ta.setEditable(false);
+					String text = (String) jTable1.getModel().getValueAt(row, column);
+					ta.setText(text);
+					ta.setLineWrap(true);
+					JScrollPane sp = new JScrollPane(ta);
+					sp.setSize(constant, constant1);
+					sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+					JOptionPane.showMessageDialog(jTable1, sp);
+				}
+
+			}
+		});
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,7 +120,7 @@ public class StartTimer extends javax.swing.JFrame {
 		ta_focusOn.setRows(5);
 		ta_focusOn.setTabSize(2);
 		ta_focusOn
-				.setText("descrivi cosa intendi fare nei prossimi 20 minuti... \n[Ctrl+tab] per togliere il \"focus\" dall' area di testo");
+				.setText("descrivi cosa intendi fare nei prossimi 20 minuti... \n[Ctrl+tab] per togliere il \"focus\" dall' area di testo.\n max 250 caratteri");
 		ta_focusOn
 				.setToolTipText("descrivi cosa intendi fare nei prossimi 20 minuti... \n[Ctrl+tab] per togliere il \"focus\" dall' area di testo");
 		jScrollPane1.setViewportView(ta_focusOn);
@@ -184,19 +213,6 @@ public class StartTimer extends javax.swing.JFrame {
 		tab_Timers.getAccessibleContext().setAccessibleName("lista dei timer");
 
 		pack();
-	}
-
-	public void openWindow() {
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (Exception ex) {
-			logger.error(null, ex);
-		}
 	}
 
 	void saveTomato(String focusOn) {
