@@ -35,7 +35,7 @@ public class JPAPaginationTableModel extends AbstractTableModel {
 	public String getColumnName(int column) {
 		switch (column) {
 		case 0:
-			return "ID";
+			return "Data / Ora";
 		case 1:
 			return "Focus on";
 		default:
@@ -108,7 +108,7 @@ public class JPAPaginationTableModel extends AbstractTableModel {
 		Object toReturn = null;
 		switch (columnIndex) {
 		case 0:
-			toReturn = c.getId();
+			toReturn = c.getStartTime().toString("dd/MM/yy - HH:mm");
 			break;
 		case 1:
 			toReturn = c.getFocusOn();
