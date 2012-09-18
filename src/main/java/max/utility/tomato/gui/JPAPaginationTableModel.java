@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 import max.utility.tomato.DaoRegister;
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
-import max.utility.tomato.domain.Tomato;
+import max.utility.tomato.domain.TomatoReview;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +20,16 @@ public class JPAPaginationTableModel extends AbstractTableModel {
 	private int counter;
 	private final HibernateBasicDaoImpl dao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
 	private int startPosition;
-	private List<Tomato> theList;
+	private List<TomatoReview> theList;
 
 	public JPAPaginationTableModel() {
 		startPosition = 0;
 		theList = getItems(startPosition, startPosition + 10);
 	}
 
+	@Override
 	public int getColumnCount() {
-		return 2;
+		return 4;
 	}
 
 	@Override
@@ -38,16 +39,20 @@ public class JPAPaginationTableModel extends AbstractTableModel {
 			return "Data / Ora";
 		case 1:
 			return "Focus on";
+		case 2:
+			return "Cosa ho fatto realmente";
+		case 3:
+			return "Problemi incontrati";
 		default:
 			return "LAST NAME";
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<Tomato> getItems(int startPosition2, int i) {
+	private List<TomatoReview> getItems(int startPosition2, int i) {
 		logger.debug("numer of requests to the database " + counter++);
 
-		List<Tomato> resultList = dao.namedQuery("TomatoDaoImpl.list");
+		List<TomatoReview> resultList = dao.namedQuery("TomatoReview.list");
 		return resultList;
 	}
 
@@ -92,10 +97,12 @@ public class JPAPaginationTableModel extends AbstractTableModel {
 	// at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
 	// at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
 	// at java.awt.EventDispatchThread.run(Unknown Source)
+	@Override
 	public int getRowCount() {
 		return dao.count("Tomato.count").intValue();
 	}
 
+	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 
 		if ((rowIndex >= startPosition) && (rowIndex < (startPosition + 100))) {
@@ -103,18 +110,24 @@ public class JPAPaginationTableModel extends AbstractTableModel {
 			theList = getItems(rowIndex, rowIndex + 100);
 			startPosition = rowIndex;
 		}
-		Tomato c = theList.get(rowIndex - startPosition);
+		TomatoReview tomatoReview = theList.get(rowIndex - startPosition);
 
 		Object toReturn = null;
 		switch (columnIndex) {
 		case 0:
-			toReturn = c.getStartTime().toString("dd/MM/yy - HH:mm");
+			toReturn = tomatoReview.getTomato().getStartTime().toString("dd/MM/yy - HH:mm");
 			break;
 		case 1:
-			toReturn = c.getFocusOn();
+			toReturn = tomatoReview.getTomato().getFocusOn();
+			break;
+		case 2:
+			toReturn = tomatoReview.getReallyDone();
+			break;
+		case 3:
+			toReturn = tomatoReview.getProblemsRaised();
 			break;
 		default:
-			toReturn = c.getId();
+			toReturn = tomatoReview.getId();
 
 		}
 		return toReturn;
