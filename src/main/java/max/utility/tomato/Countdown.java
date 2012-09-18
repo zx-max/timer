@@ -19,18 +19,25 @@ public class Countdown {
 
 	public static final Logger logger = LoggerFactory.getLogger(Countdown.class);
 
+	private long duration;
+
 	private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
 
-	private final StartTimer startTimer;
+	private StartTimer startTimer;
+
+	private TimeUnit timeUnit;
 
 	public Countdown(StartTimer startTimer) {
 		this.startTimer = startTimer;
+		duration = Integer.valueOf(PropertyLoader.getProperty("duration"));
+		timeUnit = Enum.valueOf(TimeUnit.class, PropertyLoader.getProperty("time.measurement.unit"));
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void start(final Long tomatoId) {
 		try {
 			Callable actionToPerform = new Callable<JFrame>() {
+				@Override
 				public JFrame call() throws Exception {
 					EndTimer endTimer = new EndTimer(tomatoId);
 					endTimer.addWindowListener(new CloseTimersListener(new JFrame[] { endTimer, startTimer }));
@@ -40,7 +47,7 @@ public class Countdown {
 			};
 
 			logger.debug("before timer");
-			ScheduledFuture future = scheduledExecutorService.schedule(actionToPerform, 3, TimeUnit.SECONDS);
+			ScheduledFuture future = scheduledExecutorService.schedule(actionToPerform, duration, timeUnit);
 			future.get(); // throw exceptions if happened
 			logger.debug("after timer");
 
@@ -51,15 +58,4 @@ public class Countdown {
 		scheduledExecutorService.shutdown();
 	}
 
-	// private Callable getActionToPerform() {
-	// Callable actionToPerform = new Callable() {
-	// public Object call() throws Exception {
-	// EndTomato endTomato = new EndTomato();
-	// endTomato.openWindow();
-	// logger.debug("after open end tomato");
-	// return "timer ended...";
-	// }
-	// };
-	// return actionToPerform;
-	// }
 }
