@@ -30,16 +30,6 @@ public class Main {
 		DaoRegister.put(HibernateBasicDaoImpl.class, basicDao);
 		StartTimer timer = new StartTimer();
 		timer.setVisible(true);
-		timer.openWindow();
 	}
-
-	// private void list() {
-	// List<Tomato> list = tomatoDao.list();
-	// if (logger.isDebugEnabled()) {
-	// logger.debug(Arrays.toString(list.toArray()).replace("Tomato [",
-	// "\nTomato ["));
-	// }
-	//
-	// }
 
 }
