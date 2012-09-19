@@ -1,9 +1,33 @@
-* TODO log start time and focus of the current timer.
+* ROADMAP
+** version 0.0.1
+*** build a simple model
+*** add basic ui
+*** simple logging configuration
+*** read timer duration from a property file
+
+** version 0.0.2 
+*** todo apply code metrics
+*** todo create the distrubution file zip
+	it have to contain a folder with:
+	 - the jar file 
+	 - the timer-manager.properties
+	 
+	 easyiest way should be an executable file which do somethink like this:
+	 DISTRIBUTION_FOLDER = timer-manager 
+	 rm ${DISTRIBUTION_FOLDER} -rf
+	 mkdir ${DISTRIBUTION_FOLDER}
+	 mvn clean assembly:assembly -Dmaven.test.skip=true
+	 cp target/tomato-0.0.1-SNAPSHOT-jar-with-dependencies.jar ${DISTRIBUTION_FOLDER}/timer-manager-0.0.1-SNAPSHOT-20-min.jar
+	 cp src/test/resources/timer-manager.properties ${DISTRIBUTION_FOLDER}
+	 
+*** TODO log start time and focus of the current timer.
 otherwise i have to wait the end to see the exactlly words.
 
-* todo default configuration for Countdown.
+*** todo default configuration for Countdown.
 
-* TODO system tray icon.
+
+** VERSION 0.0.3
+*** TODO add system tray icon.
 
 https://www.google.it/search?q=%20Device%20or%20resource%20busy&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:it:official&client=firefox-a&source=hp&channel=np#hl=it&client=firefox-a&rls=org.mozilla:it%3Aofficial&channel=np&sclient=psy-ab&q=add+window+system+tray+icon+to+a+java+program&oq=add+window+system+tray+icon+to+a+java+program&gs_l=serp.3...6679.16546.6.17153.24.23.1.0.0.2.224.4032.0j21j2.23.0...0.0...1c.1.fetFbEhZHlo&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.&fp=c6224e40b1bf022&biw=1280&bih=930
 http://docs.oracle.com/javase/tutorial/uiswing/misc/systemtray.html
@@ -11,10 +35,13 @@ http://stackoverflow.com/questions/9701852/how-to-add-application-to-system-tray
 http://stackoverflow.com/questions/9964116/how-to-put-java-application-in-systemtray-when-user-clicks-on-close-windows
 
 
-** count down on mouse over system icon tray
+*** todo count down on mouse over system icon tray
  
 
 * OTHER
+** todo wiki maven release
+
+** todo wiki Git-Egit-Eclipse
 $ git diff HEAD
 diff --git a/src/main/java/max/utility/tomato/PropertyLoader.java b/src/main/java/max/utility/tomato/PropertyLoader.java
 old mode 100644
