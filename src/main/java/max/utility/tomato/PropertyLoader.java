@@ -21,6 +21,14 @@ public class PropertyLoader {
 	private static Properties props = new Properties();
 	public static final String TIMER_MANAGER_PROP_FILE = "timer-manager.properties";
 
+	public static String dump() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PropertyLoader [toString()=");
+		builder.append(props.toString());
+		builder.append("]");
+		return builder.toString();
+	}
+
 	public static String getProperty(String key) {
 		return props.getProperty(key);
 	}
@@ -37,9 +45,15 @@ public class PropertyLoader {
 			ClassLoader loader = ClassLoader.getSystemClassLoader();
 
 			in = loader.getResourceAsStream(propsName);
+			if (in == null) {
+				throw new IllegalArgumentException(String.format("file: [%s] not found.", propsName));
+			}
+
 			if (in != null) {
 				props.load(in); // Can throw IOException
 			}
+		} catch (IllegalArgumentException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new IllegalArgumentException("could not load [" + propsName + "]" + " as classloader resource");
 		} finally {
@@ -90,4 +104,5 @@ public class PropertyLoader {
 			}
 		}
 	}
+
 }

@@ -41,6 +41,7 @@ public class Main {
 		} catch (Exception e) {
 			if (e.getCause() instanceof FileNotFoundException) {
 				PropertyLoader.loadFromClassPathAsInputStream(PropertyLoader.TIMER_MANAGER_PROP_FILE);
+				logger.info("load default timer configuration: [{}]", PropertyLoader.dump());
 			}
 		}
 
@@ -51,5 +52,4 @@ public class Main {
 		StartTimer timer = new StartTimer();
 		timer.setVisible(true);
 	}
-
 }

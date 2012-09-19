@@ -23,6 +23,16 @@ public class PropertyLoaderTest {
 	// 2:
 	// file:/C:/Users/MAX/Documents/groovy/plugins/tomato/bin/timer-manager-0.0.1-SNAPSHOT-20-min.jar!/max/utility/tomato/
 
+	@Test(expected = IllegalArgumentException.class)
+	public void fileSystemThrowExceptionIfResourceNotFound() {
+		PropertyLoader.loadFromFileSystem(new File("caramba.properties"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void inputStreamThrowExceptionIfResourceNotFound() {
+		PropertyLoader.loadFromClassPathAsInputStream("caramba.properties");
+	}
+
 	@Test
 	public void loadFromClassPathAsInputStream() {
 		PropertyLoader.loadFromClassPathAsInputStream("timer-manager.properties");
@@ -50,6 +60,11 @@ public class PropertyLoaderTest {
 		PropertyLoader.loadFromFileSystem(file);
 		assertEquals("3", PropertyLoader.getProperty("duration"));
 		assertEquals("SECONDS", PropertyLoader.getProperty("time.measurement.unit"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void resourceBundleThrowExceptionIfResourceNotFound() {
+		PropertyLoader.loadFromClassPathAsResourceBundle("caramba.properties");
 	}
 
 	// ------------------------------------------------
