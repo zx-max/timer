@@ -216,9 +216,9 @@ public class StartTimer extends javax.swing.JFrame {
 	}
 
 	void saveTomato(String focusOn) {
-		logger.debug("save tomato");
 		Tomato tomato = new Tomato(focusOn);
 		basicDao.save(tomato);
+		logger.info(tomato.toString());
 		setVisible(false);
 		dispose();
 		countDown(tomato.getId());

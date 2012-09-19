@@ -1,6 +1,7 @@
 package max.utility.tomato;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.security.CodeSource;
 
 import javax.persistence.EntityManager;
@@ -30,8 +31,18 @@ public class Main {
 		CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
 		File jarFile = new File(codeSource.getLocation().toURI().getPath());
 		String path = jarFile.getParentFile().getPath();
+		// java.lang.IllegalArgumentException:
+		// java.io.FileNotFoundException:
+		// C:\Users\MAX\Documents\groovy\plugins\tomato\target\timer-manager.properties
+		// (Impossibile trovare il file specificato)
 		File propsFile = new File(path + File.separator + PropertyLoader.TIMER_MANAGER_PROP_FILE);
-		PropertyLoader.loadFromFileSystem(propsFile);
+		try {
+			PropertyLoader.loadFromFileSystem(propsFile);
+		} catch (Exception e) {
+			if (e.getCause() instanceof FileNotFoundException) {
+				PropertyLoader.loadFromClassPathAsInputStream(PropertyLoader.TIMER_MANAGER_PROP_FILE);
+			}
+		}
 
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("tomatoPU");
 		EntityManager entityManager = emFactory.createEntityManager();
