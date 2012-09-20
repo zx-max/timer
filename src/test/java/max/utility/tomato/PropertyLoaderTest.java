@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.MissingResourceException;
 
 import org.junit.Test;
 
@@ -22,16 +23,6 @@ public class PropertyLoaderTest {
 	// 1: C:\Users\MAX\Documents\groovy\plugins\tomato\bin
 	// 2:
 	// file:/C:/Users/MAX/Documents/groovy/plugins/tomato/bin/timer-manager-0.0.1-SNAPSHOT-20-min.jar!/max/utility/tomato/
-
-	@Test(expected = IllegalArgumentException.class)
-	public void fileSystemThrowExceptionIfResourceNotFound() {
-		PropertyLoader.loadFromFileSystem(new File("caramba.properties"));
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void inputStreamThrowExceptionIfResourceNotFound() {
-		PropertyLoader.loadFromClassPathAsInputStream("caramba.properties");
-	}
 
 	@Test
 	public void loadFromClassPathAsInputStream() {
@@ -62,8 +53,18 @@ public class PropertyLoaderTest {
 		assertEquals("SECONDS", PropertyLoader.getProperty("time.measurement.unit"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void resourceBundleThrowExceptionIfResourceNotFound() {
+	@Test(expected = MissingResourceException.class)
+	public void throwExceptionIfResourceNotFound_FileSystem() {
+		PropertyLoader.loadFromFileSystem(new File("caramba.properties"));
+	}
+
+	@Test(expected = MissingResourceException.class)
+	public void throwExceptionIfResourceNotFound_InputStream() {
+		PropertyLoader.loadFromClassPathAsInputStream("caramba.properties");
+	}
+
+	@Test(expected = MissingResourceException.class)
+	public void throwExceptionIfResourceNotFound_ResourceBundle() {
 		PropertyLoader.loadFromClassPathAsResourceBundle("caramba.properties");
 	}
 

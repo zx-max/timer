@@ -1,8 +1,8 @@
 package max.utility.tomato;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.security.CodeSource;
+import java.util.MissingResourceException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,7 +39,7 @@ public class Main {
 		try {
 			PropertyLoader.loadFromFileSystem(propsFile);
 		} catch (Exception e) {
-			if (e.getCause() instanceof FileNotFoundException) {
+			if (e instanceof MissingResourceException) {
 				PropertyLoader.loadFromClassPathAsInputStream(PropertyLoader.TIMER_MANAGER_PROP_FILE);
 				logger.info("load default timer configuration: [{}]", PropertyLoader.dump());
 			}

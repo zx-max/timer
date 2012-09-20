@@ -2,9 +2,12 @@ package max.utility.tomato;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -46,16 +49,16 @@ public class PropertyLoader {
 
 			in = loader.getResourceAsStream(propsName);
 			if (in == null) {
-				throw new IllegalArgumentException(String.format("file: [%s] not found.", propsName));
+				throw new MissingResourceException(String.format("file: [%s] not found.", propsName), null, null);
 			}
 
 			if (in != null) {
-				props.load(in); // Can throw IOException
+				try {
+					props.load(in);
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 			}
-		} catch (IllegalArgumentException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new IllegalArgumentException("could not load [" + propsName + "]" + " as classloader resource");
 		} finally {
 			if (in != null) {
 				try {
@@ -66,6 +69,28 @@ public class PropertyLoader {
 			}
 		}
 	}
+
+	// http://javahowto.blogspot.it/2006/05/debug-java-util-missingresourceexcepti.html
+	// ResourceBundle.getBundle() is really intended to look up translatable
+	// resources. In the example you give (connections.properties), it sounds
+	// like you're using it as a general mechanism for loading properties files
+	// from the classpath.
+	//
+	// Although that works, it's relatively inefficent (it first tries to find
+	// locale specific versions of the properties file, which incurs a
+	// classloading overhead, and then must create a PropertiesResourceBundle
+	// instance for your properties file). If you're loading a nontranslated
+	// file, you can achieve the same effect using something like:
+	//
+	//
+	// URL resUrl = myclass.getResource( "/org/acme/connection.properties" );
+	// Properties props = new Properties();
+	// properties.load( resUrl.openStream() );
+
+	// Brian, thanks for the comments. I agree ResourceBundle should be used for
+	// i18n purpose. But I also found it's often used (misused) for general
+	// properties-loading. Maybe I should change the example
+	// connection.properties to messages_en.properties.
 
 	public static void loadFromClassPathAsResourceBundle(String propsFile) {
 		propsFile = propsFile.replace('/', '.');
@@ -91,9 +116,15 @@ public class PropertyLoader {
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(propsFile);
-			props.load(fis);
-		} catch (Exception e) {
-			throw new IllegalArgumentException(e);
+
+			try {
+				props.load(fis);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		} catch (FileNotFoundException e) {
+			throw new MissingResourceException(e.getMessage(), null, null);
 		} finally {
 			if (fis != null) {
 				try {
