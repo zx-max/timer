@@ -7,7 +7,7 @@
 
 ** version 0.0.2 (code refactorig and distribution management)
 
-*** TODO log start time and focus of the current timer.
+*** log start time and focus of the current timer.
 	otherwise i have to wait the end to see the exactly words.
 
 *** todo create the distrubution file zip
@@ -23,7 +23,7 @@
 	 cp target/tomato-0.0.1-SNAPSHOT-jar-with-dependencies.jar ${DISTRIBUTION_FOLDER}/timer-manager-0.0.1-SNAPSHOT-20-min.jar
 	 cp src/test/resources/timer-manager.properties ${DISTRIBUTION_FOLDER}
 
-*** todo default configuration for Countdown.
+*** default configuration for Countdown.
 
 *** todo apply code metrics
 
