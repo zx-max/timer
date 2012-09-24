@@ -25,6 +25,23 @@ public class PropertyLoaderTest {
 	// file:/C:/Users/MAX/Documents/groovy/plugins/tomato/bin/timer-manager-0.0.1-SNAPSHOT-20-min.jar!/max/utility/tomato/
 
 	@Test
+	public void defaultConutndownConfigurationExist() throws IOException {
+		String path = ClassLoader.getSystemClassLoader().getResource(".").getPath();
+		File currentPath = new File(path);
+		StringBuilder sb = new StringBuilder();
+		sb.append(currentPath.getParent());
+		sb.append(File.separator);
+		sb.append("classes");
+		sb.append(File.separator);
+		sb.append("timer-manager.properties");
+		String fileAbsPath = sb.toString();
+		File file = new File(fileAbsPath);
+		PropertyLoader.loadFromFileSystem(file);
+		assertEquals("20", PropertyLoader.getProperty("duration"));
+		assertEquals("MINUTES", PropertyLoader.getProperty("time.measurement.unit"));
+	}
+
+	@Test
 	public void loadFromClassPathAsInputStream() {
 		PropertyLoader.loadFromClassPathAsInputStream("timer-manager.properties");
 		assertEquals("3", PropertyLoader.getProperty("duration"));

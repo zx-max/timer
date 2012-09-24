@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-public abstract class PropertyLoader {
+public abstract class ExamplePropertyLoader {
 	private static final boolean LOAD_AS_RESOURCE_BUNDLE = false;
 
 	private static final String SUFFIX = ".properties";
