@@ -1,17 +1,24 @@
 * ROADMAP
-** version 0.0.1 (basic ui with simplest functionality)
-*** build a simple model
-*** add basic ui
-*** simple logging configuration
-*** read timer duration from a property file
 
-** version 0.0.2 (code refactorig and distribution management)
 
+================================================================
+** VERSION 0.0.1 (basic ui with simplest functionality).
+================================================================
+*** build a simple model.
+*** add basic ui.
+*** simple logging configuration.
+*** read timer duration from a property file.
+
+
+
+
+================================================================
+** VERSION 0.0.2 (code refactorig and distribution management)
+================================================================
 *** log start time and focus of the current timer.
 	otherwise i have to wait the end to see the exactly words.
-
-*** create the distrubution file zip
-	it have to contain a folder with:
+*** create the distrubution file zip.
+	It has to contain a folder with:
 	 - the jar file 
 	 - the timer-manager.properties
 	 
@@ -24,23 +31,47 @@
 	 cp src/test/resources/timer-manager.properties ${DISTRIBUTION_FOLDER}
 
 *** default configuration for Countdown.
+*** todo apply code metrics.
 
-*** todo apply code metrics
 
 
+================================================================
 ** VERSION 0.0.3 (ui improvements)
-*** TODO add system tray icon.
-
+================================================================
+*** todo add system tray icon.
 https://www.google.it/search?q=%20Device%20or%20resource%20busy&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:it:official&client=firefox-a&source=hp&channel=np#hl=it&client=firefox-a&rls=org.mozilla:it%3Aofficial&channel=np&sclient=psy-ab&q=add+window+system+tray+icon+to+a+java+program&oq=add+window+system+tray+icon+to+a+java+program&gs_l=serp.3...6679.16546.6.17153.24.23.1.0.0.2.224.4032.0j21j2.23.0...0.0...1c.1.fetFbEhZHlo&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.&fp=c6224e40b1bf022&biw=1280&bih=930
 http://docs.oracle.com/javase/tutorial/uiswing/misc/systemtray.html
 http://stackoverflow.com/questions/9701852/how-to-add-application-to-system-tray
 http://stackoverflow.com/questions/9964116/how-to-put-java-application-in-systemtray-when-user-clicks-on-close-windows
 
+*** todo on tray icon, add a tooltip with time left and focusOn.
+*** todo count down on mouse over system icon tray.
+*** todo in the end of the timer review window add a button for "close and start new timer". 
 
-*** todo count down on mouse over system icon tray
- 
 
+
+
+================================================================
+** VERSION 0.0.4 (extend with external plugins)
+================================================================
+*** todo move version 0.0.3 develops as external (window desktop) module to load at runtime or not.
+*** todo add user interface test on the application with the module. 
+
+
+
+
+================================================================
+** VERSION 0.0.5 (extend with external plugins)
+================================================================
+*** develop "on the job" learning tool
+	based on red field (TomatoReview.problemsRaised)
+	link Formazione.org and hard-to-implement.org to specif tomatos. 
+
+
+
+================================================================
 * OTHER
+================================================================
 ** todo wiki maven release
 
 ** todo wiki Git-Egit-Eclipse
