@@ -10,7 +10,7 @@
 *** log start time and focus of the current timer.
 	otherwise i have to wait the end to see the exactly words.
 
-*** todo create the distrubution file zip
+*** create the distrubution file zip
 	it have to contain a folder with:
 	 - the jar file 
 	 - the timer-manager.properties
