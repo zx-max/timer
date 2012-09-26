@@ -31,7 +31,7 @@
 	 cp src/test/resources/timer-manager.properties ${DISTRIBUTION_FOLDER}
 
 *** default configuration for Countdown.
-*** todo apply code metrics.
+*** apply code metrics.
 
 
 
