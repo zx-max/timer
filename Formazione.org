@@ -1,0 +1,3 @@
+* brevi tutorial da inserire sul wiki
+** todo dire a mvn di utilizzare uno specifico pom.xml
+** todo creare un file .zip tramite riga di comando
