@@ -5,6 +5,7 @@
 	<artifactId>tomato</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<build>
+	<finalName>timer-manager</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
