@@ -1,10 +1,24 @@
 package max.utility.tomato.gui;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 import max.utility.tomato.DaoRegister;
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
@@ -24,17 +38,17 @@ public class EndTimer extends JFrame {
 
 	private final HibernateBasicDaoImpl basicDao;
 	// Variables declaration - do not modify
-	private javax.swing.JButton btn_reviewCompleted;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane3;
-	private javax.swing.JScrollPane jScrollPane4;
-	private javax.swing.JLabel lbl_focusOn;
-	private javax.swing.JLabel lbl_problemsRaised;
-	private javax.swing.JLabel lbl_reallyDone;
-	private javax.swing.JLabel lbl_review;
-	private javax.swing.JTextArea ta_focusOn;
-	private javax.swing.JTextArea ta_problemsRaised;
-	private javax.swing.JTextArea ta_reallyDone;
+	private JButton btn_reviewCompleted;
+	private JScrollPane jScrollPane1;
+	private JScrollPane jScrollPane3;
+	private JScrollPane jScrollPane4;
+	private JLabel lbl_focusOn;
+	private JLabel lbl_problemsRaised;
+	private JLabel lbl_reallyDone;
+	private JLabel lbl_review;
+	private JTextArea ta_focusOn;
+	private JTextArea ta_problemsRaised;
+	private JTextArea ta_reallyDone;
 	private final Tomato tomato;
 
 	// End of variables declaration
@@ -42,146 +56,142 @@ public class EndTimer extends JFrame {
 	public EndTimer(final Long tomatoId) {
 		setTitle("End Timer");
 		basicDao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
-		tomato = (Tomato) basicDao.load(Tomato.class, tomatoId);
+		tomato = basicDao.load(Tomato.class, tomatoId);
 		initComponents();
 		setVisible(true);
 		logger.debug(tomato.toString());
 	}
 
-	private void btn_reviewCompletedKeyPressed(java.awt.event.KeyEvent evt) {
+	private void btn_reviewCompletedKeyPressed(KeyEvent evt) {
 		logger.debug(evt.getKeyCode() + ", " + evt.getKeyChar());
 		if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
 			saveAndCloseWindow();
 		}
 	}
 
-	private void btn_reviewCompletedMouseClicked(java.awt.event.MouseEvent evt) {
+	private void btn_reviewCompletedMouseClicked(MouseEvent evt) {
 		saveAndCloseWindow();
 	}
 
 	private void initComponents() {
 
-		lbl_review = new javax.swing.JLabel();
-		lbl_focusOn = new javax.swing.JLabel();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		ta_focusOn = new javax.swing.JTextArea();
-		lbl_reallyDone = new javax.swing.JLabel();
-		jScrollPane4 = new javax.swing.JScrollPane();
-		ta_reallyDone = new javax.swing.JTextArea();
-		lbl_problemsRaised = new javax.swing.JLabel();
-		jScrollPane3 = new javax.swing.JScrollPane();
-		ta_problemsRaised = new javax.swing.JTextArea();
-		btn_reviewCompleted = new javax.swing.JButton();
+		lbl_review = new JLabel();
+		lbl_focusOn = new JLabel();
+		jScrollPane1 = new JScrollPane();
+		ta_focusOn = new JTextArea();
+		lbl_reallyDone = new JLabel();
+		jScrollPane4 = new JScrollPane();
+		ta_reallyDone = new JTextArea();
+		lbl_problemsRaised = new JLabel();
+		jScrollPane3 = new JScrollPane();
+		ta_problemsRaised = new JTextArea();
+		btn_reviewCompleted = new JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setBackground(new java.awt.Color(0, 0, 0));
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setBackground(new Color(0, 0, 0));
 
-		lbl_review.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-		lbl_review.setForeground(new java.awt.Color(255, 153, 0));
+		lbl_review.setFont(new Font("Comic Sans MS", 0, 14)); // NOI18N
+		lbl_review.setForeground(new Color(255, 153, 0));
 		lbl_review.setText("rivedi quanto fatto");
 
-		lbl_focusOn.setBackground(new java.awt.Color(0, 0, 0));
-		lbl_focusOn.setForeground(new java.awt.Color(0, 204, 204));
+		lbl_focusOn.setBackground(new Color(0, 0, 0));
+		lbl_focusOn.setForeground(new Color(0, 204, 204));
 		lbl_focusOn.setLabelFor(ta_focusOn);
 		lbl_focusOn.setText("volevo fare ...");
 
 		ta_focusOn.setEditable(false);
-		ta_focusOn.setBackground(new java.awt.Color(0, 0, 0));
+		ta_focusOn.setBackground(new Color(0, 0, 0));
 		ta_focusOn.setColumns(20);
-		ta_focusOn.setFont(new java.awt.Font("Andalus", 0, 13)); // NOI18N
-		ta_focusOn.setForeground(new java.awt.Color(0, 255, 255));
+		ta_focusOn.setFont(new Font("Andalus", 0, 13)); // NOI18N
+		ta_focusOn.setForeground(new Color(0, 255, 255));
 		ta_focusOn.setRows(10);
 		ta_focusOn.setTabSize(2);
 		ta_focusOn.setFocusable(false);
 		ta_focusOn.setText(tomato.getFocusOn());
 		ta_focusOn.setToolTipText("breve revisione di quanto fatto ..");
-		ta_focusOn.setMargin(new java.awt.Insets(0, 2, 2, 2));
+		ta_focusOn.setMargin(new Insets(0, 2, 2, 2));
 		jScrollPane1.setViewportView(ta_focusOn);
 
-		lbl_reallyDone.setForeground(new java.awt.Color(0, 0, 255));
+		lbl_reallyDone.setForeground(new Color(0, 0, 255));
 		lbl_reallyDone.setLabelFor(ta_focusOn);
 		lbl_reallyDone.setText("ho fatto");
 
 		ta_reallyDone.setColumns(20);
-		ta_reallyDone.setFont(new java.awt.Font("Andalus", 0, 13)); // NOI18N
-		ta_reallyDone.setForeground(new java.awt.Color(0, 0, 255));
+		ta_reallyDone.setFont(new Font("Andalus", 0, 13)); // NOI18N
+		ta_reallyDone.setForeground(new Color(0, 0, 255));
 		ta_reallyDone.setRows(10);
 		ta_reallyDone.setTabSize(2);
 		ta_reallyDone.setText("salva le ultime modifiche.\ncommit -m \"fine timer\"\n");
 		ta_reallyDone.setToolTipText("breve revisione di quanto fatto ..");
 		// ta_reallyDone.setFocusCycleRoot(true);
-		ta_reallyDone.setMargin(new java.awt.Insets(0, 2, 2, 2));
+		ta_reallyDone.setMargin(new Insets(0, 2, 2, 2));
 		ta_reallyDone.requestFocusInWindow();
 		ta_reallyDone.setNextFocusableComponent(ta_problemsRaised);
 		jScrollPane4.setViewportView(ta_reallyDone);
 
-		lbl_problemsRaised.setForeground(new java.awt.Color(204, 0, 0));
+		lbl_problemsRaised.setForeground(new Color(204, 0, 0));
 		lbl_problemsRaised.setLabelFor(ta_problemsRaised);
-		lbl_problemsRaised.setText("difficoltà, impedimenti, problemi, ...");
+		lbl_problemsRaised.setText("difficoltï¿½, impedimenti, problemi, ...");
 
-		jScrollPane3.setBackground(new java.awt.Color(204, 0, 0));
+		jScrollPane3.setBackground(new Color(204, 0, 0));
 
 		ta_problemsRaised.setColumns(20);
-		ta_problemsRaised.setFont(new java.awt.Font("Andalus", 0, 13)); // NOI18N
-		ta_problemsRaised.setForeground(new java.awt.Color(204, 0, 0));
+		ta_problemsRaised.setFont(new Font("Andalus", 0, 13)); // NOI18N
+		ta_problemsRaised.setForeground(new Color(204, 0, 0));
 		ta_problemsRaised.setRows(10);
 		ta_problemsRaised.setTabSize(2);
 		ta_problemsRaised
 				.setText("finestre di start e stop (versione base) ok\nformattazione del codice ok\neseguire il codice da riga di comando ok\navvio e stop del timer ok\n");
 		ta_problemsRaised.setToolTipText("breve revisione di quanto fatto ..");
 		// ta_problemsRaised.setFocusCycleRoot(true);
-		ta_problemsRaised.setMargin(new java.awt.Insets(0, 2, 2, 2));
+		ta_problemsRaised.setMargin(new Insets(0, 2, 2, 2));
 		ta_problemsRaised.setNextFocusableComponent(btn_reviewCompleted);
 		jScrollPane3.setViewportView(ta_problemsRaised);
 
 		btn_reviewCompleted.setText("ok");
 		// btn_reviewCompleted.setFocusCycleRoot(true);
 		btn_reviewCompleted.setNextFocusableComponent(ta_focusOn);
-		btn_reviewCompleted.addMouseListener(new java.awt.event.MouseAdapter() {
+		btn_reviewCompleted.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			public void mouseClicked(MouseEvent evt) {
 				btn_reviewCompletedMouseClicked(evt);
 			}
 		});
-		btn_reviewCompleted.addKeyListener(new java.awt.event.KeyAdapter() {
+		btn_reviewCompleted.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(java.awt.event.KeyEvent evt) {
+			public void keyPressed(KeyEvent evt) {
 				btn_reviewCompletedKeyPressed(evt);
 			}
 		});
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
 								.addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.TRAILING,
+														GroupLayout.Alignment.TRAILING,
 														layout.createSequentialGroup()
 																.addGap(0, 0, Short.MAX_VALUE)
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(
-																						jScrollPane4,
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						500,
-																						javax.swing.GroupLayout.PREFERRED_SIZE)
-																				.addComponent(
-																						jScrollPane3,
-																						javax.swing.GroupLayout.Alignment.TRAILING,
-																						javax.swing.GroupLayout.PREFERRED_SIZE,
-																						500,
-																						javax.swing.GroupLayout.PREFERRED_SIZE)))
+																				GroupLayout.Alignment.LEADING)
+																				.addComponent(jScrollPane4,
+																						GroupLayout.Alignment.TRAILING,
+																						GroupLayout.PREFERRED_SIZE,
+																						500, GroupLayout.PREFERRED_SIZE)
+																				.addComponent(jScrollPane3,
+																						GroupLayout.Alignment.TRAILING,
+																						GroupLayout.PREFERRED_SIZE,
+																						500, GroupLayout.PREFERRED_SIZE)))
 												.addGroup(
 														layout.createSequentialGroup()
 																.addGroup(
 																		layout.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.LEADING)
+																				GroupLayout.Alignment.LEADING)
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addGap(20, 20, 20)
@@ -197,19 +207,19 @@ public class EndTimer extends JFrame {
 																								.addGap(19, 19, 19)
 																								.addGroup(
 																										layout.createParallelGroup(
-																												javax.swing.GroupLayout.Alignment.LEADING)
+																												GroupLayout.Alignment.LEADING)
 																												.addComponent(
 																														jScrollPane1,
-																														javax.swing.GroupLayout.PREFERRED_SIZE,
+																														GroupLayout.PREFERRED_SIZE,
 																														500,
-																														javax.swing.GroupLayout.PREFERRED_SIZE)
+																														GroupLayout.PREFERRED_SIZE)
 																												.addGroup(
 																														layout.createSequentialGroup()
 																																.addComponent(
 																																		lbl_focusOn,
-																																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																																		GroupLayout.PREFERRED_SIZE,
 																																		79,
-																																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																																		GroupLayout.PREFERRED_SIZE)
 																																.addGap(92,
 																																		92,
 																																		92)
@@ -218,43 +228,35 @@ public class EndTimer extends JFrame {
 																.addGap(0, 0, Short.MAX_VALUE))).addContainerGap())
 				.addGroup(
 						layout.createSequentialGroup().addGap(237, 237, 237).addComponent(btn_reviewCompleted)
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addGroup(
 												layout.createSequentialGroup().addComponent(lbl_review)
 														.addGap(15, 15, 15))
 										.addGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING,
-												layout.createSequentialGroup()
-														.addComponent(lbl_focusOn)
-														.addPreferredGap(
-																javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(19, 19, 19)
-						.addComponent(lbl_reallyDone)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 111,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(33, 33, 33)
-						.addComponent(lbl_problemsRaised)
-						.addGap(1, 1, 1)
-						.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111,
-								javax.swing.GroupLayout.PREFERRED_SIZE).addGap(18, 18, 18)
-						.addComponent(btn_reviewCompleted).addContainerGap(27, Short.MAX_VALUE)));
+												GroupLayout.Alignment.TRAILING,
+												layout.createSequentialGroup().addComponent(lbl_focusOn)
+														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
+						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+						.addGap(19, 19, 19).addComponent(lbl_reallyDone)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+						.addGap(33, 33, 33).addComponent(lbl_problemsRaised).addGap(1, 1, 1)
+						.addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+						.addGap(18, 18, 18).addComponent(btn_reviewCompleted).addContainerGap(27, Short.MAX_VALUE)));
 
 		pack();
 	}
 
 	public JFrame openWindow() {
 		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
 			}
