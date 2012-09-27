@@ -1,12 +1,18 @@
 package max.utility.tomato.gui;
 
+import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +27,7 @@ import javax.swing.WindowConstants;
 
 import max.utility.tomato.Countdown;
 import max.utility.tomato.DaoRegister;
+import max.utility.tomato.PropertyLoader;
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
 import max.utility.tomato.domain.Tomato;
 
@@ -79,6 +86,17 @@ public class StartTimer extends JFrame {
 	private void countDown(final Long tomatoId) {
 		Countdown beeperControl = new Countdown(this);
 		beeperControl.start(tomatoId);
+	}
+
+	private Image createImage(String path, String description) {
+		URL imageURL = PropertyLoader.loadFromClassPathAsURL("images/bulb.gif");
+
+		if (imageURL == null) {
+			System.err.println("Resource not found: " + path);
+			return null;
+		} else {
+			return (new ImageIcon(imageURL, description)).getImage();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -223,6 +241,15 @@ public class StartTimer extends JFrame {
 	}
 
 	void saveTomato(String focusOn) {
+		final TrayIcon trayIcon = new TrayIcon(createImage("images/bulb.gif", "tray icon"));
+		final SystemTray tray = SystemTray.getSystemTray();
+		trayIcon.setToolTip("ciao");
+		try {
+			tray.add(trayIcon);
+		} catch (AWTException e) {
+			logger.error("TrayIcon could not be added.", e);
+			return;
+		}
 		Tomato tomato = new Tomato(focusOn);
 		basicDao.save(tomato);
 		logger.info(tomato.toString());

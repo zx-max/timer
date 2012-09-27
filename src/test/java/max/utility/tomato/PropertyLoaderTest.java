@@ -1,9 +1,11 @@
 package max.utility.tomato;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.MissingResourceException;
 
 import org.junit.Test;
@@ -53,6 +55,12 @@ public class PropertyLoaderTest {
 		PropertyLoader.loadFromClassPathAsResourceBundle("timer-manager");
 		assertEquals("3", PropertyLoader.getProperty("duration"));
 		assertEquals("SECONDS", PropertyLoader.getProperty("time.measurement.unit"));
+	}
+
+	@Test
+	public void loadFromClassPathAsUrl() {
+		URL resource = PropertyLoader.loadFromClassPathAsURL("images/bulb.gif");
+		assertNotNull(resource.getFile());
 	}
 
 	@Test
