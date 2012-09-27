@@ -18,6 +18,7 @@
 	</appender>
 
 	<logger name="org.hibernate" level="ERROR" appender="FILE"/>
+	<logger name="max.utility.tomato" level="debug" appender="STDOUT"/>
 
 	<root level="info">
 		<appender-ref ref="STDOUT" />

@@ -69,7 +69,7 @@ public class TrayIconDemo {
 		trayIcon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "This dialog box is run from System Tray");
+				JOptionPane.showMessageDialog(null, "aaaaa This dialog box is run from System Tray");
 			}
 		});
 

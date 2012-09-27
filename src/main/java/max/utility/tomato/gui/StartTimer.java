@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -31,6 +33,9 @@ import max.utility.tomato.PropertyLoader;
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
 import max.utility.tomato.domain.Tomato;
 
+import org.joda.time.Duration;
+import org.joda.time.Interval;
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -241,20 +246,42 @@ public class StartTimer extends JFrame {
 	}
 
 	void saveTomato(String focusOn) {
+
+		final Tomato tomato = new Tomato(focusOn);
+
 		final TrayIcon trayIcon = new TrayIcon(createImage("images/bulb.gif", "tray icon"));
 		final SystemTray tray = SystemTray.getSystemTray();
-		trayIcon.setToolTip("ciao");
+
 		try {
 			tray.add(trayIcon);
 		} catch (AWTException e) {
 			logger.error("TrayIcon could not be added.", e);
 			return;
 		}
-		Tomato tomato = new Tomato(focusOn);
+		// trayIcon.addActionListener(new TrayIconActionListener(trayIcon,
+		// tomato));
+		trayIcon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				LocalDateTime startTime = tomato.getStartTime();
+				LocalDateTime now = new LocalDateTime();
+				Interval interval = new Interval(startTime.toDate().getTime(), now.toDate().getTime());
+				Duration duration = new Duration(startTime.toDate().getTime(), now.toDate().getTime());
+
+				String string = interval.toString() + ", " + duration.toString();
+				logger.debug(string);
+				System.out.println(string);
+				trayIcon.setToolTip(string);
+
+			}
+		});
 		basicDao.save(tomato);
 		logger.info(tomato.toString());
 		setVisible(false);
 		dispose();
 		countDown(tomato.getId());
+
 	}
+
 }
