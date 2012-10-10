@@ -12,6 +12,15 @@
 	<build>
 		<finalName>timer-manager</finalName>
 		<plugins>
+		<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
+          <source>${targetJdk}</source>
+          <target>${targetJdk}</target>
+        </configuration>
+      </plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.3</version>
