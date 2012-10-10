@@ -9,9 +9,12 @@ import max.utility.tomato.domain.Tomato;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.joda.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TrayIconActionListener implements ActionListener {
 
+	public static final Logger logger = LoggerFactory.getLogger(TrayIconActionListener.class);
 	private Tomato tomato;
 	private TrayIcon trayIcon;
 
@@ -26,8 +29,9 @@ public class TrayIconActionListener implements ActionListener {
 		LocalDateTime now = new LocalDateTime();
 		Interval interval = new Interval(startTime.toDate().getTime(), now.toDate().getTime());
 		Duration duration = new Duration(startTime.toDate().getTime(), now.toDate().getTime());
-
-		trayIcon.setToolTip(interval.toString() + ", " + duration.toString());
+		String string = interval.toString() + ", " + duration.toString();
+		logger.debug(string);
+		trayIcon.setToolTip(string);
 		// JOptionPane.showMessageDialog(null,
 		// "This dialog box is run from System Tray");
 	}
