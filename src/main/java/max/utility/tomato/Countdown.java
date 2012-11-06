@@ -5,10 +5,11 @@ import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
@@ -29,7 +30,7 @@ public class Countdown {
 
 	private long duration;
 
-	private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
 	private StartTimer startTimer;
 
@@ -40,26 +41,6 @@ public class Countdown {
 		duration = Integer.valueOf(PropertyLoader.getProperty("duration"));
 		timeUnit = Enum.valueOf(TimeUnit.class, PropertyLoader.getProperty("time.measurement.unit"));
 
-		// trayIcon.addActionListener(new TrayIconActionListener(trayIcon,
-		// tomato));
-		// trayIcon.addActionListener(new ActionListener() {
-		//
-		// @Override
-		// public void actionPerformed(ActionEvent arg0) {
-		// LocalDateTime startTime = tomato.getStartTime();
-		// LocalDateTime now = new LocalDateTime();
-		// Interval interval = new Interval(startTime.toDate().getTime(),
-		// now.toDate().getTime());
-		// Duration duration = new Duration(startTime.toDate().getTime(),
-		// now.toDate().getTime());
-		//
-		// String string = interval.toString() + ", " + duration.toString();
-		// logger.debug(string);
-		// System.out.println(string);
-		// trayIcon.setToolTip(string);
-		//
-		// }
-		// });
 	}
 
 	private Image createImage(String path, String description) {
@@ -73,9 +54,9 @@ public class Countdown {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void start(final Tomato tomato) {
 		final TrayIcon trayIcon = new TrayIcon(createImage("images/bulb.gif", "tray icon"));
+		trayIcon.addActionListener(new TrayIconActionListener(trayIcon, tomato));
 		final SystemTray tray = SystemTray.getSystemTray();
 
 		try {
@@ -85,20 +66,16 @@ public class Countdown {
 			return;
 		}
 		try {
-			Callable actionToPerform = new Callable<JFrame>() {
-				@Override
-				public JFrame call() throws Exception {
-					trayIcon.addActionListener(new TrayIconActionListener(trayIcon, tomato));
-					EndTimer endTimer = new EndTimer(tomato.getId());
-					endTimer.addWindowListener(new CloseTimersListener(new JFrame[] { endTimer, startTimer }));
-					logger.debug("open endTomato");
-					return endTimer.openWindow();
-				}
-			};
 
 			logger.debug("before timer");
-			ScheduledFuture future = scheduledExecutorService.schedule(actionToPerform, duration, timeUnit);
-			future.get(); // throw exceptions if happened
+			Timer timer = new Timer();
+			TimerTask task = getTimerTask(tomato);
+			timer.schedule(task, 5000);
+			// ScheduledFuture<JFrame> future =
+			// scheduledExecutorService.schedule(getActionToPerform(tomato),
+			// duration,
+			// timeUnit);
+			// future.get(); // throw exceptions if happened
 			logger.debug("after timer");
 
 		} catch (Exception e) {
@@ -106,6 +83,39 @@ public class Countdown {
 		}
 
 		scheduledExecutorService.shutdown();
+	}
+
+	private TimerTask getTimerTask(final Tomato tomato) {
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				EndTimer endTimer = new EndTimer(tomato.getId());
+				endTimer.addWindowListener(new CloseTimersListener(new JFrame[] { endTimer, startTimer }));
+				logger.debug("open endTomato");
+				endTimer.openWindow();
+			}
+		};
+		return task;
+	}
+
+	private Callable<JFrame> getActionToPerform(final Tomato tomato) {
+		Callable<JFrame> actionToPerform = new Callable<JFrame>() {
+			@Override
+			public JFrame call() throws Exception {
+				logger.debug("");
+				logger.debug("");
+				logger.debug("");
+				logger.debug("");
+				logger.debug("");
+				logger.debug("____________________________");
+				Thread.dumpStack();
+				EndTimer endTimer = new EndTimer(tomato.getId());
+				endTimer.addWindowListener(new CloseTimersListener(new JFrame[] { endTimer, startTimer }));
+				logger.debug("open endTomato");
+				return endTimer.openWindow();
+			}
+		};
+		return actionToPerform;
 	}
 
 }
