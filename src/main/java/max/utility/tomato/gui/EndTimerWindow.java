@@ -8,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.GroupLayout;
@@ -28,15 +29,16 @@ import max.utility.tomato.domain.TomatoReview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EndTimer extends JFrame {
+public class EndTimerWindow extends JFrame {
 
-	public static final Logger logger = LoggerFactory.getLogger(EndTimer.class);
+	public static final Logger logger = LoggerFactory.getLogger(EndTimerWindow.class);
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8849013985135065049L;
 
 	private final HibernateBasicDaoImpl basicDao;
+
 	// Variables declaration - do not modify
 	private JButton btn_reviewCompleted;
 	private JScrollPane jScrollPane1;
@@ -49,14 +51,14 @@ public class EndTimer extends JFrame {
 	private JTextArea ta_focusOn;
 	private JTextArea ta_problemsRaised;
 	private JTextArea ta_reallyDone;
-	private final Tomato tomato;
+	private Tomato tomato;
 
 	// End of variables declaration
 
-	public EndTimer(final Long tomatoId) {
+	public EndTimerWindow(Tomato tomato) {
 		setTitle("End Timer");
+		this.tomato = tomato;
 		basicDao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
-		tomato = basicDao.load(Tomato.class, tomatoId);
 		initComponents();
 		setVisible(true);
 		logger.debug(tomato.toString());
@@ -164,6 +166,16 @@ public class EndTimer extends JFrame {
 			}
 		});
 
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent evt) {
+				logger.debug("start closing windows..");
+				// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// http://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
+				// System.exit(0);
+			}
+
+		});
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout

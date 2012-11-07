@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.Callable;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -23,13 +24,14 @@ import max.utility.tomato.Countdown;
 import max.utility.tomato.DaoRegister;
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
 import max.utility.tomato.domain.Tomato;
+import max.utility.tomato.tasks.OpenEndTimerWindow;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StartTimer extends JFrame {
+public class StartTimerWindow extends JFrame {
 
-	public static final Logger logger = LoggerFactory.getLogger(StartTimer.class);
+	public static final Logger logger = LoggerFactory.getLogger(StartTimerWindow.class);
 
 	/**
 	 * 
@@ -55,12 +57,12 @@ public class StartTimer extends JFrame {
 	/**
 	 * Creates new form StartTimer
 	 */
-	public StartTimer() {
+	public StartTimerWindow() {
 		initComponents();
 		basicDao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
 	}
 
-	public StartTimer(HibernateBasicDaoImpl tomatoDao) {
+	public StartTimerWindow(HibernateBasicDaoImpl tomatoDao) {
 		initComponents();
 		basicDao = tomatoDao;
 	}
@@ -68,17 +70,12 @@ public class StartTimer extends JFrame {
 	private void btnStartTomatoKeyPressed(KeyEvent evt) {
 		logger.debug(evt.getKeyCode() + ", " + evt.getKeyChar());
 		if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
-			saveTomato(ta_focusOn.getText());
+			storeDataAndStartTimer(ta_focusOn.getText());
 		}
 	}
 
 	private void btnStartTomatoMouseClicked(MouseEvent evt) {
-		saveTomato(ta_focusOn.getText());
-	}
-
-	private void countDown(final Tomato tomato) {
-		Countdown beeperControl = new Countdown(this);
-		beeperControl.start(tomato);
+		storeDataAndStartTimer(ta_focusOn.getText());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -222,16 +219,27 @@ public class StartTimer extends JFrame {
 		pack();
 	}
 
-	void saveTomato(String focusOn) {
-
-		final Tomato tomato = new Tomato(focusOn);
-
+	private void storeDataAndStartTimer(String focusOn) {
+		Tomato tomato = new Tomato(focusOn);
 		basicDao.save(tomato);
 		logger.info(tomato.toString());
+
+		startCountdown(tomato);
+
+		closeThisWindow();
+	}
+
+	private void closeThisWindow() {
 		setVisible(false);
 		dispose();
-		countDown(tomato);
+		// WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+		// Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+	}
 
+	private void startCountdown(Tomato tomato) {
+		Countdown countdown = new Countdown();
+		Callable<JFrame> task = new OpenEndTimerWindow(tomato);
+		countdown.start(task);
 	}
 
 }
