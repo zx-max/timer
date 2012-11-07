@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<aspectj>
+
+	<weaver>
+		<include within="max.utility.tomato..*"/>
+	</weaver>
+
+	<aspects>
+		<aspect name="max.utility.tomato.aspects.task.LogExceptionAspect"/>
+	</aspects>
+
+</aspectj>
