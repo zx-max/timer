@@ -1,14 +1,20 @@
 package max.utility.tomato;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.MissingResourceException;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PropertyLoaderTest {
+	public static final Logger logger = LoggerFactory.getLogger(PropertyLoaderTest.class);
+
 	// System.out.println("0: "
 	// +
 	// getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(6));
@@ -36,6 +42,7 @@ public class PropertyLoaderTest {
 		sb.append("timer-manager.properties");
 		String fileAbsPath = sb.toString();
 		File file = new File(fileAbsPath);
+		logger.debug("load file: [{}]", fileAbsPath);
 		PropertyLoader.loadFromFileSystem(file);
 		assertEquals("20", PropertyLoader.getProperty("duration"));
 		assertEquals("MINUTES", PropertyLoader.getProperty("time.measurement.unit"));
@@ -53,6 +60,12 @@ public class PropertyLoaderTest {
 		PropertyLoader.loadFromClassPathAsResourceBundle("timer-manager");
 		assertEquals("3", PropertyLoader.getProperty("duration"));
 		assertEquals("SECONDS", PropertyLoader.getProperty("time.measurement.unit"));
+	}
+
+	@Test
+	public void loadFromClassPathAsUrl() {
+		URL resource = PropertyLoader.loadFromClassPathAsURL("images/bulb.gif");
+		assertNotNull(resource.getFile());
 	}
 
 	@Test

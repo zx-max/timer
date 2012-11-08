@@ -19,3 +19,10 @@
 * SECURITY 
 ================================================================
  https://www.securecoding.cert.org/confluence/display/java/IDS00-J.+Sanitize+untrusted+data+passed+across+a+trust+boundary
+
+
+
+================================================================
+* SQL 
+================================================================
+ http://code.google.com/p/generic-spatial-dao/

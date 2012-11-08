@@ -31,14 +31,40 @@
 	 cp src/test/resources/timer-manager.properties ${DISTRIBUTION_FOLDER}
 
 *** default configuration for Countdown.
-*** apply code metrics.
+
 
 
 
 ================================================================
 ** VERSION 0.0.3 (ui improvements)
 ================================================================
-*** todo add system tray icon.
+**** BUG [UI]: timer list items are not well rendered
+     see image bug/bug_lista_timer.jpg.
+     may be there are too items in list the the panel ...
+     
+**** FIXED [UI]: events on icon tray are not fired until the timer stop
+14:57:25.562 [AWT-EventQueue-0] DEBUG max.utility.tomato.Countdown - before timer
+14:57:35.577 [pool-2-thread-1] DEBUG m.u.tomato.dao.HibernateBasicDaoImpl .....
+14:57:35.640 [pool-2-thread-1] DEBUG max.utility.tomato.gui.EndTimer - Tomato [id=61, focusOn=descrivi cosa intendi fare nei prossimi 20 minuti... 
+14:57:35.640 [pool-2-thread-1] DEBUG max.utility.tomato.Countdown - open endTomato
+14:57:35.656 [AWT-EventQueue-0] DEBUG max.utility.tomato.Countdown - after timer
+14:57:35.687 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED
+
+**** BUG [UI]: program crash if tomato focusOn filed is empty
+14:59:57.122 [AWT-EventQueue-0] ERROR m.u.tomato.dao.HibernateBasicDaoImpl - #catch_block#
+javax.validation.ConstraintViolationException: Validation failed for classes [max.utility.tomato.domain.Tomato] during persist time for groups [javax.validation.groups.Default, ]
+List of constraint violations:[
+ConstraintViolationImpl{interpolatedMessage='size must be between 1 and 500', propertyPath=focusOn, rootBeanClass=class max.utility.tomato.domain.Tomato, messageTemplate='{javax.validation.constraints.Size.message}'}
+]
+More over, the icon tray remain visible and receive events:
+15:02:35.341 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256555341,modifiers=] on java.awt.TrayIcon@469d59b0
+15:02:37.448 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256557448,modifiers=] on java.awt.TrayIcon@469d59b0
+
+
+
+*** add button "save and open new"
+ 
+*** add system tray icon.
 https://www.google.it/search?q=%20Device%20or%20resource%20busy&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:it:official&client=firefox-a&source=hp&channel=np#hl=it&client=firefox-a&rls=org.mozilla:it%3Aofficial&channel=np&sclient=psy-ab&q=add+window+system+tray+icon+to+a+java+program&oq=add+window+system+tray+icon+to+a+java+program&gs_l=serp.3...6679.16546.6.17153.24.23.1.0.0.2.224.4032.0j21j2.23.0...0.0...1c.1.fetFbEhZHlo&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.&fp=c6224e40b1bf022&biw=1280&bih=930
 http://docs.oracle.com/javase/tutorial/uiswing/misc/systemtray.html
 http://stackoverflow.com/questions/9701852/how-to-add-application-to-system-tray
@@ -46,8 +72,8 @@ http://stackoverflow.com/questions/9964116/how-to-put-java-application-in-system
 
 *** todo on tray icon, add a tooltip with time left and focusOn.
 *** todo count down on mouse over system icon tray.
-*** todo in the end of the timer review window add a button for "close and start new timer". 
-
+*** TODO in the end of the timer review window add a button for "close and start new timer". 
+*** TODO apply code metrics.
 
 
 

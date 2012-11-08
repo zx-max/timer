@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -106,6 +107,11 @@ public class PropertyLoader {
 		}
 	}
 
+	public static URL loadFromClassPathAsURL(String name) {
+		URL resource = PropertyLoader.class.getClassLoader().getResource(name);
+		return resource;
+	}
+
 	/**
 	 * 
 	 * @param propsFile
@@ -135,5 +141,4 @@ public class PropertyLoader {
 			}
 		}
 	}
-
 }

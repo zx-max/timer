@@ -1,15 +1,22 @@
 package max.utility.tomato;
 
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.io.File;
+import java.net.URL;
 import java.security.CodeSource;
 import java.util.MissingResourceException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
-import max.utility.tomato.gui.StartTimer;
+import max.utility.tomato.gui.StartTimerWindow;
+import max.utility.tomato.gui.TrayIconActionListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +24,7 @@ import org.slf4j.LoggerFactory;
 public class Main {
 
 	public static final Logger logger = LoggerFactory.getLogger(Main.class);
+	public static final String CATCH_BLOCK = "#catch_block#";
 
 	public static void main(String[] args) {
 		try {
@@ -28,6 +36,7 @@ public class Main {
 
 	public Main() throws Exception {
 		super();
+		showIconTray();
 		CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
 		File jarFile = new File(codeSource.getLocation().toURI().getPath());
 		String path = jarFile.getParentFile().getPath();
@@ -49,7 +58,25 @@ public class Main {
 		EntityManager entityManager = emFactory.createEntityManager();
 		HibernateBasicDaoImpl basicDao = new HibernateBasicDaoImpl(entityManager);
 		DaoRegister.put(HibernateBasicDaoImpl.class, basicDao);
-		StartTimer timer = new StartTimer();
+		StartTimerWindow timer = new StartTimerWindow();
 		timer.setVisible(true);
+	}
+
+	private Image createImage(String path, String description) {
+		URL imageURL = PropertyLoader.loadFromClassPathAsURL("images/bulb.gif");
+
+		if (imageURL == null) {
+			System.err.println("Resource not found: " + path);
+			return null;
+		} else {
+			return (new ImageIcon(imageURL, description)).getImage();
+		}
+	}
+
+	private void showIconTray() throws AWTException {
+		final TrayIcon trayIcon = new TrayIcon(createImage("images/bulb.gif", "tray icon"));
+		trayIcon.addActionListener(new TrayIconActionListener(trayIcon));
+		final SystemTray tray = SystemTray.getSystemTray();
+		tray.add(trayIcon);
 	}
 }

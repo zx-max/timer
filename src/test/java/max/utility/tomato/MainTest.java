@@ -1,13 +1,13 @@
 package max.utility.tomato;
 
-import max.utility.tomato.gui.StartTimer;
+import max.utility.tomato.gui.StartTimerWindow;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MainTest {
-	public static final Logger logger = LoggerFactory.getLogger(StartTimer.class);
+	public static final Logger logger = LoggerFactory.getLogger(StartTimerWindow.class);
 
 	// the problem is: load timer-manager.properties
 	// from command line it should be readed from the same folder of the jar
