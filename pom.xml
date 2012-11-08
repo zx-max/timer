@@ -8,6 +8,8 @@
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<targetJdk>1.6</targetJdk>
+		<maven.test.jvmargs>-javaagent:C:\Users\MAX\.m2\repository\org\springframework\org.springframework.instrument\3.0.5.RELEASE\org.springframework.instrument-3.0.5.RELEASE.jar</maven.test.jvmargs>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
@@ -16,6 +18,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
 				<configuration>
 					<!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
 					<source>${targetJdk}</source>
@@ -34,6 +37,14 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<argLine>${maven.test.jvmargs}</argLine>
 				</configuration>
 			</plugin>
 			<!-- code metrics -->
@@ -81,18 +92,18 @@
 
 	<dependencies>
 
-<!-- for slf4j javaagent -->
-<!-- http://www.slf4j.org/extensions.html#extended_logger -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.slf4j</groupId> -->
-<!-- 			<artifactId>slf4j-ext</artifactId> -->
-<!-- 			<version>1.7.2</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.log4j</groupId> -->
-<!-- 			<artifactId>com.springsource.org.apache.log4j</artifactId> -->
-<!-- 			<version>1.2.16</version> -->
-<!-- 		</dependency> -->
+		<!-- for slf4j javaagent -->
+		<!-- http://www.slf4j.org/extensions.html#extended_logger -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.slf4j</groupId> -->
+		<!-- <artifactId>slf4j-ext</artifactId> -->
+		<!-- <version>1.7.2</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.log4j</groupId> -->
+		<!-- <artifactId>com.springsource.org.apache.log4j</artifactId> -->
+		<!-- <version>1.2.16</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
