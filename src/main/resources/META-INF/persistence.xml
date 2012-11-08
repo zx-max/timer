@@ -19,7 +19,7 @@
 			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
 
 			<!-- h2 file -->
-			<property name="hibernate.connection.url" value="jdbc:h2:file:sqlDataBase/timer_manager_db" />
+			<property name="hibernate.connection.url" value="jdbc:h2:file:sqlDataBase/timer_manager_db;DB_CLOSE_ON_EXIT=FALSE" />
 			<property name="hibernate.connection.username" value="sa" />
 			<property name="hibernate.connection.password" value="" />
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
