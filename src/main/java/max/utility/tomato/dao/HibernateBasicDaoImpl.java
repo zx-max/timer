@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /*
- * per esmpi di select e configurazioni più avanzate, vedi ad esempio:
+ * for examples of select and more advanced configuration checkout:
  * http://code.google.com/p/generic-spatial-dao/
  */
 public class HibernateBasicDaoImpl {
