@@ -34,29 +34,40 @@ public class Ex1 extends JFrame {
 	private void run() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		// Layout, Column and Row constraints as arguments.
+
+		JPanel panel1 = constraintsByString();
+		JPanel panel2 = constraintsByApi();
+
+		getContentPane().add(panel1);
+	}
+
+	private JPanel constraintsByString() {
 		MigLayout layout1 = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
 		JPanel panel1 = new JPanel(layout1);
 
-		panel1.add(new JLabel("Enter size:"), "");
+		JLabel lblSize = new JLabel("Enter size:");
+		panel1.add(lblSize, "");
 		panel1.add(new JTextField(""), "wrap");
-		panel1.add(new JLabel("Enter weight:"), "");
+		JLabel lblWieght = new JLabel("Enter weight:");
+		panel1.add(lblWieght, "");
 		panel1.add(new JTextField(""), "");
+		return panel1;
+	}
 
-		// Or the same layout with the API constraint building. Sice they are so
-		// similar the API version will not be handled much further in this
-		// white paper.
-
-		// Layout, Column and Row constraints as arguments.
+	// Or the same layout with the API constraint building. Sice they are so
+	// similar the API version will not be handled much further in this
+	// white paper.
+	// Layout, Column and Row constraints as arguments.
+	private JPanel constraintsByApi() {
 		MigLayout layout2 = new MigLayout(new LC().fillX(), new AC().align("right").gap("rel").grow().fill(), new AC().gap("10"));
-
+		JLabel lblSize = new JLabel("Enter size:");
+		JLabel lblWieght = new JLabel("Enter weight:");
 		JPanel panel2 = new JPanel(layout2);
 
-		panel2.add(new JLabel("Enter size:"));
+		panel2.add(lblSize);
 		panel2.add(new JTextField(""), new CC().wrap());
-		panel2.add(new JLabel("Enter weight:"));
+		panel2.add(lblWieght);
 		panel2.add(new JTextField(""));
-
-		getContentPane().add(panel1);
+		return panel2;
 	}
 }
