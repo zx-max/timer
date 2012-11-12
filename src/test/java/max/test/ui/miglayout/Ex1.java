@@ -39,6 +39,7 @@ public class Ex1 extends JFrame {
 		JPanel panel2 = constraintsByApi();
 
 		getContentPane().add(panel1);
+		// getContentPane().add(panel2);
 	}
 
 	private JPanel constraintsByString() {
@@ -46,11 +47,13 @@ public class Ex1 extends JFrame {
 		JPanel panel1 = new JPanel(layout1);
 
 		JLabel lblSize = new JLabel("Enter size:");
+		JLabel lblWieght = new JLabel("Enter weight:");
+
 		panel1.add(lblSize, "");
 		panel1.add(new JTextField(""), "wrap");
-		JLabel lblWieght = new JLabel("Enter weight:");
 		panel1.add(lblWieght, "");
 		panel1.add(new JTextField(""), "");
+
 		return panel1;
 	}
 
@@ -68,6 +71,7 @@ public class Ex1 extends JFrame {
 		panel2.add(new JTextField(""), new CC().wrap());
 		panel2.add(lblWieght);
 		panel2.add(new JTextField(""));
+
 		return panel2;
 	}
 }
