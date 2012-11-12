@@ -43,9 +43,14 @@ public class Ex1 extends JFrame {
 	}
 
 	private JPanel constraintsByString() {
-		MigLayout layout1 = new MigLayout("fillx", "[right]rel[grow,fill]", "[]10[]");
-		JPanel panel1 = new JPanel(layout1);
 
+		String layoutConstraint = "fillx";
+		String columAxisConstraint = "[right]rel[grow,fill]";
+		String rowAxisConstraint = "[]10[]";
+
+		MigLayout layout = new MigLayout(layoutConstraint, columAxisConstraint, rowAxisConstraint);
+
+		JPanel panel1 = new JPanel(layout);
 		JLabel lblSize = new JLabel("Enter size:");
 		JLabel lblWieght = new JLabel("Enter weight:");
 
@@ -62,10 +67,16 @@ public class Ex1 extends JFrame {
 	// white paper.
 	// Layout, Column and Row constraints as arguments.
 	private JPanel constraintsByApi() {
-		MigLayout layout2 = new MigLayout(new LC().fillX(), new AC().align("right").gap("rel").grow().fill(), new AC().gap("10"));
+
+		LC layoutConstraint = new LC().fillX();
+		AC columAxisConstraint = new AC().align("right").gap("rel").grow().fill();
+		AC rowAxisConstraint = new AC().gap("10");
+
+		MigLayout layout = new MigLayout(layoutConstraint, columAxisConstraint, rowAxisConstraint);
+
 		JLabel lblSize = new JLabel("Enter size:");
 		JLabel lblWieght = new JLabel("Enter weight:");
-		JPanel panel2 = new JPanel(layout2);
+		JPanel panel2 = new JPanel(layout);
 
 		panel2.add(lblSize);
 		panel2.add(new JTextField(""), new CC().wrap());
