@@ -4,21 +4,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.LayoutManager;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 
-import max.utility.tomato.gui.EvenOddRowCellRenderer;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -83,39 +77,27 @@ public class MLStartTimerWindow extends JFrame {
 
 	private Component getPnlTimersList() {
 		JPanel pnlTimersList = new JPanel();
-		JScrollPane spTimerList = new JScrollPane();
-		final JTable jTable1 = new JTable();
-		spTimerList.setViewportView(jTable1);
-		jTable1.setRowHeight(40);
-		jTable1.setModel(new FakePaginationTableModel());
-		jTable1.setDefaultRenderer(Object.class, new EvenOddRowCellRenderer());
-		jTable1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 1) {
-					JTable target = (JTable) e.getSource();
-					int row = target.getSelectedRow();
-					int column = target.getSelectedColumn();
-					JTextArea ta = new JTextArea();
-					ta.setLineWrap(true);
-					int constant = 400;
-					int constant1 = 300;
-					ta.setSize(constant, constant1);
-					ta.setEditable(false);
-					String text = (String) jTable1.getModel().getValueAt(row, column);
-					ta.setText(text);
-					ta.setLineWrap(true);
-					JScrollPane sp = new JScrollPane();
-					sp.setViewportView(ta);
-					sp.setSize(constant, constant1);
-					sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-					sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-					JOptionPane.showMessageDialog(jTable1, sp);
-				}
+		JLabel lblFocusOn = new JLabel("focus on:");
+		JLabel lblDone = new JLabel("done:");
+		JLabel lblProblemsRaised = new JLabel("issues:");
+		JTextArea txtFocusOn = new JTextArea();
+		JTextArea txtDone = new JTextArea();
+		JTextArea txtProblemsRaised = new JTextArea();
 
-			}
-		});
-		pnlTimersList.add(spTimerList);
+		txtFocusOn.setColumns(20);
+		txtDone.setColumns(20);
+		txtProblemsRaised.setColumns(20);
+
+		LayoutManager layout = new MigLayout("", "", "");
+		pnlTimersList.setLayout(layout);
+
+		pnlTimersList.add(lblFocusOn, "cell 0 0");
+		pnlTimersList.add(txtFocusOn, "cell 0 1");
+		pnlTimersList.add(lblDone, "cell 1 0");
+		pnlTimersList.add(txtDone, "cell 1 1 ");
+		pnlTimersList.add(lblProblemsRaised, "cell 2 0");
+		pnlTimersList.add(txtProblemsRaised, "cell 2 1");
+
 		return pnlTimersList;
 	}
 
