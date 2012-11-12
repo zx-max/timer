@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
+import max.utility.tomato.domain.Tomato;
+import max.utility.tomato.domain.TomatoReview;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -43,7 +47,7 @@ public class MLStartTimerWindow extends JFrame {
 
 	public MLStartTimerWindow() {
 
-		init();
+		initComponents();
 	}
 
 	private Component getPnlNewTimer() {
@@ -76,7 +80,28 @@ public class MLStartTimerWindow extends JFrame {
 	}
 
 	private Component getPnlTimersList() {
-		JPanel pnlTimersList = new JPanel();
+		JPanel pnlTimerList = new JPanel();
+		LayoutManager layout = new MigLayout("flowy", "fill,grow");
+		pnlTimerList.setLayout(layout);
+		List<TomatoReview> resultList = getList();
+		for (TomatoReview tomatoReview : resultList) {
+			pnlTimerList.add(getItemDataPanel(tomatoReview), "");
+		}
+		return pnlTimerList;
+	}
+
+	private List<TomatoReview> getList() {
+		List<TomatoReview> theList = new ArrayList<TomatoReview>();
+		for (int j = 0; j < 20; j++) {
+			Tomato tomato = new Tomato("eeeeeeeeee -->   " + j);
+			TomatoReview tr = new TomatoReview(tomato, "afasdfasdf -->   " + j, "rrrrrrrrrrr -->   " + j);
+			theList.add(tr);
+		}
+		return theList;
+	}
+
+	private JPanel getItemDataPanel(TomatoReview tomatoReview) {
+		JPanel pnlShowItemData = new JPanel();
 		JLabel lblFocusOn = new JLabel("focus on:");
 		JLabel lblDone = new JLabel("done:");
 		JLabel lblProblemsRaised = new JLabel("issues:");
@@ -84,24 +109,27 @@ public class MLStartTimerWindow extends JFrame {
 		JTextArea txtDone = new JTextArea();
 		JTextArea txtProblemsRaised = new JTextArea();
 
-		txtFocusOn.setColumns(20);
-		txtDone.setColumns(20);
-		txtProblemsRaised.setColumns(20);
+		txtFocusOn.setText(tomatoReview.getTomato().getFocusOn());
+		txtDone.setText(tomatoReview.getReallyDone());
+		txtProblemsRaised.setText(tomatoReview.getProblemsRaised());
 
-		LayoutManager layout = new MigLayout("", "", "");
-		pnlTimersList.setLayout(layout);
+		LayoutManager layout = new MigLayout("", "grow,fill", "");
+		pnlShowItemData.setLayout(layout);
 
-		pnlTimersList.add(lblFocusOn, "cell 0 0");
-		pnlTimersList.add(txtFocusOn, "cell 0 1");
-		pnlTimersList.add(lblDone, "cell 1 0");
-		pnlTimersList.add(txtDone, "cell 1 1 ");
-		pnlTimersList.add(lblProblemsRaised, "cell 2 0");
-		pnlTimersList.add(txtProblemsRaised, "cell 2 1");
+		// "cell column row width height"
+		pnlShowItemData.add(lblFocusOn, "cell 0 0");
+		pnlShowItemData.add(lblDone, "cell 1 0");
 
-		return pnlTimersList;
+		pnlShowItemData.add(txtFocusOn, "cell 0 1,growx ");
+		pnlShowItemData.add(txtDone, "cell 1 1,growx ");
+
+		pnlShowItemData.add(lblProblemsRaised, "cell 0 2");
+		pnlShowItemData.add(txtProblemsRaised, "cell 0 3 2 1, growx");
+		return pnlShowItemData;
+
 	}
 
-	private void init() {
+	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
