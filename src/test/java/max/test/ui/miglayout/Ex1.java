@@ -62,10 +62,6 @@ public class Ex1 extends JFrame {
 		return panel1;
 	}
 
-	// Or the same layout with the API constraint building. Sice they are so
-	// similar the API version will not be handled much further in this
-	// white paper.
-	// Layout, Column and Row constraints as arguments.
 	private JPanel constraintsByApi() {
 
 		LC layoutConstraint = new LC().fillX();
