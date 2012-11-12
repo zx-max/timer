@@ -90,6 +90,14 @@
 
 	<dependencies>
 
+		<!-- UI -->
+		<dependency>
+			<groupId>com.miglayout</groupId>
+			<artifactId>miglayout-swing</artifactId>
+			<version>4.2</version>
+		</dependency>
+
+
 		<!-- for slf4j javaagent -->
 		<!-- http://www.slf4j.org/extensions.html#extended_logger -->
 		<!-- <dependency> -->
