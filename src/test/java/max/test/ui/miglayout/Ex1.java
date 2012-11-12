@@ -1,28 +1,31 @@
 package max.test.ui.miglayout;
 
 import java.awt.EventQueue;
+import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import net.miginfocom.layout.AC;
-import net.miginfocom.layout.CC;
-import net.miginfocom.layout.LC;
 import net.miginfocom.swing.MigLayout;
 
 public class Ex1 extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4299592918557121279L;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Ex1 frame = new Ex1();
-					frame.run();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,54 +34,42 @@ public class Ex1 extends JFrame {
 		});
 	}
 
-	private void run() {
+	public Ex1() {
+
+		init();
+	}
+
+	private void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
-		JPanel panel1 = constraintsByString();
-		JPanel panel2 = constraintsByApi();
+		LayoutManager mgr = new MigLayout("flowy", "[grow,fill]", "[grow]");
+		getContentPane().setLayout(mgr);
 
-		getContentPane().add(panel1);
-		// getContentPane().add(panel2);
+		for (int i = 0; i < 3; i++) {
+			getContentPane().add(useCellsForComponents(), "cell 0 0,grow");
+		}
 	}
 
-	private JPanel constraintsByString() {
+	private JPanel useCellsForComponents() {
+		JTextField textField;
+		JTextField textField_1;
 
-		String layoutConstraint = "fillx";
-		String columAxisConstraint = "[right]rel[grow,fill]";
-		String rowAxisConstraint = "[]10[]";
-
-		MigLayout layout = new MigLayout(layoutConstraint, columAxisConstraint, rowAxisConstraint);
-
-		JPanel panel1 = new JPanel(layout);
-		JLabel lblSize = new JLabel("Enter size:");
-		JLabel lblWieght = new JLabel("Enter weight:");
-
-		panel1.add(lblSize, "");
-		panel1.add(new JTextField(""), "wrap");
-		panel1.add(lblWieght, "");
-		panel1.add(new JTextField(""), "");
-
-		return panel1;
-	}
-
-	private JPanel constraintsByApi() {
-
-		LC layoutConstraint = new LC().fillX();
-		AC columAxisConstraint = new AC().align("right").gap("rel").grow().fill();
-		AC rowAxisConstraint = new AC().gap("10");
-
-		MigLayout layout = new MigLayout(layoutConstraint, columAxisConstraint, rowAxisConstraint);
+		JPanel panel = new JPanel();
+		panel.setLayout(new MigLayout("", "[][grow]", "[][]"));
 
 		JLabel lblSize = new JLabel("Enter size:");
+		textField = new JTextField();
+		textField.setColumns(10);
 		JLabel lblWieght = new JLabel("Enter weight:");
-		JPanel panel2 = new JPanel(layout);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
 
-		panel2.add(lblSize);
-		panel2.add(new JTextField(""), new CC().wrap());
-		panel2.add(lblWieght);
-		panel2.add(new JTextField(""));
+		panel.add(lblSize, "cell 0 0,alignx trailing");
+		panel.add(textField, "cell 1 0,growx");
+		panel.add(lblWieght, "cell 0 1,alignx trailing");
+		panel.add(textField_1, "cell 1 1");
 
-		return panel2;
+		return panel;
 	}
 }
