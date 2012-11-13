@@ -29,7 +29,7 @@ How many tomato for each roadmap issue ?
 	 - the jar file 
 	 - the timer-manager.properties
 	 
-	 easyiest way should be an executable file which do somethink like this:
+	 easiest way should be an executable file which does something like this:
 	 DISTRIBUTION_FOLDER = timer-manager 
 	 rm ${DISTRIBUTION_FOLDER} -rf
 	 mkdir ${DISTRIBUTION_FOLDER}
