@@ -6,7 +6,7 @@ import java.awt.LayoutManager;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -51,8 +51,12 @@ public class Ex1 extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		getContentPane().add(tabbedPane, "cell 0 0,grow");
 
-		JScrollPane scrollPane = new JScrollPane();
-		tabbedPane.addTab("New tab", null, scrollPane, null);
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
+		panel.setLayout(new MigLayout("", "[grow]", "[grow]"));
+
+		JScrollBar scrollBar = new JScrollBar();
+		panel.add(scrollBar, "cell 0 0");
 
 		for (int i = 0; i < 3; i++) {
 			getContentPane().add(useCellsForComponents(), "cell 0 0,grow");
