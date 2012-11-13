@@ -55,7 +55,6 @@ More over, the icon tray remain visible and receive events:
 15:02:35.341 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256555341,modifiers=] on java.awt.TrayIcon@469d59b0
 15:02:37.448 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256557448,modifiers=] on java.awt.TrayIcon@469d59b0
 
-*** TODO make focusOn on EndTOmatoWindow selectable.
 *** TODO rewrite application windows using MigLayout.
 *** TODO add button "save and open new" to EndTimerWindow. 
 *** TODO on tray icon, add a tooltip with time left and focusOn.
@@ -75,6 +74,7 @@ More over, the icon tray remain visible and receive events:
 14:57:35.656 [AWT-EventQueue-0] DEBUG max.utility.tomato.Countdown - after timer
 14:57:35.687 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED
 
+*** DONE make focusOn on EndTOmatoWindow selectable.
 *** DONE add system tray icon.
 https://www.google.it/search?q=%20Device%20or%20resource%20busy&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:it:official&client=firefox-a&source=hp&channel=np#hl=it&client=firefox-a&rls=org.mozilla:it%3Aofficial&channel=np&sclient=psy-ab&q=add+window+system+tray+icon+to+a+java+program&oq=add+window+system+tray+icon+to+a+java+program&gs_l=serp.3...6679.16546.6.17153.24.23.1.0.0.2.224.4032.0j21j2.23.0...0.0...1c.1.fetFbEhZHlo&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.&fp=c6224e40b1bf022&biw=1280&bih=930
 http://docs.oracle.com/javase/tutorial/uiswing/misc/systemtray.html

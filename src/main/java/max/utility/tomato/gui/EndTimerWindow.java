@@ -108,7 +108,7 @@ public class EndTimerWindow extends JFrame {
 		ta_focusOn.setForeground(new Color(0, 255, 255));
 		ta_focusOn.setRows(10);
 		ta_focusOn.setTabSize(2);
-		ta_focusOn.setFocusable(false);
+		// ta_focusOn.setFocusable(false);
 		ta_focusOn.setText(tomato.getFocusOn());
 		ta_focusOn.setToolTipText("breve revisione di quanto fatto ..");
 		ta_focusOn.setMargin(new Insets(0, 2, 2, 2));
@@ -189,31 +189,27 @@ public class EndTimerWindow extends JFrame {
 														layout.createSequentialGroup()
 																.addGap(0, 0, Short.MAX_VALUE)
 																.addGroup(
-																		layout.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
+																		layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																				.addComponent(jScrollPane4,
 																						GroupLayout.Alignment.TRAILING,
-																						GroupLayout.PREFERRED_SIZE,
-																						500, GroupLayout.PREFERRED_SIZE)
+																						GroupLayout.PREFERRED_SIZE, 500,
+																						GroupLayout.PREFERRED_SIZE)
 																				.addComponent(jScrollPane3,
 																						GroupLayout.Alignment.TRAILING,
-																						GroupLayout.PREFERRED_SIZE,
-																						500, GroupLayout.PREFERRED_SIZE)))
+																						GroupLayout.PREFERRED_SIZE, 500,
+																						GroupLayout.PREFERRED_SIZE)))
 												.addGroup(
 														layout.createSequentialGroup()
 																.addGroup(
-																		layout.createParallelGroup(
-																				GroupLayout.Alignment.LEADING)
+																		layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addGap(20, 20, 20)
-																								.addComponent(
-																										lbl_reallyDone))
+																								.addComponent(lbl_reallyDone))
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addGap(20, 20, 20)
-																								.addComponent(
-																										lbl_problemsRaised))
+																								.addComponent(lbl_problemsRaised))
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addGap(19, 19, 19)
@@ -246,20 +242,17 @@ public class EndTimerWindow extends JFrame {
 						.addContainerGap()
 						.addGroup(
 								layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-										.addGroup(
-												layout.createSequentialGroup().addComponent(lbl_review)
-														.addGap(15, 15, 15))
+										.addGroup(layout.createSequentialGroup().addComponent(lbl_review).addGap(15, 15, 15))
 										.addGroup(
 												GroupLayout.Alignment.TRAILING,
 												layout.createSequentialGroup().addComponent(lbl_focusOn)
 														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
-						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addGap(19, 19, 19).addComponent(lbl_reallyDone)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addGap(33, 33, 33).addComponent(lbl_problemsRaised).addGap(1, 1, 1)
-						.addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addGap(18, 18, 18).addComponent(btn_reviewCompleted).addContainerGap(27, Short.MAX_VALUE)));
+						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE).addGap(19, 19, 19)
+						.addComponent(lbl_reallyDone).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE).addGap(33, 33, 33)
+						.addComponent(lbl_problemsRaised).addGap(1, 1, 1)
+						.addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE).addGap(18, 18, 18)
+						.addComponent(btn_reviewCompleted).addContainerGap(27, Short.MAX_VALUE)));
 
 		pack();
 	}
