@@ -83,11 +83,14 @@ public class MLStartTimerWindow extends JFrame {
 		JPanel pnlTimerList = new JPanel();
 		LayoutManager layout = new MigLayout("flowy", "fill,grow");
 		pnlTimerList.setLayout(layout);
+
 		List<TomatoReview> resultList = getList();
+		JScrollPane sp = new JScrollPane(pnlTimerList);
 		for (TomatoReview tomatoReview : resultList) {
 			pnlTimerList.add(getItemDataPanel(tomatoReview), "");
 		}
-		return pnlTimerList;
+		sp.getVerticalScrollBar().getModel().setValue(0);
+		return sp;
 	}
 
 	private List<TomatoReview> getList() {

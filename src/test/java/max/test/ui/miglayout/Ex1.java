@@ -6,6 +6,8 @@ import java.awt.LayoutManager;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
@@ -45,6 +47,12 @@ public class Ex1 extends JFrame {
 
 		LayoutManager mgr = new MigLayout("flowy", "[grow,fill]", "[grow]");
 		getContentPane().setLayout(mgr);
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		getContentPane().add(tabbedPane, "cell 0 0,grow");
+
+		JScrollPane scrollPane = new JScrollPane();
+		tabbedPane.addTab("New tab", null, scrollPane, null);
 
 		for (int i = 0; i < 3; i++) {
 			getContentPane().add(useCellsForComponents(), "cell 0 0,grow");
