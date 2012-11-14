@@ -7,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -101,12 +100,17 @@ public class StartTimerWindow extends JFrame {
 		JPanel pnlTimerList = new JPanel();
 		LayoutManager layout = new MigLayout("flowy", "fill,grow");
 		pnlTimerList.setLayout(layout);
-		List<TomatoReview> resultList = basicDao.namedQuery("TomatoReview.list");
-		logger.debug(Arrays.toString(resultList.toArray()).replaceAll("TomatoReview", "\nTomatoReview"));
+
+		List<TomatoReview> resultList = getList();
+		JScrollPane pnlScrollList = new JScrollPane(pnlTimerList);
 		for (TomatoReview tomatoReview : resultList) {
 			pnlTimerList.add(getItemDataPanel(tomatoReview), "");
 		}
-		return pnlTimerList;
+		return pnlScrollList;
+	}
+
+	private List<TomatoReview> getList() {
+		return basicDao.namedQuery("TomatoReview.list");
 	}
 
 	private JPanel getItemDataPanel(TomatoReview tomatoReview) {
