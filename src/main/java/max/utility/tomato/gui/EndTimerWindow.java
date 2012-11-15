@@ -44,13 +44,13 @@ public class EndTimerWindow extends JFrame {
 	private JScrollPane jScrollPane1;
 	private JScrollPane jScrollPane3;
 	private JScrollPane jScrollPane4;
-	private JLabel lbl_focusOn;
-	private JLabel lbl_problemsRaised;
-	private JLabel lbl_reallyDone;
-	private JLabel lbl_review;
-	private JTextArea ta_focusOn;
-	private JTextArea ta_problemsRaised;
-	private JTextArea ta_reallyDone;
+	private JLabel lblFocusOn;
+	private JLabel lblNote;
+	private JLabel lblDone;
+	private JLabel lblTitle;
+	private JTextArea taFocusOn;
+	private JTextArea taNote;
+	private JTextArea taDone;
 	private Tomato tomato;
 
 	// End of variables declaration
@@ -77,82 +77,83 @@ public class EndTimerWindow extends JFrame {
 
 	private void initComponents() {
 
-		lbl_review = new JLabel();
-		lbl_focusOn = new JLabel();
+		lblFocusOn = new JLabel();
+		taFocusOn = new JTextArea();
 		jScrollPane1 = new JScrollPane();
-		ta_focusOn = new JTextArea();
-		lbl_reallyDone = new JLabel();
+
+		lblDone = new JLabel();
+		taDone = new JTextArea();
 		jScrollPane4 = new JScrollPane();
-		ta_reallyDone = new JTextArea();
-		lbl_problemsRaised = new JLabel();
+
+		lblNote = new JLabel();
+		taNote = new JTextArea();
 		jScrollPane3 = new JScrollPane();
-		ta_problemsRaised = new JTextArea();
+
 		btn_reviewCompleted = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBackground(new Color(0, 0, 0));
 
-		lbl_review.setFont(new Font("Comic Sans MS", 0, 14)); // NOI18N
-		lbl_review.setForeground(new Color(255, 153, 0));
-		lbl_review.setText("rivedi quanto fatto");
+		lblTitle.setFont(new Font("Comic Sans MS", 0, 14)); // NOI18N
+		lblTitle.setForeground(new Color(255, 153, 0));
+		lblTitle.setText("rivedi quanto fatto");
 
-		lbl_focusOn.setBackground(new Color(0, 0, 0));
-		lbl_focusOn.setForeground(new Color(0, 204, 204));
-		lbl_focusOn.setLabelFor(ta_focusOn);
-		lbl_focusOn.setText("volevo fare ...");
+		lblFocusOn.setBackground(new Color(0, 0, 0));
+		lblFocusOn.setForeground(new Color(0, 204, 204));
+		lblFocusOn.setLabelFor(taFocusOn);
+		lblFocusOn.setText("volevo fare ...");
 
-		ta_focusOn.setEditable(false);
-		ta_focusOn.setBackground(new Color(0, 0, 0));
-		ta_focusOn.setColumns(20);
-		ta_focusOn.setFont(new Font("Andalus", 0, 13)); // NOI18N
-		ta_focusOn.setForeground(new Color(0, 255, 255));
-		ta_focusOn.setRows(10);
-		ta_focusOn.setTabSize(2);
+		taFocusOn.setEditable(false);
+		taFocusOn.setBackground(new Color(0, 0, 0));
+		taFocusOn.setColumns(20);
+		taFocusOn.setFont(new Font("Andalus", 0, 13)); // NOI18N
+		taFocusOn.setForeground(new Color(0, 255, 255));
+		taFocusOn.setRows(10);
+		taFocusOn.setTabSize(2);
 		// ta_focusOn.setFocusable(false);
-		ta_focusOn.setText(tomato.getFocusOn());
-		ta_focusOn.setToolTipText("breve revisione di quanto fatto ..");
-		ta_focusOn.setMargin(new Insets(0, 2, 2, 2));
-		jScrollPane1.setViewportView(ta_focusOn);
+		taFocusOn.setText(tomato.getFocusOn());
+		taFocusOn.setToolTipText("breve revisione di quanto fatto ..");
+		taFocusOn.setMargin(new Insets(0, 2, 2, 2));
+		jScrollPane1.setViewportView(taFocusOn);
 
-		lbl_reallyDone.setForeground(new Color(0, 0, 255));
-		lbl_reallyDone.setLabelFor(ta_focusOn);
-		lbl_reallyDone.setText("ho fatto");
+		lblDone.setForeground(new Color(0, 0, 255));
+		lblDone.setLabelFor(taFocusOn);
+		lblDone.setText("ho fatto");
 
-		ta_reallyDone.setColumns(20);
-		ta_reallyDone.setFont(new Font("Andalus", 0, 13)); // NOI18N
-		ta_reallyDone.setForeground(new Color(0, 0, 255));
-		ta_reallyDone.setRows(10);
-		ta_reallyDone.setTabSize(2);
-		ta_reallyDone.setText("salva le ultime modifiche.\ncommit -m \"fine timer\"\n");
-		ta_reallyDone.setToolTipText("breve revisione di quanto fatto ..");
+		taDone.setColumns(20);
+		taDone.setFont(new Font("Andalus", 0, 13)); // NOI18N
+		taDone.setForeground(new Color(0, 0, 255));
+		taDone.setRows(10);
+		taDone.setTabSize(2);
+		taDone.setText("salva le ultime modifiche.\ncommit -m \"fine timer\"\n");
+		taDone.setToolTipText("breve revisione di quanto fatto ..");
 		// ta_reallyDone.setFocusCycleRoot(true);
-		ta_reallyDone.setMargin(new Insets(0, 2, 2, 2));
-		ta_reallyDone.requestFocusInWindow();
-		ta_reallyDone.setNextFocusableComponent(ta_problemsRaised);
-		jScrollPane4.setViewportView(ta_reallyDone);
+		taDone.setMargin(new Insets(0, 2, 2, 2));
+		taDone.requestFocusInWindow();
+		taDone.setNextFocusableComponent(taNote);
+		jScrollPane4.setViewportView(taDone);
 
-		lbl_problemsRaised.setForeground(new Color(204, 0, 0));
-		lbl_problemsRaised.setLabelFor(ta_problemsRaised);
-		lbl_problemsRaised.setText("difficolt�, impedimenti, problemi, ...");
+		lblNote.setForeground(new Color(204, 0, 0));
+		lblNote.setLabelFor(taNote);
+		lblNote.setText("difficolt�, impedimenti, problemi, ...");
 
 		jScrollPane3.setBackground(new Color(204, 0, 0));
 
-		ta_problemsRaised.setColumns(20);
-		ta_problemsRaised.setFont(new Font("Andalus", 0, 13)); // NOI18N
-		ta_problemsRaised.setForeground(new Color(204, 0, 0));
-		ta_problemsRaised.setRows(10);
-		ta_problemsRaised.setTabSize(2);
-		ta_problemsRaised
-				.setText("finestre di start e stop (versione base) ok\nformattazione del codice ok\neseguire il codice da riga di comando ok\navvio e stop del timer ok\n");
-		ta_problemsRaised.setToolTipText("breve revisione di quanto fatto ..");
+		taNote.setColumns(20);
+		taNote.setFont(new Font("Andalus", 0, 13)); // NOI18N
+		taNote.setForeground(new Color(204, 0, 0));
+		taNote.setRows(10);
+		taNote.setTabSize(2);
+		taNote.setText("finestre di start e stop (versione base) ok\nformattazione del codice ok\neseguire il codice da riga di comando ok\navvio e stop del timer ok\n");
+		taNote.setToolTipText("breve revisione di quanto fatto ..");
 		// ta_problemsRaised.setFocusCycleRoot(true);
-		ta_problemsRaised.setMargin(new Insets(0, 2, 2, 2));
-		ta_problemsRaised.setNextFocusableComponent(btn_reviewCompleted);
-		jScrollPane3.setViewportView(ta_problemsRaised);
+		taNote.setMargin(new Insets(0, 2, 2, 2));
+		taNote.setNextFocusableComponent(btn_reviewCompleted);
+		jScrollPane3.setViewportView(taNote);
 
 		btn_reviewCompleted.setText("ok");
 		// btn_reviewCompleted.setFocusCycleRoot(true);
-		btn_reviewCompleted.setNextFocusableComponent(ta_focusOn);
+		btn_reviewCompleted.setNextFocusableComponent(taFocusOn);
 		btn_reviewCompleted.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
@@ -205,11 +206,11 @@ public class EndTimerWindow extends JFrame {
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addGap(20, 20, 20)
-																								.addComponent(lbl_reallyDone))
+																								.addComponent(lblDone))
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addGap(20, 20, 20)
-																								.addComponent(lbl_problemsRaised))
+																								.addComponent(lblNote))
 																				.addGroup(
 																						layout.createSequentialGroup()
 																								.addGap(19, 19, 19)
@@ -224,7 +225,7 @@ public class EndTimerWindow extends JFrame {
 																												.addGroup(
 																														layout.createSequentialGroup()
 																																.addComponent(
-																																		lbl_focusOn,
+																																		lblFocusOn,
 																																		GroupLayout.PREFERRED_SIZE,
 																																		79,
 																																		GroupLayout.PREFERRED_SIZE)
@@ -232,7 +233,7 @@ public class EndTimerWindow extends JFrame {
 																																		92,
 																																		92)
 																																.addComponent(
-																																		lbl_review)))))
+																																		lblTitle)))))
 																.addGap(0, 0, Short.MAX_VALUE))).addContainerGap())
 				.addGroup(
 						layout.createSequentialGroup().addGap(237, 237, 237).addComponent(btn_reviewCompleted)
@@ -242,15 +243,15 @@ public class EndTimerWindow extends JFrame {
 						.addContainerGap()
 						.addGroup(
 								layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-										.addGroup(layout.createSequentialGroup().addComponent(lbl_review).addGap(15, 15, 15))
+										.addGroup(layout.createSequentialGroup().addComponent(lblTitle).addGap(15, 15, 15))
 										.addGroup(
 												GroupLayout.Alignment.TRAILING,
-												layout.createSequentialGroup().addComponent(lbl_focusOn)
+												layout.createSequentialGroup().addComponent(lblFocusOn)
 														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE).addGap(19, 19, 19)
-						.addComponent(lbl_reallyDone).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(lblDone).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE).addGap(33, 33, 33)
-						.addComponent(lbl_problemsRaised).addGap(1, 1, 1)
+						.addComponent(lblNote).addGap(1, 1, 1)
 						.addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE).addGap(18, 18, 18)
 						.addComponent(btn_reviewCompleted).addContainerGap(27, Short.MAX_VALUE)));
 
@@ -272,7 +273,7 @@ public class EndTimerWindow extends JFrame {
 	}
 
 	private void saveAndCloseWindow() {
-		basicDao.save(new TomatoReview(tomato, ta_reallyDone.getText(), ta_problemsRaised.getText()));
+		basicDao.save(new TomatoReview(tomato, taDone.getText(), taNote.getText()));
 		WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
 	}
