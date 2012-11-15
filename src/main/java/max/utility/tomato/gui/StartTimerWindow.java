@@ -3,6 +3,7 @@ package max.utility.tomato.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.LayoutManager;
+import java.awt.TrayIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -41,6 +42,8 @@ public class StartTimerWindow extends JFrame {
 	private final HibernateBasicDaoImpl basicDao;
 	private JTextArea taFocusOn;
 
+	private TrayIcon trayIcon;
+
 	/**
 	 * Creates new form StartTimer
 	 */
@@ -52,6 +55,12 @@ public class StartTimerWindow extends JFrame {
 	public StartTimerWindow(HibernateBasicDaoImpl tomatoDao) {
 		initComponents();
 		basicDao = tomatoDao;
+	}
+
+	public StartTimerWindow(TrayIcon trayIcon) {
+		this.trayIcon = trayIcon;
+		basicDao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
+		initComponents();
 	}
 
 	private Component getPnlNewTimer() {
@@ -171,6 +180,7 @@ public class StartTimerWindow extends JFrame {
 
 		startCountdown(tomato);
 
+		trayIcon.addMouseMotionListener(new TrayIconMouseMotionListener(trayIcon, tomato));
 		closeThisWindow();
 	}
 

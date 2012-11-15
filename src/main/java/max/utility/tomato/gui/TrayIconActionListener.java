@@ -19,6 +19,7 @@ public class TrayIconActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("actionPerformed");
 		LocalDateTime now = new LocalDateTime();
 		logger.debug(now.toString("dd-MM-yyyy HH:mm"));
 		trayIcon.setToolTip(now.toString("dd-MM-yyyy HH:mm"));

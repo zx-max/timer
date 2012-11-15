@@ -36,7 +36,6 @@ public class Main {
 
 	public Main() throws Exception {
 		super();
-		showIconTray();
 		CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
 		File jarFile = new File(codeSource.getLocation().toURI().getPath());
 		String path = jarFile.getParentFile().getPath();
@@ -58,7 +57,7 @@ public class Main {
 		EntityManager entityManager = emFactory.createEntityManager();
 		HibernateBasicDaoImpl basicDao = new HibernateBasicDaoImpl(entityManager);
 		DaoRegister.put(HibernateBasicDaoImpl.class, basicDao);
-		StartTimerWindow timer = new StartTimerWindow();
+		StartTimerWindow timer = new StartTimerWindow(showIconTray());
 		timer.setVisible(true);
 	}
 
@@ -73,10 +72,12 @@ public class Main {
 		}
 	}
 
-	private void showIconTray() throws AWTException {
+	private TrayIcon showIconTray() throws AWTException {
 		final TrayIcon trayIcon = new TrayIcon(createImage("images/bulb.gif", "tray icon"));
 		trayIcon.addActionListener(new TrayIconActionListener(trayIcon));
 		final SystemTray tray = SystemTray.getSystemTray();
 		tray.add(trayIcon);
+
+		return trayIcon;
 	}
 }
