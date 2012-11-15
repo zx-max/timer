@@ -66,4 +66,17 @@ public class TomatoReview {
 		this.tomato = tomato;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("TomatoReview [id=");
+		builder.append(id);
+		builder.append(", problemsRaised=");
+		builder.append(problemsRaised);
+		builder.append(", reallyDone=");
+		builder.append(reallyDone);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
