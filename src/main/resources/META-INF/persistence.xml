@@ -3,29 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
-
-	<persistence-unit name="tomatoPU">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-
-		<mapping-file>META-INF/jpql/tomato.xml</mapping-file>
-		
-		<class>max.utility.tomato.domain.Tomato</class>
-		<class>max.utility.tomato.domain.TomatoReview</class>
-
-		<properties>
-			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.show_sql" value="false" />
-			<property name="hibernate.max_fetch_depth" value="3" />
-			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
-
-			<!-- h2 file -->
-			<property name="hibernate.connection.url" value="jdbc:h2:file:sqlDataBase/timer_manager_db;DB_CLOSE_ON_EXIT=FALSE" />
-			<property name="hibernate.connection.username" value="sa" />
-			<property name="hibernate.connection.password" value="" />
-			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-
+<!-- http://www.h2database.com/html/features.html -->
 
 			<!-- hsqldb in memory -->
 			<!-- <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:unit-test" /> -->
@@ -36,6 +14,42 @@
 			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MyHSQLDialect" 
 				/> -->
 			<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+
+	<persistence-unit name="H2FileTomatoPU">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<mapping-file>META-INF/jpql/tomato.xml</mapping-file>
+		<class>max.utility.tomato.domain.Tomato</class>
+		<class>max.utility.tomato.domain.TomatoReview</class>
+		<properties>
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.max_fetch_depth" value="3" />
+			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
+			<property name="hibernate.connection.url" value="jdbc:h2:file:sqlDataBase/timer_manager_db" />
+			<property name="hibernate.connection.username" value="sa" />
+			<property name="hibernate.connection.password" value="" />
+			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+	
+	<persistence-unit name="H2MemTomatoPU">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<mapping-file>META-INF/jpql/tomato.xml</mapping-file>
+		<class>max.utility.tomato.domain.Tomato</class>
+		<class>max.utility.tomato.domain.TomatoReview</class>
+		<properties>
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.max_fetch_depth" value="3" />
+			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
+			<property name="hibernate.connection.url" value="jdbc:h2:mem:timer_manager_db" />
+			<property name="hibernate.connection.username" value="sa" />
+			<property name="hibernate.connection.password" value="" />
+			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>

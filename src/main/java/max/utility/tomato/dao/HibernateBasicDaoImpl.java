@@ -83,7 +83,7 @@ public class HibernateBasicDaoImpl {
 			entityManager.getTransaction().rollback();
 			logger.error("#catch_block#", e);
 		}
-		logger.debug(entity.toString());
+		logger.debug("saved: " + entity.toString());
 	}
 
 }

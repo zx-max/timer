@@ -53,7 +53,7 @@ public class Main {
 			}
 		}
 
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("tomatoPU");
+		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("H2FileTomatoPU");
 		EntityManager entityManager = emFactory.createEntityManager();
 		HibernateBasicDaoImpl basicDao = new HibernateBasicDaoImpl(entityManager);
 		DaoRegister.put(HibernateBasicDaoImpl.class, basicDao);
