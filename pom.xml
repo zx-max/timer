@@ -8,7 +8,7 @@
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<targetJdk>1.6</targetJdk>
-		<maven.test.jvmargs>-javaagent:C:\Users\MAX\.m2\repository\org\springframework\org.springframework.instrument\3.0.5.RELEASE\org.springframework.instrument-3.0.5.RELEASE.jar</maven.test.jvmargs>
+		<maven.test.jvmargs>-javaagent:C:\max\maven_repo\org\springframework\org.springframework.instrument\3.0.5.RELEASE\org.springframework.instrument-3.0.5.RELEASE.jar</maven.test.jvmargs>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
