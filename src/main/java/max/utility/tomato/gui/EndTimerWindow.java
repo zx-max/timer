@@ -93,7 +93,7 @@ public class EndTimerWindow extends JFrame {
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBackground(new Color(0, 0, 0));
-
+		lblTitle = new JLabel("titolo"); 
 		lblTitle.setFont(new Font("Comic Sans MS", 0, 14)); // NOI18N
 		lblTitle.setForeground(new Color(255, 153, 0));
 		lblTitle.setText("rivedi quanto fatto");
@@ -135,7 +135,7 @@ public class EndTimerWindow extends JFrame {
 
 		lblNote.setForeground(new Color(204, 0, 0));
 		lblNote.setLabelFor(taNote);
-		lblNote.setText("difficolt�, impedimenti, problemi, ...");
+		lblNote.setText("difficoltà, impedimenti, problemi, ...");
 
 		jScrollPane3.setBackground(new Color(204, 0, 0));
 
