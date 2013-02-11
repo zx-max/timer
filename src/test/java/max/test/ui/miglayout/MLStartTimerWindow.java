@@ -147,7 +147,7 @@ public class MLStartTimerWindow extends JFrame {
 		JTabbedPane tabTimers = new JTabbedPane();
 
 		tabTimers.addTab("nuovo timer", getPnlNewTimer());
-		tabTimers.addTab("lista dei timer", getPnlTimersList());
+		tabTimers.addTab("lista dei timer", null);
 		getContentPane().add(tabTimers);
 	}
 }
