@@ -21,6 +21,7 @@ public class Countdown<T> {
 	public Countdown() {
 		duration = Integer.valueOf(PropertyLoader.getProperty("duration"));
 		timeUnit = Enum.valueOf(TimeUnit.class, PropertyLoader.getProperty("time.measurement.unit"));
+		logger.info("timer: " + duration + " " + timeUnit);
 	}
 
 	public void start(Callable<T> task) {
