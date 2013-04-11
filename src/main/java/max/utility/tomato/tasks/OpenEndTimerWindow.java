@@ -37,7 +37,6 @@ public class OpenEndTimerWindow extends TimerTask implements Callable<JFrame> {
 	private JFrame openEndTimerWindow() {
 		try {
 			EndTimerWindow endTimer = new EndTimerWindow(tomato);
-			endTimer.openWindow();
 			logger.debug("open endTomato");
 			return endTimer;
 		} catch (Exception e) {

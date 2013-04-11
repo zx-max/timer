@@ -3,7 +3,7 @@ package max.utility.tomato;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DaoRegister {
+public class Register {
 	private static Map<Class, Object> register = new HashMap<Class, Object>();
 
 	public static Object get(Class key) {

@@ -2,8 +2,12 @@ package max.utility.tomato;
 
 import java.awt.AWTException;
 import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
 import java.security.CodeSource;
@@ -13,10 +17,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
 import max.utility.tomato.gui.StartTimerWindow;
 import max.utility.tomato.gui.TrayIconActionListener;
+import max.utility.tomato.gui.TrayIconMouseMotionListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +62,25 @@ public class Main {
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("H2FileTomatoPU");
 		EntityManager entityManager = emFactory.createEntityManager();
 		HibernateBasicDaoImpl basicDao = new HibernateBasicDaoImpl(entityManager);
-		DaoRegister.put(HibernateBasicDaoImpl.class, basicDao);
-		StartTimerWindow timer = new StartTimerWindow(showIconTray());
+		Register.put(HibernateBasicDaoImpl.class, basicDao);
+		TrayIcon trayIcon = getTrayIcon();
+		TrayIconMouseMotionListener listener = new TrayIconMouseMotionListener(trayIcon);
+		trayIcon.addMouseMotionListener(listener);
+		Register.put(TrayIcon.class, trayIcon);
+		Register.put(TrayIconMouseMotionListener.class, listener);
+		
+		try {
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception ex) {
+			logger.error(null, ex);
+		}
+		
+		StartTimerWindow timer = new StartTimerWindow();
 		timer.setVisible(true);
 	}
 
@@ -72,12 +95,37 @@ public class Main {
 		}
 	}
 
-	private TrayIcon showIconTray() throws AWTException {
+	private TrayIcon getTrayIcon() throws AWTException {
 		final TrayIcon trayIcon = new TrayIcon(createImage("images/bulb.gif", "tray icon"));
 		trayIcon.addActionListener(new TrayIconActionListener(trayIcon));
+
+
+		MenuItem exitItem = new MenuItem("Exit");
+		MenuItem newTimerItem = new MenuItem("Nuovo Timer");
+		final PopupMenu popup = new PopupMenu();
+		popup.add(exitItem);
+		popup.add(newTimerItem);
+		trayIcon.setPopupMenu(popup);
+		
 		final SystemTray tray = SystemTray.getSystemTray();
 		tray.add(trayIcon);
-
+		
+		exitItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tray.remove(trayIcon);
+				System.exit(0);
+			}
+		});
+		
+		newTimerItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				StartTimerWindow timer = new StartTimerWindow();
+				timer.setVisible(true);
+			}
+		});
 		return trayIcon;
 	}
 }

@@ -14,9 +14,9 @@ public class TrayIconMouseMotionListener implements MouseMotionListener {
 	private TrayIcon trayIcon;
 	private Tomato tomato;
 
-	public TrayIconMouseMotionListener(TrayIcon trayIcon, Tomato tomato) {
+	public TrayIconMouseMotionListener(TrayIcon trayIcon/* , Tomato tomato */) {
 		this.trayIcon = trayIcon;
-		this.tomato = tomato;
+		// this.tomato = tomato;
 	}
 
 	@Override
@@ -30,11 +30,20 @@ public class TrayIconMouseMotionListener implements MouseMotionListener {
 		PeriodFormatterBuilder formatter = new PeriodFormatterBuilder();
 		formatter.appendMinutes().appendSeparator(":").appendSeconds();
 
-		String timeLeft = "min: "
-				+ (Integer.valueOf(PropertyLoader.getProperty("duration")) - (now.getMinuteOfHour() - tomato.getStartTime()
-						.getMinuteOfHour()));
+		if (null != tomato) {
+			String timeLeft = "min: "
+					+ (Integer.valueOf(PropertyLoader.getProperty("duration")) - (now
+							.getMinuteOfHour() - tomato.getStartTime()
+							.getMinuteOfHour()));
 
-		trayIcon.setToolTip(timeLeft + "\n" + tomato.getFocusOn());
+			trayIcon.setToolTip(timeLeft + "\n" + tomato.getFocusOn());
+		} else {
+			trayIcon.setToolTip(null);
+		}
+	}
+
+	public void setTomato(Tomato tomato) {
+		this.tomato = tomato;
 	}
 
 }

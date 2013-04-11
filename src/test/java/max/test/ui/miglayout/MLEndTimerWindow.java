@@ -3,6 +3,12 @@ package max.test.ui.miglayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,6 +36,7 @@ public class MLEndTimerWindow extends JFrame {
 			}
 		});
 	}
+	
 	private void initComponent() {
 		getContentPane().setLayout(new MigLayout("", "[grow][]", "[][][grow][][grow][][grow][][]"));
 
@@ -54,6 +61,10 @@ public class MLEndTimerWindow extends JFrame {
 
 		JTextArea taDone = new JTextArea();
 		JScrollPane spDone = new JScrollPane(taDone);
+		taDone.setRows(10);
+		taDone.setTabSize(2);
+		taDone.setText("salva le ultime modifiche.\ncommit -m \"fine timer\"\n");
+		taDone.setToolTipText("breve revisione di quanto fatto ..");
 		getContentPane().add(spDone, "cell 0 4,grow");
 
 		JLabel lblNote = new JLabel("note:");
@@ -68,8 +79,35 @@ public class MLEndTimerWindow extends JFrame {
 
 		JButton btnOkNew = new JButton("ok & New");
 		getContentPane().add(btnOkNew, "cell 0 8");
+		
+		btnOk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+//				btnOkCompletedMouseClicked(evt);
+			}
+		});
+		btnOk.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent evt) {
+//				btnOkCompletedKeyPressed(evt);
+			}
+		});
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent evt) {
+//				logger.debug("start closing windows..");
+				// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				// http://stackoverflow.com/questions/1234912/how-to-programmatically-close-a-jframe
+				// System.exit(0);
+			}
+
+		}
+		);
 	}
 
-	private static final long serialVersionUID = 2925011233048896580L;
+	
+
+	
 
 }

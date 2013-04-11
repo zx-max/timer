@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import max.utility.tomato.DaoRegister;
+import max.utility.tomato.Register;
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
 import max.utility.tomato.domain.TomatoReview;
 
@@ -18,7 +18,7 @@ public class JPAPaginationTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 2632646700661917306L;
 
 	private int counter;
-	private final HibernateBasicDaoImpl dao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
+	private final HibernateBasicDaoImpl dao = (HibernateBasicDaoImpl) Register.get(HibernateBasicDaoImpl.class);
 	private int startPosition;
 	private List<TomatoReview> theList;
 

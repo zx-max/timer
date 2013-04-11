@@ -20,7 +20,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import max.utility.tomato.Countdown;
-import max.utility.tomato.DaoRegister;
+import max.utility.tomato.Register;
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
 import max.utility.tomato.domain.Tomato;
 import max.utility.tomato.domain.TomatoReview;
@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 public class StartTimerWindow extends JFrame {
 
 	public static final Logger logger = LoggerFactory.getLogger(StartTimerWindow.class);
+	public static final Logger timerLogger = LoggerFactory.getLogger("TimerLogger");
 
 	/**
 	 * 
@@ -42,24 +43,13 @@ public class StartTimerWindow extends JFrame {
 	private final HibernateBasicDaoImpl basicDao;
 	private JTextArea taFocusOn;
 
-	private TrayIcon trayIcon;
-
-	/**
-	 * Creates new form StartTimer
-	 */
-	public StartTimerWindow() {
-		basicDao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
-		initComponents();
-	}
-
 	public StartTimerWindow(HibernateBasicDaoImpl tomatoDao) {
 		initComponents();
 		basicDao = tomatoDao;
 	}
 
-	public StartTimerWindow(TrayIcon trayIcon) {
-		this.trayIcon = trayIcon;
-		basicDao = (HibernateBasicDaoImpl) DaoRegister.get(HibernateBasicDaoImpl.class);
+	public StartTimerWindow() {
+		basicDao = (HibernateBasicDaoImpl) Register.get(HibernateBasicDaoImpl.class);
 		initComponents();
 	}
 
@@ -160,6 +150,7 @@ public class StartTimerWindow extends JFrame {
 		tabTimers.addTab("nuovo timer", getPnlNewTimer());
 		tabTimers.addTab("lista dei timer", getPnlTimersList());
 		getContentPane().add(tabTimers);
+		// pack();
 	}
 
 	private void btnStartTomatoKeyPressed(KeyEvent evt) {
@@ -176,11 +167,13 @@ public class StartTimerWindow extends JFrame {
 	private void storeDataAndStartTimer() {
 		Tomato tomato = new Tomato(taFocusOn.getText());
 		basicDao.save(tomato);
-		logger.info(tomato.toString());
+		logger.debug(tomato.toString());
+		timerLogger.info("Focus on:\n" +  tomato.getFocusOn());
 
 		startCountdown(tomato);
 
-		trayIcon.addMouseMotionListener(new TrayIconMouseMotionListener(trayIcon, tomato));
+		TrayIconMouseMotionListener listener = (TrayIconMouseMotionListener) Register.get(TrayIconMouseMotionListener.class);
+		listener.setTomato(tomato);
 		closeThisWindow();
 	}
 

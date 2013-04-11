@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
+	<appender name="TimerAppender" class="ch.qos.logback.core.FileAppender">
+		<file>logs/timer-report.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
-	</appender>
+	</appender>	
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
 		<file>logs/timer-manager.log</file>
 		<append>true</append>
@@ -16,7 +23,11 @@
 
 	<logger name="org.hibernate" level="ERROR" appender="FILE" />
 	
-	<logger name="max.utility.tomato" level="DEBUG"/>
+	<logger name="max.utility.tomato" level="warn"/>
+	
+	<logger name="TimerLogger" level="INFO" >
+		<appender-ref ref="TimerAppender" />
+	</logger>
 
 	
 	<root level="warn">
