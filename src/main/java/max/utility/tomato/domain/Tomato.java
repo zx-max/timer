@@ -13,6 +13,10 @@ import org.joda.time.LocalDateTime;
 @Entity
 public class Tomato {
 
+	@Column (nullable = true, length = 80)
+	@Size(min=0, max= 80)
+	private String title;
+	
 	@Column(nullable = false, length = 500)
 	@Size(min = 1, max = 500)
 	private String focusOn;
@@ -60,10 +64,20 @@ public class Tomato {
 		this.startTime = startTime;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Tomato [id=");
+		builder.append("Tomato [title=");
+		builder.append(title);
+		builder.append(", id=");
 		builder.append(id);
 		builder.append(", focusOn=");
 		builder.append(focusOn);
@@ -73,4 +87,5 @@ public class Tomato {
 		return builder.toString();
 	}
 
+	
 }

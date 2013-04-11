@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import max.utility.tomato.Countdown;
 import max.utility.tomato.Register;
@@ -42,6 +43,7 @@ public class StartTimerWindow extends JFrame {
 
 	private final HibernateBasicDaoImpl basicDao;
 	private JTextArea taFocusOn;
+	private JTextField tfTitle;
 
 	public StartTimerWindow(HibernateBasicDaoImpl tomatoDao) {
 		initComponents();
@@ -60,6 +62,8 @@ public class StartTimerWindow extends JFrame {
 		taFocusOn = new JTextArea();
 		JScrollPane spFocusOn = new JScrollPane();
 		JLabel lblFocusOn = new JLabel("will focus on:");
+		JLabel lblTitle = new JLabel("titolo:");
+		tfTitle = new JTextField(30); 
 		JButton btnStart = new JButton();
 
 		pnlNewTimer.setLayout(layout);
@@ -88,6 +92,8 @@ public class StartTimerWindow extends JFrame {
 			}
 		});
 
+		pnlNewTimer.add(lblTitle);
+		pnlNewTimer.add(tfTitle);
 		pnlNewTimer.add(lblFocusOn);
 		pnlNewTimer.add(spFocusOn, "growx");
 		pnlNewTimer.add(btnStart);
@@ -166,9 +172,10 @@ public class StartTimerWindow extends JFrame {
 
 	private void storeDataAndStartTimer() {
 		Tomato tomato = new Tomato(taFocusOn.getText());
+		tomato.setTitle(tfTitle.getText());
 		basicDao.save(tomato);
 		logger.debug(tomato.toString());
-		timerLogger.info("Focus on:\n" +  tomato.getFocusOn());
+		timerLogger.info("Titolo: " + tomato.getTitle() + " \n Focus on:\n" +  tomato.getFocusOn());
 
 		startCountdown(tomato);
 
