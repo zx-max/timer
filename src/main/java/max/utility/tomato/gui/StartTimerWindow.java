@@ -30,6 +30,8 @@ import net.miginfocom.swing.MigLayout;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javax.swing.Box;
+import javax.swing.SwingConstants;
 
 public class StartTimerWindow extends JFrame {
 
@@ -44,6 +46,7 @@ public class StartTimerWindow extends JFrame {
 	private final HibernateBasicDaoImpl basicDao;
 	private JTextArea taFocusOn;
 	private JTextField tfTitle;
+	private JTextField txtDurata;
 
 	public StartTimerWindow(HibernateBasicDaoImpl tomatoDao) {
 		initComponents();
@@ -55,14 +58,19 @@ public class StartTimerWindow extends JFrame {
 		initComponents();
 	}
 
+	public StartTimerWindow(String title) {
+		basicDao = (HibernateBasicDaoImpl) Register.get(HibernateBasicDaoImpl.class);
+		initComponents();
+		tfTitle.setText(title);
+	}
+	
 	private Component getPnlNewTimer() {
 
 		JPanel pnlNewTimer = new JPanel();
-		LayoutManager layout = new MigLayout("flowy", "fill,grow");
+		LayoutManager layout = new MigLayout("flowy", "[328.00][grow,fill]", "[][][][][]");
 		taFocusOn = new JTextArea();
+		taFocusOn.setWrapStyleWord(true);
 		JScrollPane spFocusOn = new JScrollPane();
-		JLabel lblFocusOn = new JLabel("will focus on:");
-		JLabel lblTitle = new JLabel("titolo:");
 		tfTitle = new JTextField(30); 
 		JButton btnStart = new JButton();
 
@@ -91,12 +99,27 @@ public class StartTimerWindow extends JFrame {
 				btnStartTomatoKeyPressed(evt);
 			}
 		});
-
-		pnlNewTimer.add(lblTitle);
-		pnlNewTimer.add(tfTitle);
-		pnlNewTimer.add(lblFocusOn);
-		pnlNewTimer.add(spFocusOn, "growx");
-		pnlNewTimer.add(btnStart);
+		JLabel lblTitle = new JLabel("titolo:");
+		
+				pnlNewTimer.add(lblTitle, "cell 0 0");
+		pnlNewTimer.add(tfTitle, "cell 0 1 2 1,growx");
+		JLabel lblFocusOn = new JLabel("will focus on:");
+		pnlNewTimer.add(lblFocusOn, "cell 0 2");
+		pnlNewTimer.add(spFocusOn, "cell 0 3 2 1,growx");
+		pnlNewTimer.add(btnStart, "cell 0 4 2 1,growx");
+		
+		Box horizontalBox = Box.createHorizontalBox();
+		pnlNewTimer.add(horizontalBox, "flowx,cell 1 0");
+		
+		JLabel lblDurata = new JLabel("durata");
+		lblDurata.setHorizontalAlignment(SwingConstants.RIGHT);
+		pnlNewTimer.add(lblDurata, "cell 1 0,alignx right");
+		lblDurata.setLabelFor(txtDurata);
+		
+		txtDurata = new JTextField("20");
+		txtDurata.setToolTipText("durata del timer in minuti");
+		pnlNewTimer.add(txtDurata, "cell 1 0,alignx center");
+		txtDurata.setColumns(2);
 
 		return pnlNewTimer;
 	}
@@ -173,6 +196,8 @@ public class StartTimerWindow extends JFrame {
 	private void storeDataAndStartTimer() {
 		Tomato tomato = new Tomato(taFocusOn.getText());
 		tomato.setTitle(tfTitle.getText());
+		
+		tomato.setDuration(Integer.parseInt(txtDurata.getText()));
 		basicDao.save(tomato);
 		logger.debug(tomato.toString());
 		timerLogger.info("Titolo: " + tomato.getTitle() + " \n Focus on:\n" +  tomato.getFocusOn());
@@ -192,7 +217,7 @@ public class StartTimerWindow extends JFrame {
 	}
 
 	private void startCountdown(Tomato tomato) {
-		Countdown countdown = new Countdown();
+		Countdown countdown = new Countdown(tomato.getDuration());
 		Callable<JFrame> task = new OpenEndTimerWindow(tomato);
 		countdown.start(task);
 	}

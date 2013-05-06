@@ -4,10 +4,13 @@ import java.awt.TrayIcon;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.Timer;
+
 import max.utility.tomato.PropertyLoader;
 import max.utility.tomato.domain.Tomato;
 
 import org.joda.time.LocalDateTime;
+import org.joda.time.Minutes;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 public class TrayIconMouseMotionListener implements MouseMotionListener {
@@ -26,15 +29,13 @@ public class TrayIconMouseMotionListener implements MouseMotionListener {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		LocalDateTime now = new LocalDateTime();
-		PeriodFormatterBuilder formatter = new PeriodFormatterBuilder();
-		formatter.appendMinutes().appendSeparator(":").appendSeconds();
 
 		if (null != tomato) {
-			String timeLeft = "min: "
-					+ (Integer.valueOf(PropertyLoader.getProperty("duration")) - (now
-							.getMinuteOfHour() - tomato.getStartTime()
-							.getMinuteOfHour()));
+			LocalDateTime startTime = tomato.getStartTime();
+			LocalDateTime endTimer = startTime.plusMinutes(tomato.getDuration());
+			LocalDateTime now = new LocalDateTime();
+			
+			String timeLeft = "min: " + Minutes.minutesBetween(endTimer, now).getMinutes();
 
 			trayIcon.setToolTip(timeLeft + "\n" + tomato.getFocusOn());
 		} else {

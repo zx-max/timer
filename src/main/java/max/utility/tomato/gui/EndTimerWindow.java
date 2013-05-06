@@ -127,7 +127,7 @@ public class EndTimerWindow extends JFrame {
 			public void mouseClicked(MouseEvent evt) {
 				saveTomatoReview();
 				closeWindow();
-				StartTimerWindow startTimerWindow = new StartTimerWindow();
+				StartTimerWindow startTimerWindow = new StartTimerWindow(tomato.getTitle());
 				startTimerWindow.setVisible(true);
 			}
 

@@ -13,10 +13,10 @@ import org.joda.time.LocalDateTime;
 @Entity
 public class Tomato {
 
-	@Column (nullable = true, length = 80)
-	@Size(min=0, max= 80)
+	@Column(nullable = true, length = 80)
+	@Size(min = 0, max = 80)
 	private String title;
-	
+
 	@Column(nullable = false, length = 500)
 	@Size(min = 1, max = 500)
 	private String focusOn;
@@ -30,6 +30,9 @@ public class Tomato {
 	// @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 	private LocalDateTime startTime;
+
+	@Column
+	private Integer duration;
 
 	public Tomato() {
 		super();
@@ -72,6 +75,14 @@ public class Tomato {
 		this.title = title;
 	}
 
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -87,5 +98,4 @@ public class Tomato {
 		return builder.toString();
 	}
 
-	
 }

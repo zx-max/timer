@@ -23,6 +23,12 @@ public class Countdown<T> {
 		timeUnit = Enum.valueOf(TimeUnit.class, PropertyLoader.getProperty("time.measurement.unit"));
 		logger.info("timer: " + duration + " " + timeUnit);
 	}
+	
+	public Countdown(long duration) {
+		this.duration = duration;
+		timeUnit = TimeUnit.MINUTES;
+		logger.info("timer: " + duration + " " + timeUnit);
+	}
 
 	public void start(Callable<T> task) {
 		logger.debug("before timer");
