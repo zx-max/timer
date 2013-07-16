@@ -55,14 +55,15 @@ More over, the icon tray remain visible and receive events:
 15:02:35.341 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256555341,modifiers=] on java.awt.TrayIcon@469d59b0
 15:02:37.448 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256557448,modifiers=] on java.awt.TrayIcon@469d59b0
 
-*** TODO rewrite application windows using MigLayout.
+*** TODO list timers grouped by title, orederd by date/time desc
+*** DONE rewrite application windows using MigLayout.
 *** DONE add button "save and open new" to EndTimerWindow. 
 *** DONE on tray icon, add a tooltip with time left and focusOn.
 *** TODO apply code metrics.
 *** TODO don't use spring for aop. 
-*** TODO add field "roadmap issue" to Tomato entity.
-*** TODO add a navigation panel for the timer list on StartTimerWindow.
-**** BUG [UI]: timer list items are not well rendered
+
+
+**** FIXED [UI]: timer list items are not well rendered
      see image bug/bug_lista_timer.jpg.
      may be there are too items in list the the panel ...
 

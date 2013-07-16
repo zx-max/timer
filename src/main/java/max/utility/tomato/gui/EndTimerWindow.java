@@ -152,7 +152,7 @@ public class EndTimerWindow extends JFrame {
 				if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
 					saveTomatoReview();
 					closeWindow();
-					StartTimerWindow startTimerWindow = new StartTimerWindow();
+					StartTimerWindow startTimerWindow = new StartTimerWindow(tomato.getTitle());
 					startTimerWindow.setVisible(true);
 				}
 			}
@@ -177,7 +177,7 @@ public class EndTimerWindow extends JFrame {
 	private void saveTomatoReview() {
 		TomatoReview review = new TomatoReview(tomato, taDone.getText(), taNote.getText());
 		basicDao.save(review);
-		timerLogger.info(tomato.getStartTime().toString("HH:mm") + " - " + (new LocalDateTime()).toString("HH:mm"));
+		timerLogger.info(tomato.getStartTime().toString("dd/MM/yyyy HH:mm") + " - " + (new LocalDateTime()).toString("dd/MM/yyyy HH:mm"));
 		timerLogger.info("Fatto:\n" + review.getReallyDone());
 		timerLogger.info("Note:\n" + review.getProblemsRaised());
 		//closeWindow();

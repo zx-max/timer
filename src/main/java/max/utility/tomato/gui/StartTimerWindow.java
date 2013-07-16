@@ -51,8 +51,8 @@ public class StartTimerWindow extends JFrame {
 	private JTextField txtDurata;
 
 	public StartTimerWindow(HibernateBasicDaoImpl tomatoDao) {
-		initComponents();
 		basicDao = tomatoDao;
+		initComponents();
 	}
 
 	public StartTimerWindow() {
@@ -106,7 +106,7 @@ public class StartTimerWindow extends JFrame {
 
 		pnlNewTimer.add(lblTitle, "cell 0 0");
 		pnlNewTimer.add(tfTitle, "cell 0 1 2 1,growx");
-		JLabel lblFocusOn = new JLabel("will focus on:");
+		JLabel lblFocusOn = new JLabel("voglio fare:");
 		pnlNewTimer.add(lblFocusOn, "cell 0 2");
 		pnlNewTimer.add(spFocusOn, "cell 0 3 2 1,growx");
 		pnlNewTimer.add(btnStart, "cell 0 4 2 1,growx");
@@ -227,14 +227,14 @@ public class StartTimerWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
-//		JTabbedPane tabTimers = new JTabbedPane();
-//
-//		tabTimers.addTab("nuovo timer", getPnlNewTimer());
-//		tabTimers.addTab("lista dei timer", getPnlTimersList());
-//		getContentPane().add(tabTimers);
 		JTabbedPane tabTimers = new JTabbedPane();
-		tabTimers.addTab("nuovo timer", new JPanel());
-		tabTimers.addTab("lista dei timer", getFakePnlTimersList());
+		tabTimers.addTab("nuovo timer", getPnlNewTimer());
+		tabTimers.addTab("lista dei timer", getPnlTimersList());		
+
+
+//		tabTimers.addTab("nuovo timer", new JPanel());
+//		tabTimers.addTab("lista dei timer", getFakePnlTimersList());
+
 		getContentPane().add(tabTimers);			
 		// pack();
 	}
@@ -249,6 +249,7 @@ public class StartTimerWindow extends JFrame {
 		JScrollPane pnlScrollList = new JScrollPane(pnlTimerList);
 		return pnlScrollList;
 	}
+	
 	private JPanel getFakeItemDataPanel() {
 		JPanel pnlShowItemData = new JPanel();
 		JLabel lblFocusOn = new JLabel("focus");
@@ -285,6 +286,7 @@ public class StartTimerWindow extends JFrame {
 		return pnlShowItemData;
 
 	}	
+	
 	private void btnStartTomatoKeyPressed(KeyEvent evt) {
 		logger.debug(evt.getKeyCode() + ", " + evt.getKeyChar());
 		if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
@@ -303,7 +305,7 @@ public class StartTimerWindow extends JFrame {
 		tomato.setDuration(Integer.parseInt(txtDurata.getText()));
 		basicDao.save(tomato);
 		logger.debug(tomato.toString());
-		timerLogger.info("Titolo: " + tomato.getTitle() + " \n Focus on:\n"
+		timerLogger.info("\nTitolo: " + tomato.getTitle() + " \n Focus on:\n"
 				+ tomato.getFocusOn());
 
 		startCountdown(tomato);
