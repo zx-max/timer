@@ -64,6 +64,7 @@ public class HideToSystemTray extends JFrame {
 		} else {
 			System.out.println("system tray not supported");
 		}
+		
 		addWindowStateListener(new WindowStateListener() {
 			public void windowStateChanged(WindowEvent e) {
 				if (e.getNewState() == ICONIFIED) {
@@ -96,6 +97,7 @@ public class HideToSystemTray extends JFrame {
 				}
 			}
 		});
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				"C:/Users/MAX/Documents/groovy/plugins/tomato/src/main/resources/images/bulb.gif"));
 
@@ -107,4 +109,4 @@ public class HideToSystemTray extends JFrame {
 	public static void main(String[] args) {
 		new HideToSystemTray();
 	}
-}
+	}
