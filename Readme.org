@@ -2,7 +2,7 @@
 
 
 ** VERSION 0.0.1 (basic ui with simplest functionality).
-================================================================
+
 -build a simple model.
 -add basic ui.
 -simple logging configuration.
@@ -11,9 +11,9 @@
 
 
 
-================================================================
+
 ** VERSION 0.0.2 (code refactorig and distribution management)
-================================================================
+
 -log start time and focus of the current timer.
 -create the distrubution file zip.
 -default configuration for Countdown.
@@ -21,9 +21,9 @@
 
 
 
-================================================================
+
 ** VERSION 0.0.3 (ui improvements)
-================================================================
+
 *** TODO list timers grouped by title, orederd by date/time desc
 
 -rewrite application windows using MigLayout.
@@ -38,7 +38,7 @@
 
 
 ** VERSION 0.0.4 (extend with external plugins)
-================================================================
+
 *** TODO don't use spring for aop. 
 *** TODO apply code metrics.
 *** TODO move version 0.0.3 develops as external (window desktop) module to load at runtime or not.
@@ -47,9 +47,9 @@
 
 
 
-================================================================
+
 ** VERSION 0.0.5 (extend with external plugins)
-================================================================
+
 *** develop "on the job" learning tool
 based on the field (TomatoReview.problemsRaised)
 link Formazione.org and hard-to-implement.org to specif tomatos. 
