@@ -37,7 +37,7 @@ public class TrayIconMouseMotionListener implements MouseMotionListener {
 			
 			String timeLeft = "min: " + Minutes.minutesBetween(endTimer, now).getMinutes();
 
-			trayIcon.setToolTip(timeLeft + "\n" + tomato.getFocusOn());
+			trayIcon.setToolTip(timeLeft + " " + System.getProperty("line.separator") + tomato.getFocusOn());
 		} else {
 			trayIcon.setToolTip(null);
 		}

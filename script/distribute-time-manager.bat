@@ -1,6 +1,4 @@
-#!/bin/sh
-
-export MAVEN_OPTS=-javaagent:"/home/max/src/tomato_paneura/script/spring-instrument-3.0.5.RELEASE.jar"
+export MAVEN_OPTS="-javaagent:C:\max\maven_repo\org\springframework\org.springframework.instrument\3.0.5.RELEASE\org.springframework.instrument-3.0.5.RELEASE.jar"
 echo "MAVEN_OPTS:"  $MAVEN_OPTS
 mvn clean assembly:assembly  
 sleep 3
