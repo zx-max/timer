@@ -1,14 +1,5 @@
 * ROADMAP
-----------------------------------------------------------------
-How many tomato for each roadmap issue ?
-----------------------------------------------------------------
-
-
-
-
-
-
-================================================================
+  ================================================================
 ** VERSION 0.0.1 (basic ui with simplest functionality).
 ================================================================
 *** build a simple model.
@@ -23,20 +14,7 @@ How many tomato for each roadmap issue ?
 ** VERSION 0.0.2 (code refactorig and distribution management)
 ================================================================
 *** log start time and focus of the current timer.
-	otherwise i have to wait the end to see the exactly words.
 *** create the distrubution file zip.
-	It has to contain a folder with:
-	 - the jar file 
-	 - the timer-manager.properties
-	 
-	 easiest way should be an executable file which does something like this:
-	 DISTRIBUTION_FOLDER = timer-manager 
-	 rm ${DISTRIBUTION_FOLDER} -rf
-	 mkdir ${DISTRIBUTION_FOLDER}
-	 mvn clean assembly:assembly -Dmaven.test.skip=true
-	 cp target/tomato-0.0.1-SNAPSHOT-jar-with-dependencies.jar ${DISTRIBUTION_FOLDER}/timer-manager-0.0.1-SNAPSHOT-20-min.jar
-	 cp src/test/resources/timer-manager.properties ${DISTRIBUTION_FOLDER}
-
 *** default configuration for Countdown.
 
 
@@ -45,50 +23,23 @@ How many tomato for each roadmap issue ?
 ================================================================
 ** VERSION 0.0.3 (ui improvements)
 ================================================================
-**** BUG [UI]: program crash if tomato focusOn is empty
-14:59:57.122 [AWT-EventQueue-0] ERROR m.u.tomato.dao.HibernateBasicDaoImpl - #catch_block#
-javax.validation.ConstraintViolationException: Validation failed for classes [max.utility.tomato.domain.Tomato] during persist time for groups [javax.validation.groups.Default, ]
-List of constraint violations:[
-ConstraintViolationImpl{interpolatedMessage='size must be between 1 and 500', propertyPath=focusOn, rootBeanClass=class max.utility.tomato.domain.Tomato, messageTemplate='{javax.validation.constraints.Size.message}'}
-]
-More over, the icon tray remain visible and receive events:
-15:02:35.341 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256555341,modifiers=] on java.awt.TrayIcon@469d59b0
-15:02:37.448 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED,cmd=null,when=1351256557448,modifiers=] on java.awt.TrayIcon@469d59b0
-
 *** TODO list timers grouped by title, orederd by date/time desc
 *** DONE rewrite application windows using MigLayout.
 *** DONE add button "save and open new" to EndTimerWindow. 
 *** DONE on tray icon, add a tooltip with time left and focusOn.
-*** TODO apply code metrics.
-*** TODO don't use spring for aop. 
-
-
-**** FIXED [UI]: timer list items are not well rendered
-     see image bug/bug_lista_timer.jpg.
-     may be there are too items in list the the panel ...
-
-**** FIXED [UI]: events on icon tray are not fired until the timer stop
-14:57:25.562 [AWT-EventQueue-0] DEBUG max.utility.tomato.Countdown - before timer
-14:57:35.577 [pool-2-thread-1] DEBUG m.u.tomato.dao.HibernateBasicDaoImpl .....
-14:57:35.640 [pool-2-thread-1] DEBUG max.utility.tomato.gui.EndTimer - Tomato [id=61, focusOn=descrivi cosa intendi fare nei prossimi 20 minuti... 
-14:57:35.640 [pool-2-thread-1] DEBUG max.utility.tomato.Countdown - open endTomato
-14:57:35.656 [AWT-EventQueue-0] DEBUG max.utility.tomato.Countdown - after timer
-14:57:35.687 [AWT-EventQueue-0] DEBUG m.u.t.gui.TrayIconActionListener - received event: java.awt.event.ActionEvent[ACTION_PERFORMED
-
 *** DONE make focusOn on EndTomatoWindow selectable.
 *** DONE add system tray icon.
-https://www.google.it/search?q=%20Device%20or%20resource%20busy&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:it:official&client=firefox-a&source=hp&channel=np#hl=it&client=firefox-a&rls=org.mozilla:it%3Aofficial&channel=np&sclient=psy-ab&q=add+window+system+tray+icon+to+a+java+program&oq=add+window+system+tray+icon+to+a+java+program&gs_l=serp.3...6679.16546.6.17153.24.23.1.0.0.2.224.4032.0j21j2.23.0...0.0...1c.1.fetFbEhZHlo&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.&fp=c6224e40b1bf022&biw=1280&bih=930
-http://docs.oracle.com/javase/tutorial/uiswing/misc/systemtray.html
-http://stackoverflow.com/questions/9701852/how-to-add-application-to-system-tray
-http://stackoverflow.com/questions/9964116/how-to-put-java-application-in-systemtray-when-user-clicks-on-close-windows
+
 
 
 
 ================================================================
 ** VERSION 0.0.4 (extend with external plugins)
 ================================================================
-*** todo move version 0.0.3 develops as external (window desktop) module to load at runtime or not.
-*** todo add user interface test on the application with the module. 
+*** TODO don't use spring for aop. 
+*** TODO apply code metrics.
+*** TODO move version 0.0.3 develops as external (window desktop) module to load at runtime or not.
+*** TODO add user interface test on the application with the module. 
 
 
 
@@ -102,54 +53,22 @@ http://stackoverflow.com/questions/9964116/how-to-put-java-application-in-system
 
 
 
-================================================================
-* OTHER
-================================================================
-** todo wiki maven release
 
-** todo wiki Git-Egit-Eclipse
-$ git diff HEAD
-diff --git a/src/main/java/max/utility/tomato/PropertyLoader.java b/src/main/java/max/utility/tomato/PropertyLoader.java
-old mode 100644
-new mode 100755
-diff --git a/src/test/java/max/utility/PropertyLoader.java b/src/test/java/max/utility/PropertyLoader.java
-old mode 100644
-new mode 100755
-diff --git a/src/test/java/max/utility/tomato/PropertyLoaderTest.java b/src/test/java/max/utility/tomato/PropertyLoaderTest.java
-old mode 100644
-new mode 100755
-diff --git a/src/test/resources/timer-manager.properties b/src/test/resources/timer-manager.properties
-old mode 100644
-new mode 100755
+	
 
-
-nessuna modifica, eppure:
-$ git status
-# On branch develop_gui
-# Changes not staged for commit:
-#   (use "git add <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#       modified:   src/main/java/max/utility/tomato/PropertyLoader.java
-#       modified:   src/test/java/max/utility/PropertyLoader.java
-#       modified:   src/test/java/max/utility/tomato/PropertyLoaderTest.java
-#       modified:   src/test/resources/timer-manager.properties
-#
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#       logs/
-no changes added to commit (use "git add" and/or "git commit -a")
+* HOW TO COMPILE
+The project is based on maven, to compile it, yopu need maven 2.0 or later and java 1.6 or later.
+Go in the root folder of the project (the one which contain this file) and from command line, execute this command:
+mvn clean install -Dmaven.test.skip=true
 
 
 
-SOLUZIONE:
+* How to get a distribution file
+Under window execute script/distribute-time-manager.bat
+Under linux  execute script/distribute-time-manager.sh
 
-http://stackoverflow.com/questions/1257592/removing-files-saying-old-mode-100755-new-mode-100644-from-unstaged-changes-in
- down vote accepted
 
-That looks like unix file permissions modes to me (755=rwxrw_rw_, 644=rw_r__r__) - the old mode included the +x (executable) flag, the new mode doesn't.
-This msysgit issue's replies suggests setting core.filemode to false in order to get rid of the issue:
 
-git config core.filemode false
-
+* HOW TO RUN
+You will find the distribution file under dist folder.
+To run it execute from command line java -jar timer-manager.jar.

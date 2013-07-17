@@ -4,3 +4,5 @@
 /strange_logs.log
 /dist
 /bin
+.#*
+*.swp
