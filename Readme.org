@@ -24,11 +24,16 @@
 ** VERSION 0.0.3 (ui improvements)
 ================================================================
 *** TODO list timers grouped by title, orederd by date/time desc
-*** DONE rewrite application windows using MigLayout.
-*** DONE add button "save and open new" to EndTimerWindow. 
-*** DONE on tray icon, add a tooltip with time left and focusOn.
-*** DONE make focusOn on EndTomatoWindow selectable.
-*** DONE add system tray icon.
+
+rewrite application windows using MigLayout.
+
+add button "save and open new" to EndTimerWindow. 
+
+on tray icon, add a tooltip with time left and focusOn.
+
+make focusOn on EndTomatoWindow selectable.
+
+add system tray icon.
 
 
 
@@ -48,8 +53,8 @@
 ** VERSION 0.0.5 (extend with external plugins)
 ================================================================
 *** develop "on the job" learning tool
-	based on red field (TomatoReview.problemsRaised)
-	link Formazione.org and hard-to-implement.org to specif tomatos. 
+based on the field (TomatoReview.problemsRaised)
+link Formazione.org and hard-to-implement.org to specif tomatos. 
 
 
 
@@ -65,10 +70,12 @@ mvn clean install -Dmaven.test.skip=true
 
 * How to get a distribution file
 Under window execute script/distribute-time-manager.bat
+
 Under linux  execute script/distribute-time-manager.sh
 
 
 
 * HOW TO RUN
 You will find the distribution file under dist folder.
+
 To run it execute from command line java -jar timer-manager.jar.
