@@ -1,23 +1,12 @@
 * ROADMAP
 
-==
-
---
-
-__
-
-====
-
-----
-
-____
 
 ** VERSION 0.0.1 (basic ui with simplest functionality).
 ================================================================
-build a simple model.
-add basic ui.
-simple logging configuration.
-read timer duration from a property file.
+-build a simple model.
+-add basic ui.
+-simple logging configuration.
+-read timer duration from a property file.
 
 
 
@@ -25,9 +14,9 @@ read timer duration from a property file.
 ================================================================
 ** VERSION 0.0.2 (code refactorig and distribution management)
 ================================================================
-log start time and focus of the current timer.
-create the distrubution file zip.
-default configuration for Countdown.
+-log start time and focus of the current timer.
+-create the distrubution file zip.
+-default configuration for Countdown.
 
 
 
@@ -37,15 +26,11 @@ default configuration for Countdown.
 ================================================================
 *** TODO list timers grouped by title, orederd by date/time desc
 
-rewrite application windows using MigLayout.
-
-add button "save and open new" to EndTimerWindow. 
-
-on tray icon, add a tooltip with time left and focusOn.
-
-make focusOn on EndTomatoWindow selectable.
-
-add system tray icon.
+-rewrite application windows using MigLayout.
+-add button "save and open new" to EndTimerWindow. 
+-on tray icon, add a tooltip with time left and focusOn.
+-make focusOn on EndTomatoWindow selectable.
+-add system tray icon.
 
 
 
