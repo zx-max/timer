@@ -1,11 +1,17 @@
 * ROADMAP
 
 ==
+
 --
+
 __
+
 ====
+
 ----
+
 ____
+
 ** VERSION 0.0.1 (basic ui with simplest functionality).
 ================================================================
 build a simple model.
