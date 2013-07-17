@@ -1,11 +1,17 @@
 * ROADMAP
-  ================================================================
+
+==
+--
+__
+====
+----
+____
 ** VERSION 0.0.1 (basic ui with simplest functionality).
 ================================================================
-*** build a simple model.
-*** add basic ui.
-*** simple logging configuration.
-*** read timer duration from a property file.
+build a simple model.
+add basic ui.
+simple logging configuration.
+read timer duration from a property file.
 
 
 
@@ -13,9 +19,9 @@
 ================================================================
 ** VERSION 0.0.2 (code refactorig and distribution management)
 ================================================================
-*** log start time and focus of the current timer.
-*** create the distrubution file zip.
-*** default configuration for Countdown.
+log start time and focus of the current timer.
+create the distrubution file zip.
+default configuration for Countdown.
 
 
 
@@ -38,7 +44,8 @@ add system tray icon.
 
 
 
-================================================================
+
+
 ** VERSION 0.0.4 (extend with external plugins)
 ================================================================
 *** TODO don't use spring for aop. 
