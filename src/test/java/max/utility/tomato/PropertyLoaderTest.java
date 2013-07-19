@@ -16,21 +16,6 @@ import org.slf4j.LoggerFactory;
 public class PropertyLoaderTest {
 	public static final Logger logger = LoggerFactory.getLogger(PropertyLoaderTest.class);
 
-	// System.out.println("0: "
-	// +
-	// getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(6));
-	//
-	// CodeSource codeSource =
-	// this.getClass().getProtectionDomain().getCodeSource();
-	// File jarFile = new File(codeSource.getLocation().toURI().getPath());
-	// System.out.println("1: " + jarFile.getParentFile().getPath());
-	// System.out.println("2: " + getClass().getResource("").getPath());
-	// 0:
-	// C:/Users/MAX/Documents/groovy/plugins/tomato/bin/timer-manager-0.0.1-SNAPSHOT-20-min.jar
-	// 1: C:\Users\MAX\Documents\groovy\plugins\tomato\bin
-	// 2:
-	// file:/C:/Users/MAX/Documents/groovy/plugins/tomato/bin/timer-manager-0.0.1-SNAPSHOT-20-min.jar!/max/utility/tomato/
-
 	@Test
 	public void defaultConutndownConfigurationExist() throws IOException {
 		String path = ClassLoader.getSystemClassLoader().getResource(".").getPath();

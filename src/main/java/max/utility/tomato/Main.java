@@ -8,10 +8,7 @@ import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.net.URL;
-import java.security.CodeSource;
-import java.util.MissingResourceException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +18,6 @@ import javax.swing.UIManager;
 
 import max.utility.tomato.dao.HibernateBasicDaoImpl;
 import max.utility.tomato.gui.StartTimerWindow;
-import max.utility.tomato.gui.TrayIconActionListener;
 import max.utility.tomato.gui.TrayIconMouseMotionListener;
 
 import org.slf4j.Logger;
@@ -42,23 +38,6 @@ public class Main {
 
 	public Main() throws Exception {
 		super();
-		CodeSource codeSource = this.getClass().getProtectionDomain().getCodeSource();
-		File jarFile = new File(codeSource.getLocation().toURI().getPath());
-		String path = jarFile.getParentFile().getPath();
-		// java.lang.IllegalArgumentException:
-		// java.io.FileNotFoundException:
-		// C:\Users\MAX\Documents\groovy\plugins\tomato\target\timer-manager.properties
-		// (Impossibile trovare il file specificato)
-		File propsFile = new File(path + File.separator + PropertyLoader.TIMER_MANAGER_PROP_FILE);
-		try {
-			PropertyLoader.loadFromFileSystem(propsFile);
-		} catch (Exception e) {
-			if (e instanceof MissingResourceException) {
-				PropertyLoader.loadFromClassPathAsInputStream(PropertyLoader.TIMER_MANAGER_PROP_FILE);
-				logger.info("load default timer configuration: [{}]", PropertyLoader.dump());
-			}
-		}
-
 		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("H2FileTomatoPU");
 		EntityManager entityManager = emFactory.createEntityManager();
 		HibernateBasicDaoImpl basicDao = new HibernateBasicDaoImpl(entityManager);
@@ -97,7 +76,6 @@ public class Main {
 
 	private TrayIcon getTrayIcon() throws AWTException {
 		final TrayIcon trayIcon = new TrayIcon(createImage("images/bulb.gif", "tray icon"));
-		trayIcon.addActionListener(new TrayIconActionListener(trayIcon));
 
 
 		MenuItem exitItem = new MenuItem("Exit");
