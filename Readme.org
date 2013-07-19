@@ -24,8 +24,6 @@
 
 ** VERSION 0.0.3 (ui improvements)
 
-*** TODO list timers grouped by title, orederd by date/time desc
-
 -rewrite application windows using MigLayout.
 -add button "save and open new" to EndTimerWindow. 
 -on tray icon, add a tooltip with time left and focusOn.
@@ -35,17 +33,16 @@
 
 
 
+** VERSION 0.0.4 (refactoring)
 
+-remove classes used for learning
+-some refactoring ...
+-log and db under ${user.home}/.Pomodoro/
 
-** VERSION 0.0.4 (refactoirng)
-*** remove classes used for learning
-*** some refactoring ...
-*** log e db sotto ${user.home}/.Pomodoro/
 
 
 
 ** VERSION 0.0.5 (extend with external plugins)
-
 *** TODO don't use spring for aop. 
 *** TODO apply code metrics.
 *** TODO move version 0.0.3 develops as external (window desktop) module to load at runtime or not.
