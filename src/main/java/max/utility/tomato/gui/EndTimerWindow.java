@@ -174,9 +174,16 @@ public class EndTimerWindow extends JFrame {
     private void saveTomatoReview() {
         TomatoReview review = new TomatoReview(tomato, taDone.getText(),
                 taNote.getText());
+
         basicDao.save(review);
-        timerLogger.info(tomato.getStartTime().toString("dd/MM/yyyy HH:mm")
-                + " - " + (new LocalDateTime()).toString("dd/MM/yyyy HH:mm"));
+
+        StringBuffer sb = new StringBuffer();
+        sb.append(tomato.getStartTime().toString("HH:mm"));
+        sb.append(" - ");
+        sb.append((new LocalDateTime()).toString("HH:mm"));
+
+        timerLogger.info(sb.toString());
+
         timerLogger.info("Fatto:\n" + review.getReallyDone());
         timerLogger.info("Note:\n" + review.getProblemsRaised());
         // closeWindow();
@@ -184,9 +191,12 @@ public class EndTimerWindow extends JFrame {
 
     private void closeWindow() {
         WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+
         TrayIconMouseMotionListener listener = (TrayIconMouseMotionListener) Register
                 .get(TrayIconMouseMotionListener.class);
+
         listener.setTomato(null);
     }
 }

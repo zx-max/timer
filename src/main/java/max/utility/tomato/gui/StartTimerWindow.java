@@ -28,6 +28,7 @@ import max.utility.tomato.domain.Tomato;
 import max.utility.tomato.tasks.OpenEndTimerWindow;
 import net.miginfocom.swing.MigLayout;
 
+import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -166,8 +167,13 @@ public class StartTimerWindow extends JFrame {
 
         basicDao.save(tomato);
         logger.debug(tomato.toString());
-        timerLogger.info("\nTitolo: " + tomato.getTitle() + " \n Focus on:\n"
-                + tomato.getFocusOn());
+
+        StringBuffer sb = new StringBuffer();
+        sb.append((new LocalDateTime()).toString("dd/MM/yyyy HH:mm") + "\n");
+        sb.append("Titolo: " + tomato.getTitle() + "\n");
+        sb.append("Focus on: " + tomato.getFocusOn());
+
+        timerLogger.info(sb.toString());
 
         startCountdown(tomato);
 

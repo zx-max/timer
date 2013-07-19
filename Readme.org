@@ -40,6 +40,9 @@
 ** VERSION 0.0.4 (refactoirng)
 *** remove classes used for learning
 *** some refactoring ...
+*** log e db sotto ${user.home}/.Pomodoro/
+
+
 
 ** VERSION 0.0.5 (extend with external plugins)
 

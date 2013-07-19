@@ -25,7 +25,7 @@
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.max_fetch_depth" value="3" />
 			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
-			<property name="hibernate.connection.url" value="jdbc:h2:file:sqlDataBase/timer_manager_db" />
+			<property name="hibernate.connection.url" value="jdbc:h2:file:~/.Pomodoro/db" />
 			<property name="hibernate.connection.username" value="sa" />
 			<property name="hibernate.connection.password" value="" />
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
