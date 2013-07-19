@@ -21,83 +21,82 @@ import net.miginfocom.swing.MigLayout;
 
 public class TabbedPaneChangeListener implements ChangeListener {
 
-	private boolean listTimerLoaded = false;
+    private boolean listTimerLoaded = false;
 
-	public void stateChanged(ChangeEvent changeEvent) {
+    public void stateChanged(ChangeEvent changeEvent) {
 
-		JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+        JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
 
-		int index = sourceTabbedPane.getSelectedIndex();
+        int index = sourceTabbedPane.getSelectedIndex();
 
-		if (index ==1 && !listTimerLoaded) {
-			
-			listTimerLoaded = true;
-			sourceTabbedPane.remove(index);
-			sourceTabbedPane.addTab("lista dei timer", getPnlTimersList());
-			sourceTabbedPane.repaint();
-			sourceTabbedPane.setSelectedIndex(index);
+        if (index == 1 && !listTimerLoaded) {
 
-		}
+            listTimerLoaded = true;
+            sourceTabbedPane.remove(index);
+            sourceTabbedPane.addTab("lista dei timer", getPnlTimersList());
+            sourceTabbedPane.repaint();
+            sourceTabbedPane.setSelectedIndex(index);
 
-	}
+        }
 
-	private Component getPnlTimersList() {
+    }
 
-		JPanel pnlTimerList = new JPanel(new MigLayout("flowy, fill"));
+    private Component getPnlTimersList() {
 
-		for (TomatoReview tomatoReview : getList()) {
-			pnlTimerList.add(getItemDataPanel(tomatoReview));
-		}
+        JPanel pnlTimerList = new JPanel(new MigLayout("flowy, fill"));
 
-		JScrollPane pnlScrollList = new JScrollPane(pnlTimerList);
-		return pnlScrollList;
-	}
+        for (TomatoReview tomatoReview : getList()) {
+            pnlTimerList.add(getItemDataPanel(tomatoReview));
+        }
 
-	private List<TomatoReview> getList() {
+        JScrollPane pnlScrollList = new JScrollPane(pnlTimerList);
+        return pnlScrollList;
+    }
 
-		HibernateBasicDaoImpl basicDao = (HibernateBasicDaoImpl) Register
-				.get(HibernateBasicDaoImpl.class);
-		return basicDao.namedQuery("TomatoReview.list");
-	}
+    private List<TomatoReview> getList() {
 
-	private JPanel getItemDataPanel(TomatoReview tomatoReview) {
-		JPanel pnlShowItemData = new JPanel();
-		JLabel lblFocusOn = new JLabel("focus");
-		JLabel lblDone = new JLabel("ho fatto");
-		JLabel lblProblemsRaised = new JLabel("note");
+        HibernateBasicDaoImpl basicDao = (HibernateBasicDaoImpl) Register
+                .get(HibernateBasicDaoImpl.class);
+        return basicDao.namedQuery("TomatoReview.list");
+    }
 
-		JTextArea txtFocusOn = new JTextArea();
-		JTextArea txtDone = new JTextArea();
-		JTextArea txtProblemsRaised = new JTextArea();
-		txtFocusOn.setColumns(10);
-		txtDone.setColumns(10);
-		txtProblemsRaised.setColumns(10);
+    private JPanel getItemDataPanel(TomatoReview tomatoReview) {
+        JPanel pnlShowItemData = new JPanel();
+        JLabel lblFocusOn = new JLabel("focus");
+        JLabel lblDone = new JLabel("ho fatto");
+        JLabel lblProblemsRaised = new JLabel("note");
 
-		txtFocusOn.setText(tomatoReview.getTomato().getFocusOn());
-		txtDone.setText(tomatoReview.getReallyDone());
-		txtProblemsRaised.setText(tomatoReview.getProblemsRaised());
+        JTextArea txtFocusOn = new JTextArea();
+        JTextArea txtDone = new JTextArea();
+        JTextArea txtProblemsRaised = new JTextArea();
+        txtFocusOn.setColumns(10);
+        txtDone.setColumns(10);
+        txtProblemsRaised.setColumns(10);
 
-		LayoutManager layout = new MigLayout("", "[grow][]", "[][grow][][][]");
-		pnlShowItemData.setLayout(layout);
-		pnlShowItemData.setLayout(new MigLayout("fill", "[][]"));
+        txtFocusOn.setText(tomatoReview.getTomato().getFocusOn());
+        txtDone.setText(tomatoReview.getReallyDone());
+        txtProblemsRaised.setText(tomatoReview.getProblemsRaised());
 
-		JSeparator separator = new JSeparator();
-		separator.setBackground(Color.GREEN);
-		pnlShowItemData.add(separator, "cell 0 0, growx, span 2");
+        LayoutManager layout = new MigLayout("", "[grow][]", "[][grow][][][]");
+        pnlShowItemData.setLayout(layout);
+        pnlShowItemData.setLayout(new MigLayout("fill", "[][]"));
 
-		// "cell column row width height"
-		pnlShowItemData.add(lblFocusOn, "cell 0 1");
-		pnlShowItemData.add(txtFocusOn, "cell 0 2, growx");
+        JSeparator separator = new JSeparator();
+        separator.setBackground(Color.GREEN);
+        pnlShowItemData.add(separator, "cell 0 0, growx, span 2");
 
-		pnlShowItemData.add(lblDone, "cell 1 1");
-		pnlShowItemData.add(txtDone, "cell 1 2, growx");
+        // "cell column row width height"
+        pnlShowItemData.add(lblFocusOn, "cell 0 1");
+        pnlShowItemData.add(txtFocusOn, "cell 0 2, growx");
 
-		pnlShowItemData.add(lblProblemsRaised, "cell 0 3");
-		pnlShowItemData.add(txtProblemsRaised, "cell 0 4, growx, span 2");
+        pnlShowItemData.add(lblDone, "cell 1 1");
+        pnlShowItemData.add(txtDone, "cell 1 2, growx");
 
-		return pnlShowItemData;
+        pnlShowItemData.add(lblProblemsRaised, "cell 0 3");
+        pnlShowItemData.add(txtProblemsRaised, "cell 0 4, growx, span 2");
 
-	}
+        return pnlShowItemData;
 
+    }
 
 }

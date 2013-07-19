@@ -14,35 +14,36 @@ import org.slf4j.LoggerFactory;
 
 public class OpenEndTimerWindow extends TimerTask implements Callable<JFrame> {
 
-	private static final Logger logger = LoggerFactory.getLogger(OpenEndTimerWindow.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(OpenEndTimerWindow.class);
 
-	private Tomato tomato;
+    private Tomato tomato;
 
-	public OpenEndTimerWindow(Tomato tomato) {
-		this.tomato = tomato;
-	}
+    public OpenEndTimerWindow(Tomato tomato) {
+        this.tomato = tomato;
+    }
 
-	// Timer timer = new Timer();
-	// timer.schedule(task, delay);
-	@Override
-	public void run() {
-		openEndTimerWindow();
-	}
+    // Timer timer = new Timer();
+    // timer.schedule(task, delay);
+    @Override
+    public void run() {
+        openEndTimerWindow();
+    }
 
-	@Override
-	public JFrame call() throws Exception {
-		return openEndTimerWindow();
-	}
+    @Override
+    public JFrame call() throws Exception {
+        return openEndTimerWindow();
+    }
 
-	private JFrame openEndTimerWindow() {
-		try {
-			EndTimerWindow endTimer = new EndTimerWindow(tomato);
-			logger.debug("open endTomato");
-			return endTimer;
-		} catch (Exception e) {
-			logger.error(Main.CATCH_BLOCK, e);
-			return null;
-		}
-	}
+    private JFrame openEndTimerWindow() {
+        try {
+            EndTimerWindow endTimer = new EndTimerWindow(tomato);
+            logger.debug("open endTomato");
+            return endTimer;
+        } catch (Exception e) {
+            logger.error(Main.CATCH_BLOCK, e);
+            return null;
+        }
+    }
 
 }

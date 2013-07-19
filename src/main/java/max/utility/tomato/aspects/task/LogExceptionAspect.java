@@ -11,20 +11,21 @@ import org.slf4j.LoggerFactory;
 
 @Aspect
 public class LogExceptionAspect {
-	public static final Logger logger = LoggerFactory.getLogger(LogExceptionAspect.class);
+    public static final Logger logger = LoggerFactory
+            .getLogger(LogExceptionAspect.class);
 
-	@Around("methodsToBeProfiled()")
-	public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
-		try {
-			logger.debug(joinPoint.toLongString());
-			return joinPoint.proceed();
-		} catch (Exception e) {
-			logger.error(Main.CATCH_BLOCK, e);
-			return null;
-		}
-	}
+    @Around("methodsToBeProfiled()")
+    public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
+        try {
+            logger.debug(joinPoint.toLongString());
+            return joinPoint.proceed();
+        } catch (Exception e) {
+            logger.error(Main.CATCH_BLOCK, e);
+            return null;
+        }
+    }
 
-	@Pointcut("execution(public * max.utility.tomato.tasks.*.*(..))")
-	public void methodsToBeProfiled() {
-	}
+    @Pointcut("execution(public * max.utility.tomato.tasks.*.*(..))")
+    public void methodsToBeProfiled() {
+    }
 }
