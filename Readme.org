@@ -37,7 +37,11 @@
 
 
 
-** VERSION 0.0.4 (extend with external plugins)
+** VERSION 0.0.4 (refactoirng)
+*** remove classes used for learning
+*** some refactoring ...
+
+** VERSION 0.0.5 (extend with external plugins)
 
 *** TODO don't use spring for aop. 
 *** TODO apply code metrics.
@@ -48,7 +52,7 @@
 
 
 
-** VERSION 0.0.5 (extend with external plugins)
+** VERSION 0.0.6 (extend with external plugins)
 
 *** develop "on the job" learning tool
 based on the field (TomatoReview.problemsRaised)
