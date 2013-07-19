@@ -134,47 +134,6 @@ public class StartTimerWindow extends JFrame {
 		return pnlNewTimer;
 	}
 
-	private JPanel getItemDataPanel1(TomatoReview tomatoReview) {
-		JPanel pnlShowItemData = new JPanel();
-		// addSeparator(pnlShowItemData, "General");
-		JLabel lblFocusOn = new JLabel("focus on:");
-		JLabel lblDone = new JLabel("done:");
-		JLabel lblProblemsRaised = new JLabel("issues:");
-		JTextArea txtFocusOn = new JTextArea();
-		JTextArea txtDone = new JTextArea();
-		JTextArea txtProblemsRaised = new JTextArea();
-
-		txtFocusOn.setColumns(10);
-		txtDone.setColumns(10);
-		txtProblemsRaised.setColumns(10);
-
-		// txtFocusOn.setText(tomatoReview.getTomato().getFocusOn().trim());
-		// txtDone.setText(tomatoReview.getReallyDone().trim());
-		// txtProblemsRaised.setText(tomatoReview.getProblemsRaised().trim());
-
-		// LayoutManager layout = new MigLayout("", "grow,fill", "[][][][]15");
-		// pnlShowItemData.setLayout(layout);
-		MigLayout migLayout = new MigLayout();
-		pnlShowItemData.setLayout(new MigLayout("", "[grow][grow]"));
-
-		JSeparator separator = new JSeparator();
-		separator.setBackground(Color.GREEN);
-		pnlShowItemData.add(separator, "cell 0 0, growx, span 2");
-		separator.setBackground(Color.GREEN);
-
-		// "cell column row width height"
-		// pnlShowItemData.add(lblFocusOn );
-		// pnlShowItemData.add(lblDone, "");
-		//
-		// pnlShowItemData.add(txtFocusOn);
-		// pnlShowItemData.add(txtDone);
-		//
-		// pnlShowItemData.add(lblProblemsRaised, "spanx 2");
-		// pnlShowItemData.add(txtProblemsRaised, "spanx 2, grow");
-		return pnlShowItemData;
-
-	}
-
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -182,65 +141,12 @@ public class StartTimerWindow extends JFrame {
 		JTabbedPane tabTimers = new JTabbedPane();
 		tabTimers.addTab("nuovo timer", getPnlNewTimer());
 		tabTimers.addTab("lista dei timer", new JPanel());
-		
-		
+				
 		ChangeListener changeListener = new TabbedPaneChangeListener();
 		
 		tabTimers.addChangeListener(changeListener);
 
-		// tabTimers.addTab("nuovo timer", new JPanel());
-		// tabTimers.addTab("lista dei timer", getFakePnlTimersList());
-
 		getContentPane().add(tabTimers);
-		// pack();
-	}
-
-	private Container getFakePnlTimersList() {
-		JPanel pnlTimerList = new JPanel(new MigLayout("flowy, fill"));
-
-		pnlTimerList.add(getFakeItemDataPanel());
-		pnlTimerList.add(getFakeItemDataPanel());
-		pnlTimerList.add(getFakeItemDataPanel());
-
-		JScrollPane pnlScrollList = new JScrollPane(pnlTimerList);
-		return pnlScrollList;
-	}
-
-	private JPanel getFakeItemDataPanel() {
-		JPanel pnlShowItemData = new JPanel();
-		JLabel lblFocusOn = new JLabel("focus");
-		JLabel lblDone = new JLabel("done");
-		JLabel lblProblemsRaised = new JLabel("note");
-
-		JTextArea txtFocusOn = new JTextArea();
-		JTextArea txtDone = new JTextArea();
-		JTextArea txtProblemsRaised = new JTextArea();
-		txtFocusOn.setColumns(10);
-		txtDone.setColumns(10);
-		txtProblemsRaised.setColumns(10);
-		// txtFocusOn.setText(tomatoReview.getTomato().getFocusOn());
-		// txtDone.setText(tomatoReview.getReallyDone());
-		// txtProblemsRaised.setText(tomatoReview.getProblemsRaised());
-
-		LayoutManager layout = new MigLayout("", "[grow][]", "[][grow][][][]");
-		pnlShowItemData.setLayout(layout);
-		pnlShowItemData
-				.setLayout(new MigLayout("", "[grow][grow]", "[][][][]"));
-
-		JSeparator separator = new JSeparator();
-		separator.setBackground(Color.GREEN);
-		pnlShowItemData.add(separator, "cell 0 0, growx, span 2");
-
-		// "cell column row width height"
-		pnlShowItemData.add(lblFocusOn, "cell 0 1");
-		pnlShowItemData.add(lblDone, "cell 1 1");
-		pnlShowItemData.add(txtFocusOn, "cell 0 2");
-		pnlShowItemData.add(txtDone, "cell 1 2");
-		pnlShowItemData.add(lblProblemsRaised, "cell 0 3");
-		pnlShowItemData.add(txtProblemsRaised, "cell 0 4 2 1");
-
-		return pnlShowItemData;
-
 	}
 
 	private void btnStartTomatoKeyPressed(KeyEvent evt) {
