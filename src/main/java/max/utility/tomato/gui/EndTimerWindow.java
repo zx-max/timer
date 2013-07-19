@@ -50,7 +50,7 @@ public class EndTimerWindow extends JFrame {
 	private Tomato tomato;
 
 	public EndTimerWindow(Tomato tomato) {
-		setTitle("End Timer");
+		setTitle("Pomodoro finito ...");
 		this.tomato = tomato;
 		basicDao = (HibernateBasicDaoImpl) Register.get(HibernateBasicDaoImpl.class);
 		initComponents();

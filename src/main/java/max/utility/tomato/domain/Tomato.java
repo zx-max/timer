@@ -18,7 +18,7 @@ public class Tomato {
 	private String title;
 
 	@Column(nullable = false, length = 500)
-	@Size(min = 1, max = 500)
+	@Size(min = 0, max = 500)
 	private String focusOn;
 
 	@Id

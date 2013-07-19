@@ -32,12 +32,16 @@ public class TrayIconMouseMotionListener implements MouseMotionListener {
 
 		if (null != tomato) {
 			LocalDateTime startTime = tomato.getStartTime();
-			LocalDateTime endTimer = startTime.plusMinutes(tomato.getDuration());
+			LocalDateTime endTimer = startTime
+					.plusMinutes(tomato.getDuration());
 			LocalDateTime now = new LocalDateTime();
-			
-			String timeLeft = "min: " + Minutes.minutesBetween(endTimer, now).getMinutes();
 
-			trayIcon.setToolTip(timeLeft + " " + System.getProperty("line.separator") + tomato.getFocusOn());
+			String timeLeft = "min: "
+					+ Minutes.minutesBetween(endTimer, now).getMinutes();
+
+			trayIcon.setToolTip(timeLeft + " / "+ System.getProperty("line.separator")
+					+ tomato.getTitle() + " / " + System.getProperty("line.separator")
+					+tomato.getFocusOn());
 		} else {
 			trayIcon.setToolTip(null);
 		}

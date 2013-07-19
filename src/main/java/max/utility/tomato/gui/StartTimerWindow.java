@@ -37,8 +37,10 @@ import javax.swing.SwingConstants;
 
 public class StartTimerWindow extends JFrame {
 
-	public static final Logger logger = LoggerFactory.getLogger(StartTimerWindow.class);
-	public static final Logger timerLogger = LoggerFactory.getLogger("TimerLogger");
+	public static final Logger logger = LoggerFactory
+			.getLogger(StartTimerWindow.class);
+	public static final Logger timerLogger = LoggerFactory
+			.getLogger("TimerLogger");
 
 	/**
 	 * 
@@ -56,16 +58,18 @@ public class StartTimerWindow extends JFrame {
 	}
 
 	public StartTimerWindow() {
-		basicDao = (HibernateBasicDaoImpl) Register.get(HibernateBasicDaoImpl.class);
+		basicDao = (HibernateBasicDaoImpl) Register
+				.get(HibernateBasicDaoImpl.class);
 		initComponents();
 	}
 
 	public StartTimerWindow(String title) {
-		basicDao = (HibernateBasicDaoImpl) Register.get(HibernateBasicDaoImpl.class);
+		basicDao = (HibernateBasicDaoImpl) Register
+				.get(HibernateBasicDaoImpl.class);
 		initComponents();
 		tfTitle.setText(title);
 	}
-	
+
 	private Component getPnlNewTimer() {
 
 		JPanel pnlNewTimer = new JPanel();
@@ -129,11 +133,11 @@ public class StartTimerWindow extends JFrame {
 
 	private Component getPnlTimersList() {
 		JPanel pnlTimerList = new JPanel(new MigLayout("flowy, fill"));
-				
+
 		for (TomatoReview tomatoReview : getList()) {
 			pnlTimerList.add(getItemDataPanel(tomatoReview));
 		}
-		
+
 		JScrollPane pnlScrollList = new JScrollPane(pnlTimerList);
 		return pnlScrollList;
 	}
@@ -145,7 +149,7 @@ public class StartTimerWindow extends JFrame {
 	private JPanel getItemDataPanel(TomatoReview tomatoReview) {
 		JPanel pnlShowItemData = new JPanel();
 		JLabel lblFocusOn = new JLabel("focus");
-		JLabel lblDone = new JLabel("done");
+		JLabel lblDone = new JLabel("ho fatto");
 		JLabel lblProblemsRaised = new JLabel("note");
 
 		JTextArea txtFocusOn = new JTextArea();
@@ -154,34 +158,33 @@ public class StartTimerWindow extends JFrame {
 		txtFocusOn.setColumns(10);
 		txtDone.setColumns(10);
 		txtProblemsRaised.setColumns(10);
-		
+
 		txtFocusOn.setText(tomatoReview.getTomato().getFocusOn());
 		txtDone.setText(tomatoReview.getReallyDone());
 		txtProblemsRaised.setText(tomatoReview.getProblemsRaised());
-		
+
 		LayoutManager layout = new MigLayout("", "[grow][]", "[][grow][][][]");
 		pnlShowItemData.setLayout(layout);
 		pnlShowItemData.setLayout(new MigLayout("fill", "[][]"));
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBackground(Color.GREEN);
 		pnlShowItemData.add(separator, "cell 0 0, growx, span 2");
-		
+
 		// "cell column row width height"
 		pnlShowItemData.add(lblFocusOn, "cell 0 1");
 		pnlShowItemData.add(txtFocusOn, "cell 0 2, growx");
-		
+
 		pnlShowItemData.add(lblDone, "cell 1 1");
 		pnlShowItemData.add(txtDone, "cell 1 2, growx");
-		
+
 		pnlShowItemData.add(lblProblemsRaised, "cell 0 3");
 		pnlShowItemData.add(txtProblemsRaised, "cell 0 4, growx, span 2");
-		
-		
+
 		return pnlShowItemData;
 
 	}
-	
+
 	private JPanel getItemDataPanel1(TomatoReview tomatoReview) {
 		JPanel pnlShowItemData = new JPanel();
 		// addSeparator(pnlShowItemData, "General");
@@ -195,16 +198,16 @@ public class StartTimerWindow extends JFrame {
 		txtFocusOn.setColumns(10);
 		txtDone.setColumns(10);
 		txtProblemsRaised.setColumns(10);
-		
-//		txtFocusOn.setText(tomatoReview.getTomato().getFocusOn().trim());
-//		txtDone.setText(tomatoReview.getReallyDone().trim());
-//		txtProblemsRaised.setText(tomatoReview.getProblemsRaised().trim());
+
+		// txtFocusOn.setText(tomatoReview.getTomato().getFocusOn().trim());
+		// txtDone.setText(tomatoReview.getReallyDone().trim());
+		// txtProblemsRaised.setText(tomatoReview.getProblemsRaised().trim());
 
 		// LayoutManager layout = new MigLayout("", "grow,fill", "[][][][]15");
 		// pnlShowItemData.setLayout(layout);
 		MigLayout migLayout = new MigLayout();
 		pnlShowItemData.setLayout(new MigLayout("", "[grow][grow]"));
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBackground(Color.GREEN);
 		pnlShowItemData.add(separator, "cell 0 0, growx, span 2");
@@ -229,27 +232,26 @@ public class StartTimerWindow extends JFrame {
 
 		JTabbedPane tabTimers = new JTabbedPane();
 		tabTimers.addTab("nuovo timer", getPnlNewTimer());
-		tabTimers.addTab("lista dei timer", getPnlTimersList());		
+		tabTimers.addTab("lista dei timer", getPnlTimersList());
 
+		// tabTimers.addTab("nuovo timer", new JPanel());
+		// tabTimers.addTab("lista dei timer", getFakePnlTimersList());
 
-//		tabTimers.addTab("nuovo timer", new JPanel());
-//		tabTimers.addTab("lista dei timer", getFakePnlTimersList());
-
-		getContentPane().add(tabTimers);			
+		getContentPane().add(tabTimers);
 		// pack();
 	}
 
 	private Container getFakePnlTimersList() {
 		JPanel pnlTimerList = new JPanel(new MigLayout("flowy, fill"));
-				
+
 		pnlTimerList.add(getFakeItemDataPanel());
 		pnlTimerList.add(getFakeItemDataPanel());
 		pnlTimerList.add(getFakeItemDataPanel());
-		
+
 		JScrollPane pnlScrollList = new JScrollPane(pnlTimerList);
 		return pnlScrollList;
 	}
-	
+
 	private JPanel getFakeItemDataPanel() {
 		JPanel pnlShowItemData = new JPanel();
 		JLabel lblFocusOn = new JLabel("focus");
@@ -262,18 +264,19 @@ public class StartTimerWindow extends JFrame {
 		txtFocusOn.setColumns(10);
 		txtDone.setColumns(10);
 		txtProblemsRaised.setColumns(10);
-//		txtFocusOn.setText(tomatoReview.getTomato().getFocusOn());
-//		txtDone.setText(tomatoReview.getReallyDone());
-//		txtProblemsRaised.setText(tomatoReview.getProblemsRaised());
-		
+		// txtFocusOn.setText(tomatoReview.getTomato().getFocusOn());
+		// txtDone.setText(tomatoReview.getReallyDone());
+		// txtProblemsRaised.setText(tomatoReview.getProblemsRaised());
+
 		LayoutManager layout = new MigLayout("", "[grow][]", "[][grow][][][]");
 		pnlShowItemData.setLayout(layout);
-		pnlShowItemData.setLayout(new MigLayout("", "[grow][grow]", "[][][][]"));
-		
+		pnlShowItemData
+				.setLayout(new MigLayout("", "[grow][grow]", "[][][][]"));
+
 		JSeparator separator = new JSeparator();
 		separator.setBackground(Color.GREEN);
 		pnlShowItemData.add(separator, "cell 0 0, growx, span 2");
-		
+
 		// "cell column row width height"
 		pnlShowItemData.add(lblFocusOn, "cell 0 1");
 		pnlShowItemData.add(lblDone, "cell 1 1");
@@ -281,12 +284,11 @@ public class StartTimerWindow extends JFrame {
 		pnlShowItemData.add(txtDone, "cell 1 2");
 		pnlShowItemData.add(lblProblemsRaised, "cell 0 3");
 		pnlShowItemData.add(txtProblemsRaised, "cell 0 4 2 1");
-		
-		
+
 		return pnlShowItemData;
 
-	}	
-	
+	}
+
 	private void btnStartTomatoKeyPressed(KeyEvent evt) {
 		logger.debug(evt.getKeyCode() + ", " + evt.getKeyChar());
 		if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
@@ -300,9 +302,16 @@ public class StartTimerWindow extends JFrame {
 
 	private void storeDataAndStartTimer() {
 		Tomato tomato = new Tomato(taFocusOn.getText());
+		
+		
 		tomato.setTitle(tfTitle.getText());
+		
+		try {
+			tomato.setDuration(Integer.parseInt(txtDurata.getText()));
+		} catch (NumberFormatException ex) {
+			tomato.setDuration(1);
+		}
 
-		tomato.setDuration(Integer.parseInt(txtDurata.getText()));
 		basicDao.save(tomato);
 		logger.debug(tomato.toString());
 		timerLogger.info("\nTitolo: " + tomato.getTitle() + " \n Focus on:\n"
