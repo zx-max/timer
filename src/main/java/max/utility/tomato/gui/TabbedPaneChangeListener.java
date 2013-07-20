@@ -28,6 +28,14 @@ public class TabbedPaneChangeListener implements ChangeListener {
 
     private static final String TAB_TIMER_LIST_FOCUS_LABEL = "focus";
 
+    // tab.timer.list.label = "lista dei timer"
+    //
+    // tab.timer.list.note.label = "note"
+    //
+    // tab.timer.list.done.label = "ho fatto"
+    //
+    // tab.timer.list.focus.on.label = "focus"
+
     private boolean listTimerLoaded = false;
 
     public void stateChanged(ChangeEvent changeEvent) {

@@ -34,21 +34,22 @@ import org.slf4j.LoggerFactory;
 
 public class StartTimerWindow extends JFrame {
 
-    private static final String TAB_NEW_TIMER_LABEL = "nuovo timer";
-    private static final String TAB_TIMER_LIST_LABEL = "lista dei timer";
+    private static final String TAB_NEW_TIMER_LABEL = "tab.new.timer.label";
 
-    private static final String TAB_NEW_TIMER_TITLE_LABEL = "titolo:";
+    private static final String TAB_TIMER_LIST_LABEL = "tab.timer.list.label";
 
-    private static final String TAB_NEW_TIMER_DURATA_LABEL = "durata";
-    private static final String TAB_NEW_TIMER_DURATA_TOOL_TIP = "durata del timer in minuti";
+    private static final String TAB_NEW_TIMER_TITLE_LABEL = "tab.new.timer.title.label";
 
-    private static final String TAB_NEW_TIMER_FOCUS_ON_LABEL = "voglio fare:";
-    private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP = "cosa intendi fare nei prossimi 20 minuti? \n[Ctrl+tab] per togliere il \"focus\" dall' area di testo";
-    private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT = "descrivi cosa intendi fare nei prossimi 20 minuti... \n[Ctrl+tab] per togliere il \"focus\" dall' area di testo.\n max 250 caratteri";
-    private static final String TAB_NEW_TIMER_BTN_START_LABEL = "inizia";
+    private static final String TAB_NEW_TIMER_DURATA_LABEL = "tab.new.timer.dirata.label";
+    private static final String TAB_NEW_TIMER_DURATA_TOOL_TIP = "tab.new.timer.durata.tootip";
 
-    private static final String TIMER_LOGGER_FOCUS_ON = "Focus on: ";
-    private static final String TIMER_LOGGER_TITOLO = "Titolo: ";
+    private static final String TAB_NEW_TIMER_FOCUS_ON_LABEL = "tab.new.timer.focus.on.label";
+    private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP = "tab.new.timer.focus.on.textarea.tooltip";
+    private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT = "tab.new.timer.focus.on.textarea.text";
+    private static final String TAB_NEW_TIMER_BTN_START_LABEL = "tab.new.timer.btn.start.label";
+
+    private static final String TIMER_LOGGER_FOCUS_ON = "timerlogger.focus.on";
+    private static final String TIMER_LOGGER_TITOLO = "timerlogger.title";
 
     public static final Logger logger = LoggerFactory
             .getLogger(StartTimerWindow.class);
@@ -95,13 +96,16 @@ public class StartTimerWindow extends JFrame {
         JButton btnStart = new JButton();
 
         pnlNewTimer.setLayout(layout);
-        btnStart.setText(TAB_NEW_TIMER_BTN_START_LABEL);
+        btnStart.setText(I18N.getKey(this.getClass(),
+                TAB_NEW_TIMER_BTN_START_LABEL));
         taFocusOn.setColumns(20);
         taFocusOn.setForeground(new Color(0, 153, 0));
         taFocusOn.setRows(5);
         taFocusOn.setTabSize(2);
-        taFocusOn.setText(TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT);
-        taFocusOn.setToolTipText(TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP);
+        taFocusOn.setText(I18N.getKey(this.getClass(),
+                TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT));
+        taFocusOn.setToolTipText(I18N.getKey(this.getClass(),
+                TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP));
         spFocusOn.setViewportView(taFocusOn);
         taFocusOn.getAccessibleContext().setAccessibleName("taFocusOn");
 
@@ -117,11 +121,13 @@ public class StartTimerWindow extends JFrame {
                 btnStartTomatoKeyPressed(evt);
             }
         });
-        JLabel lblTitle = new JLabel(TAB_NEW_TIMER_TITLE_LABEL);
+        JLabel lblTitle = new JLabel(I18N.getKey(this.getClass(),
+                TAB_NEW_TIMER_TITLE_LABEL));
 
         pnlNewTimer.add(lblTitle, "cell 0 0");
         pnlNewTimer.add(tfTitle, "cell 0 1 2 1,growx");
-        JLabel lblFocusOn = new JLabel(TAB_NEW_TIMER_FOCUS_ON_LABEL);
+        JLabel lblFocusOn = new JLabel(I18N.getKey(this.getClass(),
+                TAB_NEW_TIMER_FOCUS_ON_LABEL));
         pnlNewTimer.add(lblFocusOn, "cell 0 2");
         pnlNewTimer.add(spFocusOn, "cell 0 3 2 1,growx");
         pnlNewTimer.add(btnStart, "cell 0 4 2 1,growx");
@@ -129,13 +135,15 @@ public class StartTimerWindow extends JFrame {
         Box horizontalBox = Box.createHorizontalBox();
         pnlNewTimer.add(horizontalBox, "flowx,cell 1 0");
 
-        JLabel lblDurata = new JLabel(TAB_NEW_TIMER_DURATA_LABEL);
+        JLabel lblDurata = new JLabel(I18N.getKey(this.getClass(),
+                TAB_NEW_TIMER_DURATA_LABEL));
         lblDurata.setHorizontalAlignment(SwingConstants.RIGHT);
         pnlNewTimer.add(lblDurata, "cell 1 0,alignx right");
         lblDurata.setLabelFor(txtDurata);
 
         txtDurata = new JTextField("20");
-        txtDurata.setToolTipText(TAB_NEW_TIMER_DURATA_TOOL_TIP);
+        txtDurata.setToolTipText(I18N.getKey(this.getClass(),
+                TAB_NEW_TIMER_DURATA_TOOL_TIP));
         pnlNewTimer.add(txtDurata, "cell 1 0,alignx center");
         txtDurata.setColumns(2);
 
@@ -147,8 +155,12 @@ public class StartTimerWindow extends JFrame {
         setBounds(100, 100, 450, 300);
 
         JTabbedPane tabTimers = new JTabbedPane();
-        tabTimers.addTab(TAB_NEW_TIMER_LABEL, getPnlNewTimer());
-        tabTimers.addTab(TAB_TIMER_LIST_LABEL, new JPanel());
+
+        tabTimers.addTab(I18N.getKey(this.getClass(), TAB_NEW_TIMER_LABEL),
+                getPnlNewTimer());
+
+        tabTimers.addTab(I18N.getKey(this.getClass(), TAB_TIMER_LIST_LABEL),
+                new JPanel());
 
         ChangeListener changeListener = new TabbedPaneChangeListener();
 
@@ -184,8 +196,10 @@ public class StartTimerWindow extends JFrame {
 
         StringBuffer sb = new StringBuffer();
         sb.append((new LocalDateTime()).toString("dd/MM/yyyy HH:mm") + "\n");
-        sb.append(TIMER_LOGGER_TITOLO + tomato.getTitle() + "\n");
-        sb.append(TIMER_LOGGER_FOCUS_ON + tomato.getFocusOn());
+        sb.append(I18N.getKey(this.getClass(), TIMER_LOGGER_TITOLO)
+                + tomato.getTitle() + "\n");
+        sb.append(I18N.getKey(this.getClass(), TIMER_LOGGER_FOCUS_ON)
+                + tomato.getFocusOn());
 
         timerLogger.info(sb.toString());
 
