@@ -20,21 +20,13 @@ import max.utility.tomato.domain.TomatoReview;
 import net.miginfocom.swing.MigLayout;
 
 public class TabbedPaneChangeListener implements ChangeListener {
-    private static final String TAB_TIMER_LIST_LABEL = "lista dei timer";
+    private static final String TAB_TIMER_LIST_LABEL = "tab.timer.list.label";
 
-    private static final String TAB_TIMER_LIST_NOTE_LABEL = "note";
+    private static final String TAB_TIMER_LIST_NOTE_LABEL = "tab.timer.list.note.label";
 
-    private static final String TAB_TIMER_LIST_DONE_LABEL = "ho fatto";
+    private static final String TAB_TIMER_LIST_DONE_LABEL = "tab.timer.list.done.label";
 
-    private static final String TAB_TIMER_LIST_FOCUS_LABEL = "focus";
-
-    // tab.timer.list.label = "lista dei timer"
-    //
-    // tab.timer.list.note.label = "note"
-    //
-    // tab.timer.list.done.label = "ho fatto"
-    //
-    // tab.timer.list.focus.on.label = "focus"
+    private static final String TAB_TIMER_LIST_FOCUS_LABEL = "tab.timer.list.focus.on.label";
 
     private boolean listTimerLoaded = false;
 
@@ -48,7 +40,9 @@ public class TabbedPaneChangeListener implements ChangeListener {
 
             listTimerLoaded = true;
             sourceTabbedPane.remove(index);
-            sourceTabbedPane.addTab(TAB_TIMER_LIST_LABEL, getPnlTimersList());
+            sourceTabbedPane.addTab(
+                    I18N.getKey(StartTimerWindow.class, TAB_TIMER_LIST_LABEL),
+                    getPnlTimersList());
             sourceTabbedPane.repaint();
             sourceTabbedPane.setSelectedIndex(index);
 
@@ -77,9 +71,12 @@ public class TabbedPaneChangeListener implements ChangeListener {
 
     public JPanel getItemDataPanel(TomatoReview tomatoReview) {
         JPanel pnlShowItemData = new JPanel();
-        JLabel lblFocusOn = new JLabel(TAB_TIMER_LIST_FOCUS_LABEL);
-        JLabel lblDone = new JLabel(TAB_TIMER_LIST_DONE_LABEL);
-        JLabel lblProblemsRaised = new JLabel(TAB_TIMER_LIST_NOTE_LABEL);
+        JLabel lblFocusOn = new JLabel(I18N.getKey(StartTimerWindow.class,
+                TAB_TIMER_LIST_FOCUS_LABEL));
+        JLabel lblDone = new JLabel(I18N.getKey(StartTimerWindow.class,
+                TAB_TIMER_LIST_DONE_LABEL));
+        JLabel lblProblemsRaised = new JLabel(I18N.getKey(
+                StartTimerWindow.class, TAB_TIMER_LIST_NOTE_LABEL));
 
         JTextArea txtFocusOn = new JTextArea();
         JTextArea txtDone = new JTextArea();

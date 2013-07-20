@@ -28,31 +28,29 @@ import org.slf4j.LoggerFactory;
 
 public class EndTimerWindow extends JFrame {
 
-    private static final String WINDOW_TITLE = "Pomodoro finito ...";
+    private static final String WINDOW_TITLE = "window.title";
 
-    private static final String LABEL_TITLE_FONT = "Comic Sans MS"; // Comic
-                                                                    // Sans MS
-                                                                    // NOI18N
-    private static final String TEXT_AREA_FOCUS_ON_FONT = "Andalus"; // Andalus
-                                                                     // NOI18N
+    private static final String TITLE_LABEL_FONT = "label.title.font";
 
-    private static final String LABEL_FOCUS_ON = "volevo fare:";
+    private static final String FOCUS_ON_TEXT_AREA_FONT = "focus.on.textarea.font";
 
-    private static final String DONE_LABEL = "fatto:";
+    private static final String FOCUS_ON_LABEL = "focus.on.label";
 
-    private static final String DONE_TEXT_AREA_TOOL_TIP = "breve revisione di quanto fatto ..";
+    private static final String DONE_LABEL = "done.label";
 
-    private static final String DONE_TEXT_AREA_SETUP_TEXT = "salva le ultime modifiche.\ncommit -m \"fine timer\"\n";
+    private static final String DONE_TEXT_AREA_TOOL_TIP = "done.textarea.tooltip";
 
-    private static final String REVIEW_LABEL = "rivedi quanto fatto";
+    private static final String DONE_TEXT_AREA_TEXT = "done.textarea.text";
 
-    private static final String NOTE_LABEL = "note:";
+    private static final String REVIEW_LABEL = "review.label";
 
-    private static final String TIMER_LOGGER_NOTE = "Note:";
-    private static final String TIMER_LOGGER_FATTO = "Fatto:";
+    private static final String NOTE_LABEL = "note.label";
 
-    private static final String BUTTON_OK_NEW_TEXT = "ok & New";
-    private static final String BUTTON_OK_TEXT = "ok";
+    private static final String TIMER_LOGGER_NOTE = "timer.logger.note";
+    private static final String TIMER_LOGGER_FATTO = "timer.logger.fatto";
+
+    private static final String BUTTON_OK_NEW_TEXT = "button.ok.new.text";
+    private static final String BUTTON_OK_TEXT = "button.ok.text";
 
     public static final Logger logger = LoggerFactory
             .getLogger(EndTimerWindow.class);
@@ -71,7 +69,7 @@ public class EndTimerWindow extends JFrame {
     private Tomato tomato;
 
     public EndTimerWindow(Tomato tomato) {
-        setTitle(WINDOW_TITLE);
+        setTitle(I18N.getKey(this.getClass(), WINDOW_TITLE));
         this.tomato = tomato;
         basicDao = (HibernateBasicDaoImpl) Register
                 .get(HibernateBasicDaoImpl.class);
@@ -87,12 +85,14 @@ public class EndTimerWindow extends JFrame {
                         new MigLayout("", "[grow][]",
                                 "[][][grow][][grow][][grow][][]"));
 
-        JLabel lblTitle = new JLabel(REVIEW_LABEL);
-        lblTitle.setFont(new Font(LABEL_TITLE_FONT, 0, 25));
+        JLabel lblTitle = new JLabel(I18N.getKey(this.getClass(), REVIEW_LABEL));
+        lblTitle.setFont(new Font(
+                I18N.getKey(this.getClass(), TITLE_LABEL_FONT), 0, 25));
         lblTitle.setForeground(new Color(255, 153, 0));
         getContentPane().add(lblTitle, "cell 0 0");
 
-        JLabel lblFocusOn = new JLabel(LABEL_FOCUS_ON);
+        JLabel lblFocusOn = new JLabel(I18N.getKey(this.getClass(),
+                FOCUS_ON_LABEL));
         lblFocusOn.setBackground(new Color(0, 0, 0));
         lblFocusOn.setForeground(new Color(10, 2, 100));
         getContentPane().add(lblFocusOn, "cell 0 1");
@@ -101,7 +101,8 @@ public class EndTimerWindow extends JFrame {
         taFocusOn.setEditable(false);
         taFocusOn.setBackground(new Color(0, 0, 0));
         taFocusOn.setColumns(20);
-        taFocusOn.setFont(new Font(TEXT_AREA_FOCUS_ON_FONT, 0, 13));
+        taFocusOn.setFont(new Font(I18N.getKey(this.getClass(),
+                FOCUS_ON_TEXT_AREA_FONT), 0, 13));
         taFocusOn.setForeground(new Color(0, 255, 255));
         taFocusOn.setRows(10);
         taFocusOn.setTabSize(2);
@@ -110,15 +111,16 @@ public class EndTimerWindow extends JFrame {
         JScrollPane scFocusOn = new JScrollPane(taFocusOn);
         getContentPane().add(scFocusOn, "cell 0 2,grow");
 
-        JLabel lblDone = new JLabel(DONE_LABEL);
+        JLabel lblDone = new JLabel(I18N.getKey(this.getClass(), DONE_LABEL));
         getContentPane().add(lblDone, "cell 0 3");
 
         taDone = new JTextArea();
         JScrollPane spDone = new JScrollPane(taDone);
         taDone.setRows(10);
         taDone.setTabSize(2);
-        taDone.setText(DONE_TEXT_AREA_SETUP_TEXT);
-        taDone.setToolTipText(DONE_TEXT_AREA_TOOL_TIP);
+        taDone.setText(I18N.getKey(this.getClass(), DONE_TEXT_AREA_TEXT));
+        taDone.setToolTipText(I18N.getKey(this.getClass(),
+                DONE_TEXT_AREA_TOOL_TIP));
         getContentPane().add(spDone, "cell 0 4,grow");
 
         JLabel lblNote = new JLabel(NOTE_LABEL);
@@ -130,10 +132,12 @@ public class EndTimerWindow extends JFrame {
         JScrollPane spNote = new JScrollPane(taNote);
         getContentPane().add(spNote, "cell 0 6,grow");
 
-        JButton btnOk = new JButton(BUTTON_OK_TEXT);
+        JButton btnOk = new JButton(
+                I18N.getKey(this.getClass(), BUTTON_OK_TEXT));
         getContentPane().add(btnOk, "flowx,cell 0 8");
 
-        JButton btnOkNew = new JButton(BUTTON_OK_NEW_TEXT);
+        JButton btnOkNew = new JButton(I18N.getKey(this.getClass(),
+                BUTTON_OK_NEW_TEXT));
         getContentPane().add(btnOkNew, "cell 0 8");
 
         btnOk.addMouseListener(new MouseAdapter() {
@@ -208,8 +212,10 @@ public class EndTimerWindow extends JFrame {
 
         timerLogger.info(sb.toString());
 
-        timerLogger.info(TIMER_LOGGER_FATTO + "\n" + review.getReallyDone());
-        timerLogger.info(TIMER_LOGGER_NOTE + "\n" + review.getProblemsRaised());
+        timerLogger.info(I18N.getKey(this.getClass(), TIMER_LOGGER_FATTO)
+                + "\n" + review.getReallyDone());
+        timerLogger.info(I18N.getKey(this.getClass(), TIMER_LOGGER_NOTE) + "\n"
+                + review.getProblemsRaised());
         // closeWindow();
     }
 
