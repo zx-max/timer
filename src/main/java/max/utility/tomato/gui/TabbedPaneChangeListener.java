@@ -20,6 +20,13 @@ import max.utility.tomato.domain.TomatoReview;
 import net.miginfocom.swing.MigLayout;
 
 public class TabbedPaneChangeListener implements ChangeListener {
+    private static final String TAB_TIMER_LIST_LABEL = "lista dei timer";
+
+    private static final String TAB_TIMER_LIST_NOTE_LABEL = "note";
+
+    private static final String TAB_TIMER_LIST_DONE_LABEL = "ho fatto";
+
+    private static final String TAB_TIMER_LIST_FOCUS_LABEL = "focus";
 
     private boolean listTimerLoaded = false;
 
@@ -33,7 +40,7 @@ public class TabbedPaneChangeListener implements ChangeListener {
 
             listTimerLoaded = true;
             sourceTabbedPane.remove(index);
-            sourceTabbedPane.addTab("lista dei timer", getPnlTimersList());
+            sourceTabbedPane.addTab(TAB_TIMER_LIST_LABEL, getPnlTimersList());
             sourceTabbedPane.repaint();
             sourceTabbedPane.setSelectedIndex(index);
 
@@ -60,11 +67,11 @@ public class TabbedPaneChangeListener implements ChangeListener {
         return basicDao.namedQuery("TomatoReview.list");
     }
 
-    private JPanel getItemDataPanel(TomatoReview tomatoReview) {
+    public JPanel getItemDataPanel(TomatoReview tomatoReview) {
         JPanel pnlShowItemData = new JPanel();
-        JLabel lblFocusOn = new JLabel("focus");
-        JLabel lblDone = new JLabel("ho fatto");
-        JLabel lblProblemsRaised = new JLabel("note");
+        JLabel lblFocusOn = new JLabel(TAB_TIMER_LIST_FOCUS_LABEL);
+        JLabel lblDone = new JLabel(TAB_TIMER_LIST_DONE_LABEL);
+        JLabel lblProblemsRaised = new JLabel(TAB_TIMER_LIST_NOTE_LABEL);
 
         JTextArea txtFocusOn = new JTextArea();
         JTextArea txtDone = new JTextArea();
