@@ -5,6 +5,16 @@
 	<artifactId>tomato</artifactId>
 	<version>0.0.4-SNAPSHOT</version>
 
+	<description>review what you have done in the last 20 minutes</description>
+
+
+	<url>https://github.com/zx-max/timer</url>
+
+	<scm>
+		<url>https://github.com/zx-max/timer</url>
+		<connection>git@github.com:zx-max/timer.git</connection>
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<targetJdk>1.6</targetJdk>
@@ -23,7 +33,6 @@
 		<hamcrest-all.version>1.3</hamcrest-all.version>
 		<h2.version>1.0.60</h2.version>
 		<joda-time.version>2.1</joda-time.version>
-		<usertype.core.version>3.0.0.CR1</usertype.core.version>
 		<usertype.jodatime.version>2.0.1</usertype.jodatime.version>
 		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
 		<hibernate-core.version>4.1.6.Final</hibernate-core.version>
@@ -36,21 +45,44 @@
 	</properties>
 
 	<build>
+
 		<finalName>timer-manager</finalName>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>${maven-pmd-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
 					<source>${targetJdk}</source>
 					<target>${targetJdk}</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin.version}</version>
 				<configuration>
 					<descriptor>src/main/assembly/dep.xml</descriptor>
 					<archive>
@@ -63,16 +95,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					<argLine>${maven.test.jvmargs}</argLine>
 				</configuration>
 			</plugin>
-			<!-- code metrics -->
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>${maven-pmd-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -83,7 +113,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>2${maven-pmd-plugin.version}</version>
+				<version>${maven-pmd-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -117,11 +147,11 @@
 		<dependency>
 			<groupId>com.miglayout</groupId>
 			<artifactId>miglayout-swing</artifactId>
-			<version>${miglayout-swing}</version>
 		</dependency>
 
-
+		<!-- ============== -->
 		<!-- for slf4j javaagent -->
+		<!-- ============== -->
 		<!-- http://www.slf4j.org/extensions.html#extended_logger -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.slf4j</groupId> -->
@@ -135,8 +165,9 @@
 		<!-- </dependency> -->
 
 
+		<!-- ============== -->
 		<!-- AOP -->
-
+		<!-- ============== -->
 		<!-- java -javaagent:$LOCAL_MAVEN_REPO\org\springframework\spring-agent\2.5.6.SEC03\spring-agent-2.5.6.SEC03.jar -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.springframework</groupId> -->
@@ -146,98 +177,79 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 
 		<!-- Spring AOP + AspectJ -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
-			<version>${aspectjrt.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>${aspectjweaver.version}</version>
 		</dependency>
 
 		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
-			<version>${hamcrest-all.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- data base -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
 		</dependency>
 
 		<!-- date / time management -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>${joda-time.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.core</artifactId>
-			<version>${usertype.core.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jadira.usertype</groupId>
 			<artifactId>usertype.jodatime</artifactId>
-			<version>${usertype.jodatime.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- orm: jpa + hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate-core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate-entitymanager.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
-			<version>${hibernate-annotations.version}</version>
 		</dependency>
 
 		<!-- java.lang.ClassFormatError: Absent Code attribute in method that is not native or abstract in class file 
@@ -252,23 +264,147 @@
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>persistence-api</artifactId>
-			<version>${persistence-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.ejb</groupId>
 			<artifactId>ejb-api</artifactId>
-			<version>${ejb-api.version}</version>
 		</dependency>
+
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback-classic.version}</version>
 		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>com.miglayout</groupId>
+				<artifactId>miglayout-swing</artifactId>
+				<version>${miglayout-swing}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectjrt.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectjweaver.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-all</artifactId>
+				<version>${hamcrest-all.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jadira.usertype</groupId>
+				<artifactId>usertype.jodatime</artifactId>
+				<version>${usertype.jodatime.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate-core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate-entitymanager.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-annotations</artifactId>
+				<version>${hibernate-annotations.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>${persistence-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.ejb</groupId>
+				<artifactId>ejb-api</artifactId>
+				<version>${ejb-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback-classic.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
