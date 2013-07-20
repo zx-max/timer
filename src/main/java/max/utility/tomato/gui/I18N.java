@@ -6,9 +6,12 @@ import java.util.ResourceBundle;
 public class I18N {
 
     public static String getKey(Class clazz, String key) {
+
         String baseName = clazz.getCanonicalName();
+
         ResourceBundle labels = ResourceBundle.getBundle(baseName,
-                Locale.ENGLISH);
+                Locale.getDefault());
+
         return labels.getString(key);
     }
 
