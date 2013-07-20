@@ -10,10 +10,13 @@
 
 	<url>https://github.com/zx-max/timer</url>
 
+
 	<scm>
-		<url>https://github.com/zx-max/timer</url>
-		<connection>scm:git@github.com:zx-max/timer.git</connection>
+		<connection>scm:git:git@github.com:zx-max/timer.git</connection>
+		<url>scm:git:git:@github.com/zx-max/timer</url>
+		<developerConnection>scm:git:git@github.com:zx-max/timer.git</developerConnection>
 	</scm>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,8 +27,9 @@
 		<maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
 		<maven-surefire-plugin.version>2.9</maven-surefire-plugin.version>
 		<maven-pmd-plugin.version>2.7.1</maven-pmd-plugin.version>
-        <maven-site-plugin.version>3.3</maven-site-plugin.version>
+		<maven-site-plugin.version>3.3</maven-site-plugin.version>
 		<findbugs-maven-plugin.version>2.5.2</findbugs-maven-plugin.version>
+		<maven-doap-plugin.version>1.1</maven-doap-plugin.version>
 
 		<miglayout-swing>4.2</miglayout-swing>
 		<spring.version>3.0.5.RELEASE</spring.version>
@@ -72,16 +76,22 @@
 					<version>${maven-pmd-plugin.version}</version>
 				</plugin>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven-site-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>${findbugs-maven-plugin.version}</version>
-                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${maven-site-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>${findbugs-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-doap-plugin</artifactId>
+					<version>${maven-doap-plugin.version}</version>
+				</plugin>
+				
 			</plugins>
 		</pluginManagement>
 
@@ -118,10 +128,52 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 			</plugin>
 
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>findbugs-maven-plugin</artifactId>
-                </plugin>			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-doap-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>site</id>
+						<phase>site</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<doapOptions>
+						<name>${project.name}</name>
+						<homepage>${project.url}</homepage>
+						<created>2012-09-14</created>
+						<vendor>${project.organization.name}</vendor>
+
+
+						<description>${project.description}</description>
+						<shortdesc>${project.description}</shortdesc>
+
+						<category>content</category>
+						<programmingLanguage>Java</programmingLanguage>
+
+						<!-- <bugDatabase>${project.issueManagement.url}</bugDatabase> -->
+						<!-- <downloadPage>\${project.distributionManagement.downloadUrl}</downloadPage> -->
+						<!-- <license>\$\{project.licenses[0].url}</license> -->
+						<!-- <mailingList>${project.url}/mail-lists.html</mailingList> -->
+						<!-- <scmAnonymousConnection>${project.scm.connection}</scmAnonymousConnection> -->
+						<!-- <scmDeveloperConnection>${project.scm.developerConnection}</scmDeveloperConnection> -->
+
+
+					</doapOptions>
+
+
+
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
