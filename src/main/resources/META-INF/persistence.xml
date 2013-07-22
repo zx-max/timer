@@ -18,8 +18,8 @@
 	<persistence-unit name="H2FileTomatoPU">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<mapping-file>META-INF/jpql/tomato.xml</mapping-file>
-		<class>max.utility.tomato.domain.Tomato</class>
-		<class>max.utility.tomato.domain.TomatoReview</class>
+		<class>zxmax.tools.timerreview.domain.Tomato</class>
+		<class>zxmax.tools.timerreview.domain.TomatoReview</class>
 		<properties>
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.show_sql" value="false" />
@@ -37,8 +37,8 @@
 	<persistence-unit name="H2MemTomatoPU">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<mapping-file>META-INF/jpql/tomato.xml</mapping-file>
-		<class>max.utility.tomato.domain.Tomato</class>
-		<class>max.utility.tomato.domain.TomatoReview</class>
+		<class>zxmax.tools.timerreview.domain.Tomato</class>
+		<class>zxmax.tools.timerreview.domain.TomatoReview</class>
 		<properties>
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.show_sql" value="false" />

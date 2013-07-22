@@ -14,7 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import max.utility.tomato.domain.TomatoReview;
+import zxmax.tools.timerreview.domain.TomatoReview;
 import net.miginfocom.swing.MigLayout;
 
 public class TimerListWindow extends JFrame {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
 	<appender name="TimerAppender" class="ch.qos.logback.core.FileAppender">
-		<file>${user.home}/.Pomodoro/logs/timer-report.log</file>
+		<file>${user.home}/.timerReview/logs/timer-report.log</file>
 		<append>true</append>
 		<encoder>
 			<pattern>%msg%n</pattern>
@@ -14,7 +14,7 @@
 		</encoder>
 	</appender>	
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${user.home}/.Pomodoro/logs/timer-manager.log</file>
+		<file>${user.home}/.timerReview/logs/timer-manager.log</file>
 		<append>true</append>
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
@@ -23,7 +23,7 @@
 
 	<logger name="org.hibernate" level="ERROR" appender="FILE" />
 	
-	<logger name="max.utility.tomato" level="info" appender="FILE" />
+	<logger name="zxmax.tools.timerreview" level="info" appender="FILE" />
 	
 	<logger name="TimerLogger" level="INFO" >
 		<appender-ref ref="TimerAppender" />

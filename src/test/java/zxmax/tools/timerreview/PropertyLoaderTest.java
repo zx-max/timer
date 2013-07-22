@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.MissingResourceException;
 
-import max.utility.tomato.PropertyLoader;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import zxmax.tools.timerreview.PropertyLoader;
 
 public class PropertyLoaderTest {
     public static final Logger logger = LoggerFactory

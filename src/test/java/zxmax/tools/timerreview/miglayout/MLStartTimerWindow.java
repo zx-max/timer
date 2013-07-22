@@ -15,8 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
-import max.utility.tomato.domain.Tomato;
-import max.utility.tomato.domain.TomatoReview;
+import zxmax.tools.timerreview.domain.Tomato;
+import zxmax.tools.timerreview.domain.TomatoReview;
 import net.miginfocom.swing.MigLayout;
 
 /**

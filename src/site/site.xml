@@ -12,13 +12,13 @@
 	name="Pomodoro" xmlns="http://maven.apache.org/DECORATION/1.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<bannerLeft>
-		<name>Pomodoro</name>
+		<name>Timer Review</name>
 		<href>#</href>
 	</bannerLeft>
 
 	<bannerRight>
 		<name>TimerReview</name>
-		<src>http://www.timerreview.net/images/logo.png</src>
+		<src>http://timerreview.sourceforge.net//images/logo.png</src>
 		<href>#</href>
 	</bannerRight>
 
@@ -28,24 +28,29 @@
 
 	<skin>
 		<groupId>org.apache.maven.skins</groupId>
-		<artifactId>maven-default-skin</artifactId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.3.0</version>
 	</skin>
+
 
 	<body>
 		<links>
-			<item name="tomato" href=".." />
+			<item name="TimerReview" href="http://timerreview.sourceforge.net/" />
 		</links>
 		<breadcrumbs>
-			<item name="Pomodoro" href="http://www.timerreview.net/" />
+			<item name="TimerReview" href="http://timerreview.sourceforge.net//" />
 		</breadcrumbs>
 
 		<menu name="Top Menu" inherit="top">
 			<item name="Introduction" href="/indexParent.html" />
-			<item name="Usage" href="/usageParent.html" />
 		</menu>
 
 		<menu ref="parent" />
 
 		<menu ref="reports" />
+
+
 	</body>
+
+
 </project>

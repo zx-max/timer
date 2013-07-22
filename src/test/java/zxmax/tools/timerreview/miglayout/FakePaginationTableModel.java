@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import max.utility.tomato.domain.Tomato;
-import max.utility.tomato.domain.TomatoReview;
+import zxmax.tools.timerreview.domain.Tomato;
+import zxmax.tools.timerreview.domain.TomatoReview;
 
 public class FakePaginationTableModel extends AbstractTableModel {
     private int startPosition;

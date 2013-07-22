@@ -3,11 +3,11 @@
 <aspectj>
 
 	<weaver>
-		<include within="max.utility.tomato..*"/>
+		<include within="zxmax.tools.timerreview..*"/>
 	</weaver>
 
 	<aspects>
-		<aspect name="max.utility.tomato.aspects.task.LogExceptionAspect"/>
+		<aspect name="zxmax.tools.timerreview.aspects.task.LogExceptionAspect"/>
 	</aspects>
 
 </aspectj>
