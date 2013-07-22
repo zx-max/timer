@@ -1,4 +1,4 @@
-package max.utility.tomato;
+package zxmax.tools.timerreview;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
@@ -7,14 +7,17 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.Callable;
 
+import max.utility.tomato.Countdown;
+import max.utility.tomato.Main;
+import max.utility.tomato.PropertyLoader;
 import max.utility.tomato.aspects.task.LogExceptionAspect;
-import max.utility.tomato.tasks.ThorwUncheckedExceptionTask;
 
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import zxmax.tools.timerreview.tasks.ThorwUncheckedExceptionTask;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package max.test.ui.miglayout;
+package zxmax.tools.timerreview.miglayout;
 
 /**
  * 

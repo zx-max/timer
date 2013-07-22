@@ -1,4 +1,4 @@
-package max.test.ui.miglayout;
+package zxmax.tools.timerreview.miglayout;
 
 import java.awt.EventQueue;
 import java.awt.LayoutManager;

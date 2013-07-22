@@ -7,3 +7,6 @@
 .#*
 *.swp
 *~
+.project
+/.settings
+.classpath

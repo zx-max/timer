@@ -1,4 +1,4 @@
-package max.utility.tomato;
+package zxmax.tools.timerreview;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.MissingResourceException;
+
+import max.utility.tomato.PropertyLoader;
 
 import org.junit.Test;
 import org.slf4j.Logger;

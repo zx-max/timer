@@ -1,19 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>max.utility.tomato</groupId>
-	<artifactId>tomato</artifactId>
+	<groupId>zxmax.tools.timer-review</groupId>
+	<artifactId>timer-review</artifactId>
 	<version>0.0.4-SNAPSHOT</version>
 
 	<description>review what you have done in the last 20 minutes</description>
 
 
-	<url>https://github.com/zx-max/timer</url>
+	<url>http://www.timer-review.net</url>
 
 
 	<scm>
+		<url>http://github.com/zx-max/timer</url>
 		<connection>scm:git:git@github.com:zx-max/timer.git</connection>
-		<url>scm:git:git:@github.com/zx-max/timer</url>
 		<developerConnection>scm:git:git@github.com:zx-max/timer.git</developerConnection>
 	</scm>
 
@@ -54,7 +54,7 @@
 
 	<build>
 
-		<finalName>timer-manager</finalName>
+		<finalName>timer-review</finalName>
 
 		<pluginManagement>
 			<plugins>
@@ -200,7 +200,7 @@
 						</transformer>
 					</transformers>
 					<shadedArtifactAttached>true</shadedArtifactAttached>
-					<shadedClassifierName>shade</shadedClassifierName>
+					<shadedClassifierName>with-deps</shadedClassifierName>
 
 				</configuration>
 				<executions>
