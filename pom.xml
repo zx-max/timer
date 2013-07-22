@@ -18,6 +18,8 @@
 	</scm>
 
 
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<targetJdk>1.6</targetJdk>
@@ -52,12 +54,14 @@
 		<logback-classic.version>1.0.7</logback-classic.version>
 	</properties>
 
-  <distributionManagement>
-    <site>
-      <id>taimerreview.sf.net</id>
-      <url>scp://web.sourceforge.net/home/project-web/taimerreview/htdocs</url>
-    </site>
-  </distributionManagement>
+	<distributionManagement>
+		<site>
+			<id>taimerreview.sf.net</id>
+			<url>scp://web.sourceforge.net/home/project-web/taimerreview/htdocs</url>
+		</site>
+		<downloadUrl>
+    http://sourceforge.net/projects/timerreview/files/</downloadUrl>
+	</distributionManagement>
 
 	<build>
 
@@ -198,8 +202,8 @@
 				<artifactId>maven-shade-plugin</artifactId>
 				<configuration>
 					<artifactSet>
-<!-- 						<exclude>org.hamcrest:hamcrest-all</exclude> -->
-<!-- 						<exclude>junit:junit</exclude> -->
+						<!-- <exclude>org.hamcrest:hamcrest-all</exclude> -->
+						<!-- <exclude>junit:junit</exclude> -->
 					</artifactSet>
 					<transformers>
 						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -224,7 +228,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>javancss-maven-plugin</artifactId>
-                <!-- Configuration must be replicated in reporting section -->
+				<!-- Configuration must be replicated in reporting section -->
 			</plugin>
 		</plugins>
 	</build>
@@ -253,12 +257,12 @@
 					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>javancss-maven-plugin</artifactId>
-                <!-- Configuration must be replicated in build section -->
-			</plugin>			
+				<!-- Configuration must be replicated in build section -->
+			</plugin>
 		</plugins>
 
 
