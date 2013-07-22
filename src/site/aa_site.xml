@@ -1,0 +1,8 @@
+<project>
+  <body>
+    <head>
+      <link rel="meta" title="DOAP" href="${project.url}/doap_${project.artifactId}.rdf" type="application/rdf+xml"/>
+    </head>
+    
+  </body>
+</project>
