@@ -124,7 +124,7 @@ public class EndTimerWindow extends JFrame {
                 DONE_TEXT_AREA_TOOL_TIP));
         getContentPane().add(spDone, "cell 0 4,grow");
 
-        JLabel lblNote = new JLabel(NOTE_LABEL);
+        JLabel lblNote = new JLabel(I18N.getKey(this.getClass(), NOTE_LABEL));
         getContentPane().add(lblNote, "cell 0 5");
 
         taNote = new JTextArea();
