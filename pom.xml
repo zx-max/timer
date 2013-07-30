@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>zxmax.tools.timer-review</groupId>
 	<artifactId>timer-review</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 
 	<description>review what you have done in the last 20 minutes</description>
 
 
-	<url>http://www.timer-review.net</url>
+	<url>http://www.timerreview.net</url>
 
 
 	<scm>

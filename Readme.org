@@ -42,18 +42,19 @@
 
 
 
-** VERSION 0.0.5 (extend with external plugins)
+** VERSION 0.0.5
+-fix: timer review window,  see I18N label rather than the key "note.label".
+*** some refactoring
+*** log and db under ${user.home}/.Pomodoro/ 
+
+
+
+
+** VERSION ?.?.? (extend with external plugins)
 *** TODO don't use spring for aop. 
 *** TODO apply code metrics.
 *** TODO move version 0.0.3 develops as external (window desktop) module to load at runtime or not.
 *** TODO add user interface test on the application with the module. 
-
-
-
-
-
-** VERSION 0.0.6 (extend with external plugins)
-
 *** develop "on the job" learning tool
 based on the field (TomatoReview.problemsRaised)
 link Formazione.org and hard-to-implement.org to specif tomatos. 
