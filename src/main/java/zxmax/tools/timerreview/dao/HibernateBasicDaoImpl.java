@@ -1,5 +1,6 @@
 package zxmax.tools.timerreview.dao;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
@@ -14,7 +15,12 @@ import org.slf4j.LoggerFactory;
  * for examples of select and more advanced configuration checkout:
  * http://code.google.com/p/generic-spatial-dao/
  */
-public class HibernateBasicDaoImpl {
+public class HibernateBasicDaoImpl implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3057220702431275558L;
 
     public static final Logger logger = LoggerFactory
             .getLogger(HibernateBasicDaoImpl.class);

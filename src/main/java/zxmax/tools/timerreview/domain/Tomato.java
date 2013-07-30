@@ -1,5 +1,7 @@
 package zxmax.tools.timerreview.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,12 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 @Entity
-public class Tomato {
+public class Tomato implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3639516598781830323L;
 
     @Column(nullable = true, length = 80)
     @Size(min = 0, max = 80)
