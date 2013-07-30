@@ -55,13 +55,12 @@ public class PropertyLoader {
                         "file: [%s] not found.", propsName), null, null);
             }
 
-            if (in != null) {
-                try {
-                    props.load(in);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            try {
+                props.load(in);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+
         } finally {
             if (in != null) {
                 try {
