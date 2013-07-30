@@ -30,29 +30,24 @@ public class Main {
     public static final String CATCH_BLOCK = "#catch_block#";
 
     public static void main(String[] args) {
-        try {
-            new Main();
-        } catch (Exception e) {
-            logger.error("", e);
-        }
+        new Main();
     }
 
-    public Main() throws Exception {
-        super();
-        EntityManagerFactory emFactory = Persistence
-                .createEntityManagerFactory("H2FileTomatoPU");
-        EntityManager entityManager = emFactory.createEntityManager();
-        HibernateBasicDaoImpl basicDao = new HibernateBasicDaoImpl(
-                entityManager);
-        Register.put(HibernateBasicDaoImpl.class, basicDao);
-        TrayIcon trayIcon = getTrayIcon();
-        TrayIconMouseMotionListener listener = new TrayIconMouseMotionListener(
-                trayIcon);
-        trayIcon.addMouseMotionListener(listener);
-        Register.put(TrayIcon.class, trayIcon);
-        Register.put(TrayIconMouseMotionListener.class, listener);
-
+    public Main() {
         try {
+            EntityManagerFactory emFactory = Persistence
+                    .createEntityManagerFactory("H2FileTomatoPU");
+            EntityManager entityManager = emFactory.createEntityManager();
+            HibernateBasicDaoImpl basicDao = new HibernateBasicDaoImpl(
+                    entityManager);
+            Register.put(HibernateBasicDaoImpl.class, basicDao);
+            TrayIcon trayIcon = getTrayIcon();
+            TrayIconMouseMotionListener listener = new TrayIconMouseMotionListener(
+                    trayIcon);
+            trayIcon.addMouseMotionListener(listener);
+            Register.put(TrayIcon.class, trayIcon);
+            Register.put(TrayIconMouseMotionListener.class, listener);
+
             for (UIManager.LookAndFeelInfo info : UIManager
                     .getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -62,6 +57,7 @@ public class Main {
             }
         } catch (Exception ex) {
             logger.error(null, ex);
+            System.exit(-1);
         }
 
         StartTimerWindow timer = new StartTimerWindow();
