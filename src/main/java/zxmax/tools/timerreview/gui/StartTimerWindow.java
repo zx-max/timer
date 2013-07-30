@@ -113,7 +113,7 @@ public class StartTimerWindow extends JFrame {
         btnStart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                btnStartTomatoMouseClicked(evt);
+                btnStartTomatoMouseClicked();
             }
         });
         btnStart.addKeyListener(new KeyAdapter() {
@@ -177,7 +177,7 @@ public class StartTimerWindow extends JFrame {
         }
     }
 
-    private void btnStartTomatoMouseClicked(MouseEvent evt) {
+    private void btnStartTomatoMouseClicked() {
         storeDataAndStartTimer();
     }
 
