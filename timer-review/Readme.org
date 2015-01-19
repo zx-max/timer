@@ -1,0 +1,100 @@
+* ROADMAP
+
+
+** VERSION 0.0.1 (basic ui with simplest functionality).
+
+-build a simple model.
+-add basic ui.
+-simple logging configuration.
+-read timer duration from a property file.
+
+
+
+
+
+** VERSION 0.0.2 (code refactorig and distribution management)
+
+-log start time and focus of the current timer.
+-create the distrubution file zip.
+-default configuration for Countdown.
+
+
+
+
+
+** VERSION 0.0.3 (ui improvements)
+
+-rewrite application windows using MigLayout.
+-add button "save and open new" to EndTimerWindow. 
+-on tray icon, add a tooltip with time left and focusOn.
+-make focusOn on EndTomatoWindow selectable.
+-add system tray icon.
+
+
+
+
+** VERSION 0.0.4 (refactoring)
+
+-remove classes used for learning
+-some refactoring ...
+-log and db under ${user.home}/.timer-review/
+
+
+
+
+** VERSION 0.0.5 (extend with external plugins)
+*** DONE don't use spring for aop. 
+*** DONE apply code metrics.
+*** DONE in info window, show log files path.
+*** DONE in info window, show app version.
+*** DONE remove distribution script and refactor Readme.org compile and build istructions.
+*** DONE on ok & new, copy the note field into the text area of the new tomato.
+
+
+
+
+** VERSION 0.0.6 (extend with external plugins)
+
+*** develop "on the job" learning tool
+based on the field (TomatoReview.problemsRaised)
+link Formazione.org and hard-to-implement.org to specif tomatos. 
+
+
+
+
+	
+
+* HOW TO COMPILE
+The project is based on maven, to compile it, you need maven 2.0 or later and jdk 1.6 or later.
+Go in the folder timer_review_root of the project and from command line, execute this command:
+mvn clean install -Dmaven.test.skip=true
+mvn site to create the default maven web site for the project, there, you will see reports and so on.
+
+
+* HOW TO GET AN EXECUTABLE FILE
+compile the root project, then go under timer-review-root\timer-review\target, there
+you will see timer-review-with-dependencies.jar.
+
+
+
+* HOW TO RUN
+You will find the  distribution file, timer-review-with-dependencies.jar, under 
+timer-review-root\timer-review\target folder.
+To run it execute from command line java -jar timer-review-with-dependencies.jar or just double click...
+
+
+* HOW TO GET SOME REPORT
+With the command line, go to timer-review-root\timer-review and run :
+mvn clean package site -Dmaven.test.skip=true
+
+
+* HOW TO GET A BASIC WEB SITE OF TEH PROJECT
+by the command line, go in the folder timer_review_root/
+then execute :
+mvn clean install -Dmaven.test.skip=true
+mvn site
+mvn site:stage
+
+Open the index.html file under: timer-review-root/target/staging
+
+

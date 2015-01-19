@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<aspectj>
+
+	<weaver>
+		<include within="zxmax.tools.timerreview..*"/>
+	</weaver>
+
+	<aspects>
+		<aspect name="zxmax.tools.timerreview.aspects.LogExceptionAspect"/>
+	</aspects>
+
+</aspectj>

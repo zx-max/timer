@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+        <artifactId>timer-review-dao</artifactId>
+	
+	<parent>
+		<groupId>zxmax.tools.timer-review</groupId>
+		<artifactId>timer-review-root-pom</artifactId>
+		<version>0.0.5-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- project libraries -->
+		<dependency>
+			<groupId>zxmax.tools.timer-review</groupId>
+			<artifactId>timer-review-domain</artifactId>
+		</dependency>
+
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+    <properties>
+        <netbeans.hint.license>gpl30</netbeans.hint.license>
+    </properties>
+</project>

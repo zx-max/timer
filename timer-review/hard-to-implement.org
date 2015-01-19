@@ -1,0 +1,14 @@
+** hard to implement
+ with cygwin
+  mvn clean assembly:assembly
+is executed
+
+BUT
+  mvn clean assembly:assembly  
+  rm ../dist -rf
+throw error
+[ERROR] Unknown lifecycle phase "
+[ERROR] ".
+cioè la parte di ritorno a capo viene vista come lifecycle phase da parte di maven :-(
+
+creato un nuovo .sh tramite emacs direttamente da cygwin... e ora funziona

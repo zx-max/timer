@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+        
+	<artifactId>timer-review-domain</artifactId>
+	
+    <parent>
+        <groupId>zxmax.tools.timer-review</groupId>
+        <artifactId>timer-review-root-pom</artifactId>
+        <version>0.0.5-SNAPSHOT</version>
+    </parent>
+
+
+
+	<dependencies>
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- data base -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
+		<!-- date / time management -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.jodatime</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- orm: jpa + hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+		</dependency>
+
+		<!-- java.lang.ClassFormatError: Absent Code attribute in method that is 
+			not native or abstract in class file javax/transaction/SystemException -->
+		<!-- I had the same error. I found that hibernate has the (Maven-) -->
+		<!-- transitive Dependency to ebj-persistence-*.jar. Additionally, I needed -->
+		<!-- javaee-api-5.jar in the classpath (for EJBException,...). Now, -->
+		<!-- ebj-persistence.jar is a subset of javaee-api-5.jar, and if they are -->
+		<!-- not compatible, a ClassFormatError raises when javaee-api-5.jar is -->
+		<!-- loaded first. I found, that the Apache-Implementation of javaee-api-5 -->
+		<!-- is compatible with Hibernate: -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+		</dependency>
+
+		<!-- logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+	</dependencies>
+</project>

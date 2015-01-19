@@ -1,21 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>zxmax.tools.timer-review</groupId>
-	<artifactId>timer-review</artifactId>
+	<artifactId>timer-review-root-pom</artifactId>
 	<version>0.0.5-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
+
+
+	<modules>
+		<module>timer-review</module>
+		<module>timer-review-dao</module>
+		<module>timer-review-domain</module>
+	</modules>
+
+	<name>timer review</name>
 	<description>review what you have done in the last 20 minutes</description>
-
-
-	<url>http://www.timerreview.net</url>
-
-
+	<url>http://www.timer-review.net</url>
+	<inceptionYear>2012</inceptionYear>
+	<organization>
+		<name>Parentini Massimiliano</name>
+	</organization>
+	<licenses>
+		<license>
+			<name>GPL, Version 3.0</name>
+			<!-- <url>http://www.gnu.org/licenses/gpl-3.0.txt</url> -->
+			<url>src/main/resources/License.txt</url>
+			<distribution>repo</distribution>
+			<comments>A free, as in speech, license</comments>
+		</license>
+	</licenses>
 	<scm>
 		<url>http://github.com/zx-max/timer</url>
 		<connection>scm:git:git@github.com:zx-max/timer.git</connection>
 		<developerConnection>scm:git:git@github.com:zx-max/timer.git</developerConnection>
 	</scm>
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/zx-max/timer/issues</url>
+	</issueManagement>
+	<distributionManagement>
+		<site>
+			<id>taimerreview.sf.net</id>
+			<url>scp://web.sourceforge.net/home/project-web/taimerreview/htdocs</url>
+		</site>
+
+		<downloadUrl>
+            http://sourceforge.net/projects/timerreview/files/</downloadUrl>
+	</distributionManagement>
+	<developers>
+		<developer>
+			<id>zxm</id>
+			<name>massimiliano parentini</name>
+			<email>massimiliano.parentini@gmail.com</email>
+			<organization>la mia</organization>
+			<roles>
+				<role>zogatolon</role>
+			</roles>
+		</developer>
+	</developers>
+
+
+
+
 
 
 
@@ -25,20 +73,35 @@
 		<targetJdk>1.6</targetJdk>
 		<maven.test.jvmargs>-javaagent:./script/spring-instrument-3.0.5.RELEASE.jar</maven.test.jvmargs>
 
+
+		<!-- plugins -->
+		<maven-jar-plugin.version>2.5</maven-jar-plugin.version>
 		<maven-compiler-plugin.version>2.5.1</maven-compiler-plugin.version>
-		<maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
+		<aspectj-maven-plugin.version>1.7</aspectj-maven-plugin.version>
+		<maven-source-plugin.version>2.4</maven-source-plugin.version>
+		<maven-shade-plugin.version>2.1</maven-shade-plugin.version>
+		<maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+
+		<!-- legal -->
+		<!-- <license-maven-plugin.version>1.8</license-maven-plugin.version> -->
+		<license-maven-plugin.version>2.3</license-maven-plugin.version>
+
+		<!-- reporting plugins -->
+		<maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
+		<maven-doap-plugin.version>1.1</maven-doap-plugin.version>
 		<maven-surefire-plugin.version>2.9</maven-surefire-plugin.version>
-		<maven-pmd-plugin.version>2.7.1</maven-pmd-plugin.version>
+		<maven-pmd-plugin.version>3.3</maven-pmd-plugin.version>
 		<maven-site-plugin.version>3.3</maven-site-plugin.version>
 		<findbugs-maven-plugin.version>2.5.2</findbugs-maven-plugin.version>
-		<maven-doap-plugin.version>1.1</maven-doap-plugin.version>
-		<maven-shade-plugin.version>2.1</maven-shade-plugin.version>
 		<javancss-maven-plugin.version>2.0</javancss-maven-plugin.version>
+		<maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
 
+
+		<!-- dependencies -->
 		<miglayout-swing>4.2</miglayout-swing>
 		<spring.version>3.0.5.RELEASE</spring.version>
-		<aspectjrt.version>1.6.11</aspectjrt.version>
-		<aspectjweaver.version>1.6.11</aspectjweaver.version>
+		<aspectjrt.version>1.8.2</aspectjrt.version>
+		<aspectjweaver.version>1.8.2</aspectjweaver.version>
 		<junit.version>4.10</junit.version>
 		<hamcrest-all.version>1.3</hamcrest-all.version>
 		<h2.version>1.0.60</h2.version>
@@ -54,29 +117,59 @@
 		<logback-classic.version>1.0.7</logback-classic.version>
 	</properties>
 
-	<distributionManagement>
-		<site>
-			<id>taimerreview.sf.net</id>
-			<url>scp://web.sourceforge.net/home/project-web/taimerreview/htdocs</url>
-		</site>
-		<downloadUrl>
-    http://sourceforge.net/projects/timerreview/files/</downloadUrl>
-	</distributionManagement>
-
 	<build>
-
-		<finalName>timer-review</finalName>
-
 		<pluginManagement>
 			<plugins>
+
+				<!--release <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-release-plugin</artifactId> 
+					<version>${maven-release-plugin.version}</version> </plugin> -->
+
+				<!-- packaging -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>${maven-shade-plugin.version}</version>
+				</plugin>
+
+
+
+				<!-- compile -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven-compiler-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>${maven-assembly-plugin.version}</version>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>aspectj-maven-plugin</artifactId>
+					<version>${aspectj-maven-plugin.version}</version>
+				</plugin>
+
+
+				<!-- legal -->
+				<plugin>
+					<groupId>com.mycila</groupId>
+					<artifactId>license-maven-plugin</artifactId>
+					<version>${license-maven-plugin.version}</version>
+				</plugin>
+
+
+
+				<!-- reporting -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jxr-plugin</artifactId>
+					<version>${maven-jxr-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -88,16 +181,15 @@
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>${maven-pmd-plugin.version}</version>
 				</plugin>
-
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${maven-project-info-reports-plugin.version}</version>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>${maven-site-plugin.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>${findbugs-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -105,9 +197,9 @@
 					<version>${maven-doap-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-shade-plugin</artifactId>
-					<version>${maven-shade-plugin.version}</version>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>${findbugs-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -120,23 +212,143 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>zxmax.tools.timerreview.Main</mainClass>
+							<addDefaultImplementationEntries>
+								true
+							</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+					<excludes>
+						<exclude>**/builddef.lst</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>${targetJdk}</source>
 					<target>${targetJdk}</target>
 				</configuration>
 			</plugin>
+
+
+
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
 				<configuration>
-					<descriptor>src/main/assembly/dep.xml</descriptor>
-					<archive>
-						<manifest>
-							<mainClass>zxmax.tools.timerreview.Main</mainClass>
-						</manifest>
-					</archive>
+					<locales>it,en</locales>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+<!-- 							<reportSets> -->
+<!-- 								<reportSet> -->
+<!-- 									<reports> -->
+<!-- 										<report>dependencies</report> -->
+<!-- 										<report>project-team</report> -->
+<!-- 										<report>license</report> -->
+<!-- 										<report>issue-tracking</report> -->
+<!-- 									</reports> -->
+<!-- 								</reportSet> -->
+<!-- 							</reportSets> -->
+						</plugin>
+					</reportPlugins>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>lt.velykis.maven.skins</groupId>
+						<artifactId>reflow-velocity-tools</artifactId>
+						<version>1.1.1</version>
+					</dependency>
+					<!-- Reflow skin requires Velocity >= 1.7 -->
+					<dependency>
+						<groupId>org.apache.velocity</groupId>
+						<artifactId>velocity</artifactId>
+						<version>1.7</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>attach-descriptor</id>
+						<goals>
+							<goal>attach-descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
+
+
+			<!-- license -->
+<!-- 			<plugin> -->
+				<!-- only for mvn license:add-third-party -->
+<!-- 				<groupId>org.codehaus.mojo</groupId> -->
+<!-- 				<artifactId>license-maven-plugin</artifactId> -->
+<!-- 				<version>1.8</version> -->
+<!-- 			</plugin> -->
+
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<configuration>
+					<header>./src/main/resources/gpl-3.0.txt</header>
+					<properties>
+						<owner>Massimiliano Parentini</owner>
+						<email>massimiliano.parentini@gmail.com</email>
+					</properties>
+					<excludes>
+						<exclude>**/Readme.org</exclude>
+						<exclude>**/License.txt</exclude>
+						<exclude>Formazione.org</exclude>
+						<exclude>Readme.org</exclude>
+
+						<exclude>src/test/resources/**</exclude>
+						<exclude>src/main/resources/**</exclude>
+						<exclude>src/site/**</exclude>
+						<exclude>rulesets/**</exclude>
+						<exclude>logs/**</exclude>
+						<exclude>hard-to-implement.org</exclude>
+
+						<!-- netbeans config files -->
+						<exclude>*.xml</exclude>
+
+						<!-- eclipse config files -->
+						<exclude>coding_conventions/**</exclude>
+						<exclude>.settings/**</exclude>
+						<exclude>.classpath</exclude>
+						<exclude>.project</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- reporting -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -146,15 +358,9 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-			</plugin>
-
-			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-doap-plugin</artifactId>
@@ -173,73 +379,129 @@
 						<homepage>${project.url}</homepage>
 						<created>2012-09-14</created>
 						<vendor>${project.organization.name}</vendor>
-
-
 						<description>${project.description}</description>
 						<shortdesc>${project.description}</shortdesc>
-
 						<category>content</category>
 						<programmingLanguage>Java</programmingLanguage>
-
-						<!-- <bugDatabase>${project.issueManagement.url}</bugDatabase> -->
-						<!-- <downloadPage>\${project.distributionManagement.downloadUrl}</downloadPage> -->
-						<!-- <license>\$\{project.licenses[0].url}</license> -->
+						<bugDatabase>${project.issueManagement.url}</bugDatabase>
+						<downloadPage>${project.distributionManagement.downloadUrl}</downloadPage>
+						<license>${project.licenses[0].url}</license>
 						<!-- <mailingList>${project.url}/mail-lists.html</mailingList> -->
 						<!-- <scmAnonymousConnection>${project.scm.connection}</scmAnonymousConnection> -->
-						<!-- <scmDeveloperConnection>${project.scm.developerConnection}</scmDeveloperConnection> -->
-
-
+						<!--<scmDeveloperConnection>${project.scm.developerConnection}</scmDeveloperConnection> -->
 					</doapOptions>
 
-
-
+					<asfExtOptions>
+						<charter>${project.description}</charter>
+						<!-- Default values -->
+						<pmc>${project.url}</pmc>
+						<name>${project.name}</name>
+					</asfExtOptions>
 				</configuration>
 			</plugin>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<configuration>
-					<artifactSet>
-						<!-- <exclude>org.hamcrest:hamcrest-all</exclude> -->
-						<!-- <exclude>junit:junit</exclude> -->
-					</artifactSet>
-					<transformers>
-						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-							<mainClass>zxmax.tools.timerreview.Main</mainClass>
-						</transformer>
-					</transformers>
-					<shadedArtifactAttached>true</shadedArtifactAttached>
-					<shadedClassifierName>with-deps</shadedClassifierName>
-
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>javancss-maven-plugin</artifactId>
 				<!-- Configuration must be replicated in reporting section -->
 			</plugin>
 		</plugins>
+
+
 	</build>
 
-	<!-- code metrics: to use the report goals -->
+
+
+
 	<reporting>
+
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${maven-project-info-reports-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>summary</report>
+							<report>license</report>
+							<report>modules</report>
+							<report>project-team</report>
+							<report>scm</report>
+							<report>issue-tracking</report>
+							<report>dependencies</report>
+							<report>dependency-convergence</report>
+							<report>plugins</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven-jxr-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>${maven-pmd-plugin.version}</version>
+				<configuration>
+					<failOnViolation>false</failOnViolation>
+					<verbose>true</verbose>
+					<!-- <xmlOutput>false</xmlOutput> -->
+					<linkXref>true</linkXref>
+					<minimumTokens>30</minimumTokens>
+					<!-- <findbugsXmlOutput>true</findbugsXmlOutput> <findbugsXmlWithMessages>true</findbugsXmlWithMessages> 
+						<effort>Max</effort> <threshold>Low</threshold> <failOnError>false</failOnError> -->
+
+					<rulesets>
+						<ruleset>rulesets/java/basic.xml</ruleset>
+						<ruleset>rulesets/java/controversial.xml</ruleset>
+						<ruleset>rulesets/java/unusedcode.xml</ruleset>
+						<ruleset>rulesets/java/unnecessary.xml</ruleset>
+
+						<!-- <ruleset>rulesets/android.xml</ruleset> -->
+						<!-- <ruleset>rulesets/basic.xml</ruleset> -->
+						<!-- <ruleset>rulesets/braces.xml</ruleset> -->
+						<!-- <ruleset>rulesets/clone.xml</ruleset> -->
+						<!-- <ruleset>rulesets/codesize.xml</ruleset> -->
+						<!-- <ruleset>rulesets/comments.xml</ruleset> -->
+						<!-- <ruleset>rulesets/controversial.xml</ruleset> -->
+						<!-- <ruleset>rulesets/coupling.xml</ruleset> -->
+						<!-- <ruleset>rulesets/design.xml</ruleset> -->
+						<!-- <ruleset>rulesets/empty.xml</ruleset> -->
+						<!-- <ruleset>rulesets/finalizers.xml</ruleset> -->
+						<!-- <ruleset>rulesets/imports.xml</ruleset> -->
+						<!-- <ruleset>rulesets/j2ee.xml</ruleset> -->
+						<!-- <ruleset>rulesets/javabeans.xml</ruleset> -->
+						<!-- <ruleset>rulesets/junit.xml</ruleset> -->
+						<!-- <ruleset>rulesets/logging-jakarta-commons.xml</ruleset> -->
+						<!-- <ruleset>rulesets/logging-java.xml</ruleset> -->
+						<!-- <ruleset>rulesets/migrating.xml</ruleset> -->
+						<!-- <ruleset>rulesets/migrating_to_13.xml</ruleset> -->
+						<!-- <ruleset>rulesets/migrating_to_14.xml</ruleset> -->
+						<!-- <ruleset>rulesets/migrating_to_15.xml</ruleset> -->
+						<!-- <ruleset>rulesets/migrating_to_junit4.xml</ruleset> -->
+						<!-- <ruleset>rulesets/naming.xml</ruleset> -->
+						<!-- <ruleset>rulesets/optimizations.xml</ruleset> -->
+						<!-- <ruleset>rulesets/strictexception.xml</ruleset> -->
+						<!-- <ruleset>rulesets/strings.xml</ruleset> -->
+						<!-- <ruleset>rulesets/sunsecure.xml</ruleset> -->
+						<!-- <ruleset>rulesets/typeresolution.xml</ruleset> -->
+						<!-- <ruleset>rulesets/unnecessary.xml</ruleset> -->
+						<!-- <ruleset>rulesets/unusedcode.xml</ruleset> -->
+					</rulesets>
+				</configuration>
 			</plugin>
 
 			<!-- FindBugs -->
@@ -261,6 +523,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>javancss-maven-plugin</artifactId>
+				<version>${javancss-maven-plugin.version}</version>
 				<!-- Configuration must be replicated in build section -->
 			</plugin>
 		</plugins>
@@ -291,149 +554,19 @@
 		</repository>
 	</repositories>
 
-	<dependencies>
-
-		<!-- UI -->
-		<dependency>
-			<groupId>com.miglayout</groupId>
-			<artifactId>miglayout-swing</artifactId>
-		</dependency>
-
-		<!-- ============== -->
-		<!-- for slf4j javaagent -->
-		<!-- ============== -->
-		<!-- http://www.slf4j.org/extensions.html#extended_logger -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.slf4j</groupId> -->
-		<!-- <artifactId>slf4j-ext</artifactId> -->
-		<!-- <version>1.7.2</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.log4j</groupId> -->
-		<!-- <artifactId>com.springsource.org.apache.log4j</artifactId> -->
-		<!-- <version>1.2.16</version> -->
-		<!-- </dependency> -->
-
-
-		<!-- ============== -->
-		<!-- AOP -->
-		<!-- ============== -->
-		<!-- java -javaagent:$LOCAL_MAVEN_REPO\org\springframework\spring-agent\2.5.6.SEC03\spring-agent-2.5.6.SEC03.jar -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework</groupId> -->
-		<!-- <artifactId>org.springframework.instrument</artifactId> -->
-		<!-- <version>${spring.version}</version> -->
-		<!-- </dependency> -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-
-		<!-- Spring AOP + AspectJ -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-		</dependency>
-
-		<!-- test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- data base -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
-
-		<!-- date / time management -->
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.jodatime</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- orm: jpa + hibernate -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-		</dependency>
-
-		<!-- java.lang.ClassFormatError: Absent Code attribute in method that is not native or abstract in class file 
-			javax/transaction/SystemException -->
-		<!-- I had the same error. I found that hibernate has the (Maven-) -->
-		<!-- transitive Dependency to ebj-persistence-*.jar. Additionally, I needed -->
-		<!-- javaee-api-5.jar in the classpath (for EJBException,...). Now, -->
-		<!-- ebj-persistence.jar is a subset of javaee-api-5.jar, and if they are -->
-		<!-- not compatible, a ClassFormatError raises when javaee-api-5.jar is -->
-		<!-- loaded first. I found, that the Apache-Implementation of javaee-api-5 -->
-		<!-- is compatible with Hibernate: -->
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.ejb</groupId>
-			<artifactId>ejb-api</artifactId>
-		</dependency>
-
-		<!-- logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
-
+			<dependency>
+				<groupId>zxmax.tools.timer-review</groupId>
+				<artifactId>timer-review-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>zxmax.tools.timer-review</groupId>
+				<artifactId>timer-review-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.miglayout</groupId>
 				<artifactId>miglayout-swing</artifactId>
@@ -466,11 +599,21 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-instrument</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjrt</artifactId>
 				<version>${aspectjrt.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjtools</artifactId>
+				<version>${aspectjrt.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
@@ -555,6 +698,25 @@
 				<artifactId>logback-classic</artifactId>
 				<version>${logback-classic.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>org.springframework.instrument</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<profiles>
+
+		<profile>
+			<id>nofoobar</id>
+			<!-- http://java.dzone.com/articles/maven-profile-best-practices -->
+			<activation>
+				<property>
+					<name>!foo.bar</name>
+				</property>
+			</activation>
+		</profile>
+	</profiles>
 </project>
