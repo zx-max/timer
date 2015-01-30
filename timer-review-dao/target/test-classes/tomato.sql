@@ -1,2 +1,0 @@
-insert into Tomato (ID, duration, focusOn, startTime, title) values (null, 5, 'prova', '2014-11-12 13:57:21.236', null);
-insert into Tomato (ID, duration, focusOn, startTime, title) values (null, null, 'prova 2', '2014-11-12 13:57:21.236', null);
