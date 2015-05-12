@@ -40,90 +40,113 @@ import org.slf4j.LoggerFactory;
  */
 public class HibernateBasicDaoImpl {
 
-    public static final Logger logger = LoggerFactory
-            .getLogger(HibernateBasicDaoImpl.class);
+	public static final Logger logger = LoggerFactory
+			.getLogger(HibernateBasicDaoImpl.class);
 
-    private final EntityManager entityManager;
+	private final EntityManager entityManager;
 
-    public HibernateBasicDaoImpl() {
-        
-        final EntityManagerFactory emFactory = Persistence
-                .createEntityManagerFactory("H2FileTomatoPU");
-        entityManager = emFactory.createEntityManager();
-                
-    }
+	public HibernateBasicDaoImpl() {
 
-    public HibernateBasicDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+		final EntityManagerFactory emFactory = Persistence
+				.createEntityManagerFactory("H2FileTomatoPU");
+		entityManager = emFactory.createEntityManager();
+	}
 
-    public Long count(String namedQuery) {
-        Query query = entityManager.createNamedQuery(namedQuery);
+	public HibernateBasicDaoImpl(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
-        return convertToLong(query.getSingleResult());
-    }
+	public Long count(String namedQuery) {
+		Query query = entityManager.createNamedQuery(namedQuery);
 
-    public org.hibernate.Session getSession() {
-        return ((org.hibernate.Session) entityManager.getDelegate());
-    }
+		return convertToLong(query.getSingleResult());
+	}
 
-    public <T> T load(Class<T> entityClass, Long id) {
-        T reference = entityManager.getReference(entityClass, id);
-        logger.debug("loaded [{}], with id:[{}]", new Object[] { entityClass,
-                id });
-        return reference;
+	public org.hibernate.Session getSession() {
+		return ((org.hibernate.Session) entityManager.getDelegate());
+	}
 
-    }
+	public <T> T load(Class<T> entityClass, Long id) {
+		T reference = entityManager.getReference(entityClass, id);
+		logger.debug("loaded [{}], with id:[{}]", new Object[] { entityClass,
+				id });
+		return reference;
 
-    public List namedQuery(String namedQuery) {
-        Query query = entityManager.createNamedQuery(namedQuery);
-        List list = query.getResultList();
-        return list;
-    }
+	}
 
-    public <T> T save(T entity) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(entity);
-            entityManager.flush();
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            logger.error("#catch_block#", e);
-        }
+	public List fetchFirstNRecordFromNamedQuery(String namedQuery, int maxResult) {
+		Query query = entityManager.createNamedQuery(namedQuery);
 
-        logger.debug("saved: " + entity.toString());
+		query.setFirstResult(0);
+		query.setMaxResults(maxResult);
 
-        return entity;
-    }
+		List list = query.getResultList();
+		return list;
+	}
 
-    private Long convertToLong(Object number) {
-        if (null == number) {
-            return 0L;
-        }
-        if (number instanceof Number) {
-            return ((Number) number).longValue();
-        }
-        if (number instanceof BigDecimal) {
-            return ((BigDecimal) number).longValue();
-        }
-        if (number instanceof BigInteger) {
-            return ((BigInteger) number).longValue();
-        }
-        if (number instanceof Integer) {
-            return ((Integer) number).longValue();
-        }
-        if (number instanceof Double) {
-            return ((Double) number).longValue();
-        }
-        if (number instanceof Float) {
-            return ((Float) number).longValue();
-        }
+	public List namedQuery(String namedQuery) {
+		Query query = entityManager.createNamedQuery(namedQuery);
+		List list = query.getResultList();
+		return list;
+	}
 
-        logger.warn(String.format("conversione in long cnon gestita per: [%s]",
-                number.toString()));
+	public List namedQuery(String namedQuery,
+			Object... parametersNamesAndValues) {
 
-        return Long.valueOf(number.toString());
-    }
+		Query query = entityManager.createNamedQuery(namedQuery);
+
+		for (int j = 0; j < parametersNamesAndValues.length; j = j + 2) {
+			query.setParameter((String) parametersNamesAndValues[j],
+					parametersNamesAndValues[j + 1]);
+		}
+
+		List list = query.getResultList();
+		return list;
+	}
+
+	public <T> T save(T entity) {
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.persist(entity);
+			entityManager.flush();
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			logger.error("#catch_block#", e);
+		}
+
+		logger.debug("saved: " + entity.toString());
+
+		return entity;
+	}
+
+	private Long convertToLong(Object number) {
+		if (null == number) {
+			return 0L;
+		}
+		if (number instanceof Number) {
+			return ((Number) number).longValue();
+		}
+		if (number instanceof BigDecimal) {
+			return ((BigDecimal) number).longValue();
+		}
+		if (number instanceof BigInteger) {
+			return ((BigInteger) number).longValue();
+		}
+		if (number instanceof Integer) {
+			return ((Integer) number).longValue();
+		}
+		if (number instanceof Double) {
+			return ((Double) number).longValue();
+		}
+		if (number instanceof Float) {
+			return ((Float) number).longValue();
+		}
+
+		logger.warn(String.format("conversione in long cnon gestita per: [%s]",
+				number.toString()));
+
+		return Long.valueOf(number.toString());
+	}
 
 }

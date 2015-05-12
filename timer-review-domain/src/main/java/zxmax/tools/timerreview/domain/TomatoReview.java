@@ -28,77 +28,80 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class TomatoReview {
 
-    @Id
-    @Column(name = "ID", unique = true, nullable = false, scale = 0)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@Column(name = "ID", unique = true, nullable = false, scale = 0)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @Column
-    private String problemsRaised;
+	@Column(nullable = true, length = 500)
+	@Size(min = 0, max = 500)
+	private String problemsRaised;
 
-    @Column
-    private String reallyDone;
+	@Column(nullable = true, length = 500)
+	@Size(min = 0, max = 500)
+	private String reallyDone;
 
-    @OneToOne
-    private Tomato tomato;
+	@OneToOne
+	private Tomato tomato;
 
-    public TomatoReview() {
-        super();
-    }
+	public TomatoReview() {
+		super();
+	}
 
-    public TomatoReview(Tomato tomato, String reallyDone, String problemsRaised) {
-        this.problemsRaised = problemsRaised;
-        this.reallyDone = reallyDone;
-        this.tomato = tomato;
-    }
+	public TomatoReview(Tomato tomato, String reallyDone, String problemsRaised) {
+		this.problemsRaised = problemsRaised;
+		this.reallyDone = reallyDone;
+		this.tomato = tomato;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getProblemsRaised() {
-        return problemsRaised;
-    }
+	public String getProblemsRaised() {
+		return problemsRaised;
+	}
 
-    public String getReallyDone() {
-        return reallyDone;
-    }
+	public String getReallyDone() {
+		return reallyDone;
+	}
 
-    public Tomato getTomato() {
-        return tomato;
-    }
+	public Tomato getTomato() {
+		return tomato;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setProblemsRaised(String problemsRaised) {
-        this.problemsRaised = problemsRaised;
-    }
+	public void setProblemsRaised(String problemsRaised) {
+		this.problemsRaised = problemsRaised;
+	}
 
-    public void setReallyDone(String reallyDone) {
-        this.reallyDone = reallyDone;
-    }
+	public void setReallyDone(String reallyDone) {
+		this.reallyDone = reallyDone;
+	}
 
-    public void setTomato(Tomato tomato) {
-        this.tomato = tomato;
-    }
+	public void setTomato(Tomato tomato) {
+		this.tomato = tomato;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("TomatoReview [id=");
-        builder.append(id);
-        builder.append(", problemsRaised=");
-        builder.append(problemsRaised);
-        builder.append(", reallyDone=");
-        builder.append(reallyDone);
-        builder.append("]");
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("TomatoReview [id=");
+		builder.append(id);
+		builder.append(", problemsRaised=");
+		builder.append(problemsRaised);
+		builder.append(", reallyDone=");
+		builder.append(reallyDone);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

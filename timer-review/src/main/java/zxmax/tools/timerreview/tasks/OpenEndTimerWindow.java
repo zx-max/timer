@@ -1,24 +1,18 @@
 /**
- * Timer Review  -  a personal time management tool
+ * This file is part of timer-review.
  *
+ * timer-review is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Copyright (C)  2012 - 2014 Parentini Massimiliano
- * Project home page: http://www.timer-review.net
- *
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
+ * timer-review is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * You should have received a copy of the GNU General Public License
+ * along with timer-review.  If not, see <http://www.gnu.org/licenses/>.
  */
 package zxmax.tools.timerreview.tasks;
 
@@ -37,34 +31,34 @@ import zxmax.tools.timerreview.serviceses.UINotificationService;
 
 public class OpenEndTimerWindow extends TimerTask implements Callable<JFrame> {
 
-    private static final Logger logger = LoggerFactory
-            .getLogger(OpenEndTimerWindow.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(OpenEndTimerWindow.class);
 
-    private Tomato tomato;
+	private Tomato tomato;
 
-    public OpenEndTimerWindow(Tomato tomato) {
-        this.tomato = tomato;
-    }
+	public OpenEndTimerWindow(Tomato tomato) {
+		this.tomato = tomato;
+	}
 
-    // Timer timer = new Timer();
-    // timer.schedule(task, delay);
-    @Override
-    public void run() {
-        openEndTimerWindow();
-    }
+	// Timer timer = new Timer();
+	// timer.schedule(task, delay);
+	@Override
+	public void run() {
+		openEndTimerWindow();
+	}
 
-    @Override
-    public JFrame call() throws Exception {
-        return openEndTimerWindow();
-    }
+	@Override
+	public JFrame call() throws Exception {
+		return openEndTimerWindow();
+	}
 
-    private JFrame openEndTimerWindow() {
-        UINotificationService uiNotificationService = (UINotificationService) Register
-                .get(UINotificationService.class);
-        uiNotificationService.setTomato(null);
-        EndTimerWindow endTimer = new EndTimerWindow(tomato);
-        logger.debug("open endTomato");
-        return endTimer;
-    }
+	private JFrame openEndTimerWindow() {
+		UINotificationService uiNotificationService = (UINotificationService) Register
+				.get(UINotificationService.class);
+		uiNotificationService.setTomato(null);
+		EndTimerWindow endTimer = new EndTimerWindow(tomato);
+		logger.debug("open endTomato");
+		return endTimer;
+	}
 
 }

@@ -26,53 +26,90 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.h2.tools.RunScript;
+import org.hibernate.jdbc.Work;
 import org.junit.Test;
 
 import zxmax.tools.timerreview.domain.Tomato;
 
 public class HibernateBasicDaoImplTest {
 
-    private HibernateBasicDaoImpl basicDao = null;
+	private HibernateBasicDaoImpl basicDao = null;
 
-    public HibernateBasicDaoImplTest() {
-        EntityManagerFactory emFactory = Persistence
-                .createEntityManagerFactory("H2MemTomatoPU");
-        EntityManager entityManager = emFactory.createEntityManager();
+	public HibernateBasicDaoImplTest() {
+		EntityManagerFactory emFactory = Persistence
+				.createEntityManagerFactory("H2MemTomatoPU");
+		EntityManager entityManager = emFactory.createEntityManager();
 
-        basicDao = new HibernateBasicDaoImpl(entityManager);
-    }
+		basicDao = new HibernateBasicDaoImpl(entityManager);
 
-    @Test
-    public void testCount() {
-        Long count = basicDao.count("Tomato.count");
-        assertTrue(2 == count);
-    }
+		Work work = new Work() {
+			@Override
+			public void execute(Connection connection) throws SQLException {
 
-    @Test
-    public void testNamedQueryTomatoReviewList() {
-        List list = basicDao.namedQuery("TomatoReview.list");
-        assertTrue(0 == list.size());
-    }
+				try {
+					RunScript.execute(connection, new FileReader(new File(
+							"src/test/resources/test_data.sql")));
+				} catch (FileNotFoundException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		};
 
-    @Test
-    public void testLoad() {
-        Tomato tomato = basicDao.load(Tomato.class, 2L);
-        assertNotNull(tomato);
-        assertTrue(tomato.getId() == 2L);
-    }
+		basicDao.getSession().doWork(work);
 
-    @Test
-    public void testSave() {
-        Tomato entity = new Tomato("prova");
-        assertEquals(null, entity.getId());
-        basicDao.save(entity);
-        assertEquals(Long.valueOf(3L), entity.getId());
-    }
+	}
+
+	@Test
+	public void testCount() {
+		Long count = basicDao.count("Tomato.count");
+		assertTrue(3 == count);
+	}
+
+	@Test
+	public void testNamedQueryTomatoList() {
+		List list = basicDao.namedQuery("TomatoDaoImpl.list");
+		assertTrue("list.size(): " + list.size(), 3 == list.size());
+	}
+
+	@Test
+	public void testNamedQueryTomatoReviewList() {
+		List list = basicDao.namedQuery("TomatoReview.list");
+		assertTrue("list.size(): " + list.size(), 3 == list.size());
+	}
+
+	@Test
+	public void testLoad() {
+		Tomato tomato = basicDao.load(Tomato.class, 2L);
+		assertNotNull(tomato);
+		assertTrue(tomato.getId() == 2L);
+	}
+
+	@Test
+	public void testFindByExample() {
+
+		List list = basicDao.namedQuery("ExistTomatoReviewForTomato",
+				"tomatoId", 3L);
+		assertEquals(1, list.size());
+	}
+
+	@Test
+	public void testSave() {
+		Tomato entity = new Tomato("prova");
+		assertEquals(null, entity.getId());
+		basicDao.save(entity);
+		assertTrue(entity.getId() > 0);
+	}
 
 }

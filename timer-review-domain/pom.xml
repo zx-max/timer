@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>zxmax.tools.timer-review</groupId>
 		<artifactId>timer-review-root-pom</artifactId>
-		<version>0.0.5-SNAPSHOT</version>
+		<version>0.0.5</version>
 	</parent>
 
 
@@ -25,22 +25,21 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- data base -->
-			<dependency>
-				<groupId>com.h2database</groupId>
-				<artifactId>h2</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
 
 		<!-- date / time management -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.jodatime</artifactId>
-			<scope>runtime</scope>
+			<artifactId>usertype.core</artifactId>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>

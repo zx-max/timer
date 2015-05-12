@@ -26,11 +26,11 @@ import org.junit.Test;
 
 public class ProveTest {
 
-    @Test
-    public void test() {
-        System.out.println(String.format(
-                "conversione in long cnon gestita per: [%s]", "ciao"));
-        // fail("Not yet implemented");
-    }
+	@Test
+	public void test() {
+		System.out.println(String.format(
+				"conversione in long cnon gestita per: [%s]", "ciao"));
+		// fail("Not yet implemented");
+	}
 
 }

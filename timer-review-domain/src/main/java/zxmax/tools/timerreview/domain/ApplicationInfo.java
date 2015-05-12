@@ -24,20 +24,20 @@ package zxmax.tools.timerreview.domain;
 
 public class ApplicationInfo {
 
-    public static final String REPORT_LOGGER = "TimerReviewReportLogger";
-    
-    private String implementationVersion = null;
+	public static final String REPORT_LOGGER = "TimerReviewReportLogger";
 
-    public ApplicationInfo(String _implementationVersion) {
-        implementationVersion = _implementationVersion;
-    }
+	private String implementationVersion = null;
 
-    public String getImplementationVersion() {
-        return implementationVersion;
-    }
+	public ApplicationInfo(String _implementationVersion) {
+		implementationVersion = _implementationVersion;
+	}
 
-    public void setImplementationVersion(String implementationVersion) {
-        this.implementationVersion = implementationVersion;
-    }
+	public String getImplementationVersion() {
+		return implementationVersion;
+	}
+
+	public void setImplementationVersion(String implementationVersion) {
+		this.implementationVersion = implementationVersion;
+	}
 
 }

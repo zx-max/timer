@@ -5,7 +5,16 @@
 	http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
 
 
-
+	<named-query name="ExistTomatoReviewForTomato">
+		<description>A review for a tomato has aready been stored.</description>
+		<query>
+		select tr 
+		FROM TomatoReview tr 
+		join fetch tr.tomato
+		where 
+		tr.tomato.id = :tomatoId
+		</query>
+	</named-query>
 	<named-query name="TomatoReview.list">
 		<description>list all tomato review. Show firstly last created.</description>
 		<query>

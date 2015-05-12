@@ -25,12 +25,15 @@
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.max_fetch_depth" value="3" />
 			<property name="hibernate.bytecode.use_reflection_optimizer" value="false" />
-			<property name="hibernate.connection.url" value="jdbc:h2:file:~/.timer-review/db" />
+			<property name="hibernate.connection.url" value="jdbc:h2:file:~/.timer-review-005/db" />
 			<property name="hibernate.connection.username" value="sa" />
 			<property name="hibernate.connection.password" value="" />
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="jadira.usertype.autoRegisterUserTypes" value="true"/>
+			<property name="jadira.usertype.databaseZone" value="jvm"/>
+			<property name="jadira.usertype.javaZone" value="jvm"/>
 		</properties>
 	</persistence-unit>
 	
@@ -50,7 +53,10 @@
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
-			<property name="hibernate.hbm2ddl.import_files" value="tomato.sql" />			
+			<property name="hibernate.hbm2ddl.import_files" value="tomato.sql" />
+			<property name="jadira.usertype.autoRegisterUserTypes" value="true"/>
+			<property name="jadira.usertype.databaseZone" value="jvm"/>
+			<property name="jadira.usertype.javaZone" value="jvm"/>	
 		</properties>
 		
 	</persistence-unit>

@@ -1,25 +1,20 @@
 /**
- * Timer Review  -  a personal time management tool
+ * This file is part of timer-review.
  *
+ * timer-review is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * Copyright (C)  2012 - 2014 Parentini Massimiliano
- * Project home page: http://www.timer-review.net
- *
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
+ * timer-review is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * You should have received a copy of the GNU General Public License
+ * along with timer-review.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package zxmax.tools.timerreview;
 
 import java.io.File;
@@ -39,129 +34,131 @@ import org.slf4j.LoggerFactory;
 
 public class PropertyLoader {
 
-    // XXX: cosa cambia tra i due ??
-    // ClassLoader loader = ClassLoader.getSystemClassLoader();
-    // ClassLoader loader = Thread.currentThread().getContextClassLoader();
-    public static final Logger logger = LoggerFactory
-            .getLogger(PropertyLoader.class);
+	// XXX: cosa cambia tra i due ??
+	// ClassLoader loader = ClassLoader.getSystemClassLoader();
+	// ClassLoader loader = Thread.currentThread().getContextClassLoader();
+	public static final Logger logger = LoggerFactory
+			.getLogger(PropertyLoader.class);
 
-    private static Properties props = new Properties();
-   // public static final String TIMER_REVIEW_PROP_FILE = "timer-review.properties";
+	private static Properties props = new Properties();
 
-    public static String dump() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PropertyLoader [toString()=");
-        builder.append(props.toString());
-        builder.append("]");
-        return builder.toString();
-    }
+	// public static final String TIMER_REVIEW_PROP_FILE =
+	// "timer-review.properties";
 
-    public static String getProperty(String key) {
-        return props.getProperty(key);
-    }
+	public static String dump() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PropertyLoader [toString()=");
+		builder.append(props.toString());
+		builder.append("]");
+		return builder.toString();
+	}
 
-    /**
-     *
-     * @param propsName
-     *            properties file name from classpath
-     * @return
-     */
-    public static void loadFromClassPathAsInputStream(String propsName) {
-        InputStream in = null;
-        try {
-            ClassLoader loader = ClassLoader.getSystemClassLoader();
+	public static String getProperty(String key) {
+		return props.getProperty(key);
+	}
 
-            in = loader.getResourceAsStream(propsName);
-            if (in == null) {
-                throw new MissingResourceException(String.format(
-                        "file: [%s] not found.", propsName), null, null);
-            }
+	/**
+	 *
+	 * @param propsName
+	 *            properties file name from classpath
+	 * @return
+	 */
+	public static void loadFromClassPathAsInputStream(String propsName) {
+		InputStream in = null;
+		try {
+			ClassLoader loader = ClassLoader.getSystemClassLoader();
 
-            try {
-                props.load(in);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (Throwable e) {
-                    logger.error(null, e);
-                }
-            }
-        }
-    }
+			in = loader.getResourceAsStream(propsName);
+			if (in == null) {
+				throw new MissingResourceException(String.format(
+						"file: [%s] not found.", propsName), null, null);
+			}
 
-    // http://javahowto.blogspot.it/2006/05/debug-java-util-missingresourceexcepti.html
-    // ResourceBundle.getBundle() is really intended to look up translatable
-    // resources. In the example you give (connections.properties), it sounds
-    // like you're using it as a general mechanism for loading properties files
-    // from the classpath.
-    //
-    // Although that works, it's relatively inefficent (it first tries to find
-    // locale specific versions of the properties file, which incurs a
-    // classloading overhead, and then must create a PropertiesResourceBundle
-    // instance for your properties file). If you're loading a nontranslated
-    // file, you can achieve the same effect using something like:
-    //
-    //
-    // URL resUrl = myclass.getResource( "/org/acme/connection.properties" );
-    // Properties props = new Properties();
-    // properties.load( resUrl.openStream() );
+			try {
+				props.load(in);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (Throwable e) {
+					logger.error(null, e);
+				}
+			}
+		}
+	}
 
-    // Brian, thanks for the comments. I agree ResourceBundle should be used for
-    // i18n purpose. But I also found it's often used (misused) for general
-    // properties-loading. Maybe I should change the example
-    // connection.properties to messages_en.properties.
+	// http://javahowto.blogspot.it/2006/05/debug-java-util-missingresourceexcepti.html
+	// ResourceBundle.getBundle() is really intended to look up translatable
+	// resources. In the example you give (connections.properties), it sounds
+	// like you're using it as a general mechanism for loading properties files
+	// from the classpath.
+	//
+	// Although that works, it's relatively inefficent (it first tries to find
+	// locale specific versions of the properties file, which incurs a
+	// classloading overhead, and then must create a PropertiesResourceBundle
+	// instance for your properties file). If you're loading a nontranslated
+	// file, you can achieve the same effect using something like:
+	//
+	//
+	// URL resUrl = myclass.getResource( "/org/acme/connection.properties" );
+	// Properties props = new Properties();
+	// properties.load( resUrl.openStream() );
 
-    public static void loadFromClassPathAsResourceBundle(String propsFile) {
-        propsFile = propsFile.replace('/', '.');
-        ClassLoader loader = ClassLoader.getSystemClassLoader();
-        // Throws MissingResourceException on lookup failures:
-        final ResourceBundle rb = ResourceBundle.getBundle(propsFile,
-                Locale.getDefault(), loader);
+	// Brian, thanks for the comments. I agree ResourceBundle should be used for
+	// i18n purpose. But I also found it's often used (misused) for general
+	// properties-loading. Maybe I should change the example
+	// connection.properties to messages_en.properties.
 
-        for (Enumeration<String> keys = rb.getKeys(); keys.hasMoreElements();) {
-            final String key = keys.nextElement();
-            final String value = rb.getString(key);
+	public static void loadFromClassPathAsResourceBundle(String propsFile) {
+		propsFile = propsFile.replace('/', '.');
+		ClassLoader loader = ClassLoader.getSystemClassLoader();
+		// Throws MissingResourceException on lookup failures:
+		final ResourceBundle rb = ResourceBundle.getBundle(propsFile,
+				Locale.getDefault(), loader);
 
-            props.put(key, value);
-        }
-    }
+		for (Enumeration<String> keys = rb.getKeys(); keys.hasMoreElements();) {
+			final String key = keys.nextElement();
+			final String value = rb.getString(key);
 
-    public static URL loadFromClassPathAsURL(String name) {
-        URL resource = PropertyLoader.class.getClassLoader().getResource(name);
-        return resource;
-    }
+			props.put(key, value);
+		}
+	}
 
-    /**
-     *
-     * @param propsFile
-     *            from file system
-     * @return
-     */
-    public static void loadFromFileSystem(File propsFile) {
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(propsFile);
+	public static URL loadFromClassPathAsURL(String name) {
+		URL resource = PropertyLoader.class.getClassLoader().getResource(name);
+		return resource;
+	}
 
-            try {
-                props.load(fis);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+	/**
+	 *
+	 * @param propsFile
+	 *            from file system
+	 * @return
+	 */
+	public static void loadFromFileSystem(File propsFile) {
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream(propsFile);
 
-        } catch (FileNotFoundException e) {
-            throw new MissingResourceException(e.getMessage(), null, null);
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (Throwable e) {
-                    logger.error(null, e);
-                }
-            }
-        }
-    }
+			try {
+				props.load(fis);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
+		} catch (FileNotFoundException e) {
+			throw new MissingResourceException(e.getMessage(), null, null);
+		} finally {
+			if (fis != null) {
+				try {
+					fis.close();
+				} catch (Throwable e) {
+					logger.error(null, e);
+				}
+			}
+		}
+	}
 }

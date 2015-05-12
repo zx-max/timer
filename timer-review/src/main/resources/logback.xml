@@ -2,7 +2,7 @@
 
 <configuration>
 	<appender name="TimerReviewReportAppender" class="ch.qos.logback.core.FileAppender">
-		<file>${user.home}/.timer-review/logs/report.txt</file>
+		<file>${user.home}/.timer-review-005/logs/report.txt</file>
 		<append>true</append>
 		<encoder>
 			<pattern>%msg%n</pattern>
@@ -15,7 +15,7 @@
 		</encoder>
 	</appender>	
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${user.home}/.timer-review/logs/timer-review.log</file>
+		<file>${user.home}/.timer-review-005/logs/timer-review.log</file>
 		<append>true</append>
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
