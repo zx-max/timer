@@ -258,6 +258,7 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<configuration>
 					<locales>it,en</locales>
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 					<reportPlugins>
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
