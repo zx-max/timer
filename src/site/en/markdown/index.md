@@ -7,7 +7,7 @@ write what you want to do and set a time limit.
 
 #### [countdown][themes]
 
-[![countdown](images/tray_icon_ubuntu.png)][themes]
+[![countdown](images/icon_tray_message.png)][themes]
 
 ... time is passing ...
 
@@ -19,7 +19,7 @@ write what you want to do and set a time limit.
 timer ended, what about you ?
 
 
-[themes]: /
+[themes]: /en/
 
 
 ---
