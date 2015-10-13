@@ -11,6 +11,12 @@ Dal men&#x00F9; contestuale dell' icona di Timer Review presente nella sezione t
 
 ok ? 
 
+PS:
+
+Il report delle proprie annotazioni sui timer viene fatto utilizzando il formato [Emacs OrgMode](http://orgmode.org/) , a me piace un sacco !!
+![info window](images/report_in_emacs_org_mode.jpg)
+
+
 
 :-)
 

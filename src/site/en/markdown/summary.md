@@ -8,3 +8,10 @@ Here you have the path to the text file with your own notes.
 
 
 Enjoy :-)
+
+PS:
+
+the report about your own annotation on timers use [Emacs OrgMode](http://orgmode.org/) format.
+This feature is very nice for me !!
+
+![info window](images/report_in_emacs_org_mode.jpg)
