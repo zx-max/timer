@@ -29,30 +29,30 @@ import zxmax.tools.timerreview.serviceses.UINotificationService;
 
 public class TrayIconMouseMotionListener implements MouseMotionListener {
 
-	private TrayIcon trayIcon;
+    private TrayIcon trayIcon;
 
-	public static final Logger logger = LoggerFactory
-			.getLogger(TrayIconMouseMotionListener.class);
+    public static final Logger logger = LoggerFactory
+            .getLogger(TrayIconMouseMotionListener.class);
 
-	public TrayIconMouseMotionListener(TrayIcon trayIcon) {
-		this.trayIcon = trayIcon;
-	}
+    public TrayIconMouseMotionListener(TrayIcon trayIcon) {
+        this.trayIcon = trayIcon;
+    }
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		UINotificationService uiNotificationService = (UINotificationService) Register
-				.get(UINotificationService.class);
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        UINotificationService uiNotificationService = (UINotificationService) Register
+                .get(UINotificationService.class);
 
-		if (null != uiNotificationService) {
-			trayIcon.setToolTip(uiNotificationService.getToolTipMessage());
-		} else {
-			logger.debug("uiNotificationService is null.");
-		}
-	}
+        if (null != uiNotificationService) {
+            trayIcon.setToolTip(uiNotificationService.getToolTipMessage());
+        } else {
+            logger.debug("uiNotificationService is null.");
+        }
+    }
 
 }

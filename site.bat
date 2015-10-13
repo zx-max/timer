@@ -21,7 +21,9 @@
 @REM <http://www.gnu.org/licenses/gpl-3.0.html>.
 @REM
 
-rmdir /S /Q D:\Users\eul0963\Documents\sts_wks\timer-review-root\target
+set TIMER_HOME=D:\Users\eul0963\Documents\sts_wks\timer
+
+rmdir /S /Q %TIMER_HOME%\target
 rmdir /S /Q D:\servers\Apache24\htdocs\staging
 call mvn site site:stage
-ROBOCOPY /E /COPYALL D:\Users\eul0963\Documents\sts_wks\timer-review-root\target\staging  D:\servers\Apache24\htdocs\staging
+ROBOCOPY /E /COPYALL %TIMER_HOME%\target\staging  D:\servers\Apache24\htdocs\staging

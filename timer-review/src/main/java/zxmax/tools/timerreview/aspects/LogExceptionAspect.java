@@ -27,23 +27,23 @@ import org.slf4j.LoggerFactory;
 @Aspect
 public class LogExceptionAspect {
 
-	public static final Logger logger = LoggerFactory
-			.getLogger(LogExceptionAspect.class);
+    public static final Logger logger = LoggerFactory
+            .getLogger(LogExceptionAspect.class);
 
-	public static final String CATCH_BLOCK = "#catch_block#";
+    public static final String CATCH_BLOCK = "#catch_block#";
 
-	@Around("methodsToBeProfiled()")
-	public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
-		try {
-			logger.debug(joinPoint.toLongString());
-			return joinPoint.proceed();
-		} catch (Exception e) {
-			logger.error(LogExceptionAspect.CATCH_BLOCK, e);
-			return null;
-		}
-	}
+    @Around("methodsToBeProfiled()")
+    public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
+        try {
+            logger.debug(joinPoint.toLongString());
+            return joinPoint.proceed();
+        } catch (Exception e) {
+            logger.error(LogExceptionAspect.CATCH_BLOCK, e);
+            return null;
+        }
+    }
 
-	@Pointcut("execution(public * zxmax.tools.timerreview.tasks.*.*(..))")
-	public void methodsToBeProfiled() {
-	}
+    @Pointcut("execution(public * zxmax.tools.timerreview.tasks.*.*(..))")
+    public void methodsToBeProfiled() {
+    }
 }

@@ -17,29 +17,29 @@
 package zxmax.tools.timerreview;
 
 public class JustOneTest {
-	public static void main(String[] args) {
-		new JustOneTest().test();
-	}
+    public static void main(String[] args) {
+        new JustOneTest().test();
+    }
 
-	void test() {
-		JustOneLock ua = new JustOneLock("JustOneId");
+    void test() {
+        JustOneLock ua = new JustOneLock("JustOneId");
 
-		if (ua.isAppActive()) {
-			System.out.println("Already active.");
-			System.exit(1);
-		} else {
-			System.out.println("NOT already active.");
-			try {
-				while (true) {
-					try {
-						System.out.print(".");
-						Thread.sleep(5 * 60);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			} catch (Exception e) {
-			}
-		}
-	}
+        if (ua.isAppActive()) {
+            System.out.println("Already active.");
+            System.exit(1);
+        } else {
+            System.out.println("NOT already active.");
+            try {
+                while (true) {
+                    try {
+                        System.out.print(".");
+                        Thread.sleep(5 * 60);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
 }

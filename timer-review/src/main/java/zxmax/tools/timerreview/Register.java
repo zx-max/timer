@@ -21,17 +21,17 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class Register {
-	private static Map<Class, Object> registry = new ConcurrentHashMap<Class, Object>();
+    private static Map<Class, Object> registry = new ConcurrentHashMap<Class, Object>();
 
-	private Register() {
-	}
+    private Register() {
+    }
 
-	public static Object get(final Class key) {
-		return registry.get(key);
-	}
+    public static Object get(final Class key) {
+        return registry.get(key);
+    }
 
-	public static void put(final Class key, final Object value) {
-		registry.put(key, value);
-	}
+    public static void put(final Class key, final Object value) {
+        registry.put(key, value);
+    }
 
 }

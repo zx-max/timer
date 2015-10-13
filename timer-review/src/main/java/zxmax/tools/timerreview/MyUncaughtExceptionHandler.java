@@ -23,28 +23,28 @@ import org.slf4j.Logger;
 
 public class MyUncaughtExceptionHandler implements UncaughtExceptionHandler {
 
-	private Logger logger = null;
+    private Logger logger = null;
 
-	public MyUncaughtExceptionHandler(Logger logger) {
-		this.logger = logger;
-	}
+    public MyUncaughtExceptionHandler(Logger logger) {
+        this.logger = logger;
+    }
 
-	@Override
-	public void uncaughtException(Thread t, Throwable e) {
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
 
-		// if (e instanceof IllegalStateException
-		// || e instanceof PersistenceException) {
-		// String message = I18N.getLabel(this.getClass(),
-		// "another.instance.already.open");
-		// JOptionPane.showOptionDialog(null, message,
-		// I18N.getLabel(this.getClass(), "error.box.title"),
-		// JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-		// null, new Object[] {}, null);
-		// } else {
-		// logger.error("", e);
-		// }
+        // if (e instanceof IllegalStateException
+        // || e instanceof PersistenceException) {
+        // String message = I18N.getLabel(this.getClass(),
+        // "another.instance.already.open");
+        // JOptionPane.showOptionDialog(null, message,
+        // I18N.getLabel(this.getClass(), "error.box.title"),
+        // JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+        // null, new Object[] {}, null);
+        // } else {
+        // logger.error("", e);
+        // }
 
-		logger.error("", e);
-	}
+        logger.error("", e);
+    }
 
 }

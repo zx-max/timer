@@ -25,33 +25,33 @@ import zxmax.tools.timerreview.gui.StartTimerWindow;
 
 public class TomatoValidator extends ObjectValidator {
 
-	public TomatoValidator() {
-	}
+    public TomatoValidator() {
+    }
 
-	List<String> validate(Object objectToValidate) {
-		List<String> errorMessages = new ArrayList<String>();
+    List<String> validate(Object objectToValidate) {
+        List<String> errorMessages = new ArrayList<String>();
 
-		if (objectToValidate instanceof Tomato) {
+        if (objectToValidate instanceof Tomato) {
 
-			Tomato tomato = (Tomato) objectToValidate;
+            Tomato tomato = (Tomato) objectToValidate;
 
-			if (tomato.getTitle() != null && tomato.getTitle().length() > 80) {
-				errorMessages.add(I18N.getLabel(StartTimerWindow.class,
-						"tomato.title.longer.than.max"));
-			}
+            if (tomato.getTitle() != null && tomato.getTitle().length() > 80) {
+                errorMessages.add(I18N.getLabel(StartTimerWindow.class,
+                        "tomato.title.longer.than.max"));
+            }
 
-			if (tomato.getFocusOn() != null
-					&& tomato.getFocusOn().length() > 500) {
-				errorMessages.add(I18N.getLabel(StartTimerWindow.class,
-						"tomato.focusOn.longer.than.max"));
-			}
+            if (tomato.getFocusOn() != null
+                    && tomato.getFocusOn().length() > 500) {
+                errorMessages.add(I18N.getLabel(StartTimerWindow.class,
+                        "tomato.focusOn.longer.than.max"));
+            }
 
-			if (tomato.getDuration() < 1 || tomato.getDuration() > 60) {
-				errorMessages.add(I18N.getLabel(StartTimerWindow.class,
-						"tomato.duration.out.of.range"));
-			}
+            if (tomato.getDuration() < 1 || tomato.getDuration() > 60) {
+                errorMessages.add(I18N.getLabel(StartTimerWindow.class,
+                        "tomato.duration.out.of.range"));
+            }
 
-		}
-		return errorMessages;
-	}
+        }
+        return errorMessages;
+    }
 }

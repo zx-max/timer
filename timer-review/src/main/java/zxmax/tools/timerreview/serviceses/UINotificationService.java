@@ -24,45 +24,45 @@ import zxmax.tools.timerreview.domain.Tomato;
 
 public class UINotificationService {
 
-	private static final String TIMER_ENDED_LABEL = "timer.ended";
-	private Tomato tomato = null;
+    private static final String TIMER_ENDED_LABEL = "timer.ended";
+    private Tomato tomato = null;
 
-	public UINotificationService(Tomato tomato) {
-		super();
-		setTomato(tomato);
-	}
+    public UINotificationService(Tomato tomato) {
+        super();
+        setTomato(tomato);
+    }
 
-	public String getToolTipMessage() {
-		if (null != getTomato()) {
+    public String getToolTipMessage() {
+        if (null != getTomato()) {
 
-			LocalDateTime startTime = getTomato().getStartTime();
-			LocalDateTime endTimer = startTime.plusMinutes(getTomato()
-					.getDuration());
-			LocalDateTime now = new LocalDateTime();
+            LocalDateTime startTime = getTomato().getStartTime();
+            LocalDateTime endTimer = startTime.plusMinutes(getTomato()
+                    .getDuration());
+            LocalDateTime now = new LocalDateTime();
 
-			final int minRemaining = Minutes.minutesBetween(now, endTimer)
-					.getMinutes() + 1;
+            final int minRemaining = Minutes.minutesBetween(now, endTimer)
+                    .getMinutes() + 1;
 
-			String timeLeft = "min: " + minRemaining;
+            String timeLeft = "min: " + minRemaining;
 
-			String toolTipMessage = timeLeft + " / "
-					+ System.getProperty("line.separator")
-					+ getTomato().getTitle() + " / "
-					+ System.getProperty("line.separator")
-					+ getTomato().getFocusOn();
+            String toolTipMessage = timeLeft + " / "
+                    + System.getProperty("line.separator")
+                    + getTomato().getTitle() + " / "
+                    + System.getProperty("line.separator")
+                    + getTomato().getFocusOn();
 
-			return toolTipMessage;
+            return toolTipMessage;
 
-		} else {
-			return I18N.getLabel(this.getClass(), TIMER_ENDED_LABEL);
-		}
-	}
+        } else {
+            return I18N.getLabel(this.getClass(), TIMER_ENDED_LABEL);
+        }
+    }
 
-	public Tomato getTomato() {
-		return tomato;
-	}
+    public Tomato getTomato() {
+        return tomato;
+    }
 
-	public void setTomato(Tomato tomato) {
-		this.tomato = tomato;
-	}
+    public void setTomato(Tomato tomato) {
+        this.tomato = tomato;
+    }
 }

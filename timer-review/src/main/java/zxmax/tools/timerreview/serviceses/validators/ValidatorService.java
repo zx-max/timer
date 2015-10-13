@@ -20,27 +20,27 @@ import java.util.List;
 import java.util.Map;
 
 public class ValidatorService {
-	// private List<ObjectValidator> validators = null;
-	private Map<Class, ObjectValidator> commands = null;
+    // private List<ObjectValidator> validators = null;
+    private Map<Class, ObjectValidator> commands = null;
 
-	public ValidatorService(Map<Class, ObjectValidator> commands) {
-		this.commands = commands;
-	}
+    public ValidatorService(Map<Class, ObjectValidator> commands) {
+        this.commands = commands;
+    }
 
-	public List<String> validate(Object objectToValidate) {
+    public List<String> validate(Object objectToValidate) {
 
-		ObjectValidator objectValidator = commands.get(objectToValidate
-				.getClass());
-		List<String> errorMessages = objectValidator.validate(objectToValidate);
+        ObjectValidator objectValidator = commands.get(objectToValidate
+                .getClass());
+        List<String> errorMessages = objectValidator.validate(objectToValidate);
 
-		// for (ObjectValidator validator : validators) {
-		// List<String> messages = validator
-		// .validate((Tomato) objectToValidate);
-		//
-		// errorMessages.addAll(messages);
-		//
-		// }
+        // for (ObjectValidator validator : validators) {
+        // List<String> messages = validator
+        // .validate((Tomato) objectToValidate);
+        //
+        // errorMessages.addAll(messages);
+        //
+        // }
 
-		return errorMessages;
-	}
+        return errorMessages;
+    }
 }

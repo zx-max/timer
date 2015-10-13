@@ -14,12 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with timer-review.  If not, see <http://www.gnu.org/licenses/>.
  */
-package zxmax.tools.timerreview.serviceses.validators;
+package zxmax.tools.timerreview.gui;
 
-import java.util.List;
+public class OrgModeDecorator {
 
-public abstract class ObjectValidator {
+    public static final String ORG_MODE_LEVEL_1 = "* ";
+    public static final String ORG_MODE_LEVEL_2 = "** ";
 
-    abstract List<String> validate(Object tomato);
-
+    private OrgModeDecorator() {
+    }
 }

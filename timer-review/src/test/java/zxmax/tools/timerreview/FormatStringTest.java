@@ -22,11 +22,11 @@ import org.junit.Test;
 
 public class FormatStringTest {
 
-	@Test
-	public void test() {
-		String formatedString = String.format("%s: [%s].",
-				"resource.not.found", "path");
-		assertEquals(formatedString, "resource.not.found: [path].");
-	}
+    @Test
+    public void test() {
+        String formatedString = String.format("%s: [%s].",
+                "resource.not.found", "path");
+        assertEquals(formatedString, "resource.not.found: [path].");
+    }
 
 }

@@ -31,34 +31,35 @@ import zxmax.tools.timerreview.serviceses.UINotificationService;
 
 public class OpenEndTimerWindow extends TimerTask implements Callable<JFrame> {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(OpenEndTimerWindow.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(OpenEndTimerWindow.class);
 
-	private Tomato tomato;
+    private Tomato tomato;
 
-	public OpenEndTimerWindow(Tomato tomato) {
-		this.tomato = tomato;
-	}
+    public OpenEndTimerWindow(Tomato tomato) {
+        this.tomato = tomato;
+    }
 
-	// Timer timer = new Timer();
-	// timer.schedule(task, delay);
-	@Override
-	public void run() {
-		openEndTimerWindow();
-	}
+    // Timer timer = new Timer();
+    // timer.schedule(task, delay);
+    @Override
+    public void run() {
+        openEndTimerWindow();
+    }
 
-	@Override
-	public JFrame call() throws Exception {
-		return openEndTimerWindow();
-	}
+    @Override
+    public JFrame call() throws Exception {
+        return openEndTimerWindow();
+    }
 
-	private JFrame openEndTimerWindow() {
-		UINotificationService uiNotificationService = (UINotificationService) Register
-				.get(UINotificationService.class);
-		uiNotificationService.setTomato(null);
-		EndTimerWindow endTimer = new EndTimerWindow(tomato);
-		logger.debug("open endTomato");
-		return endTimer;
-	}
+    private JFrame openEndTimerWindow() {
+        UINotificationService uiNotificationService = (UINotificationService) Register
+                .get(UINotificationService.class);
+        uiNotificationService.setTomato(null);
+        EndTimerWindow endTimer = new EndTimerWindow(tomato);
+        endTimer.createBufferStrategy(1);
+        logger.debug("open endTomato");
+        return endTimer;
+    }
 
 }

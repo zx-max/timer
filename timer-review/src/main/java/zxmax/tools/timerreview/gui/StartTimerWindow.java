@@ -61,227 +61,235 @@ import zxmax.tools.timerreview.tasks.OpenEndTimerWindow;
 
 public class StartTimerWindow extends JFrame {
 
-	private static final String TAB_NEW_TIMER_LABEL = "tab.new.timer.label";
+    private static final String TAB_NEW_TIMER_LABEL = "tab.new.timer.label";
 
-	private static final String TAB_TIMER_LIST_LABEL = "tab.timer.list.label";
+    private static final String TAB_TIMER_LIST_LABEL = "tab.timer.list.label";
 
-	private static final String TAB_NEW_TIMER_TITLE_LABEL = "tab.new.timer.title.label";
+    private static final String TAB_NEW_TIMER_TITLE_LABEL = "tab.new.timer.title.label";
 
-	private static final String TAB_NEW_TIMER_DURATA_LABEL = "tab.new.timer.dirata.label";
-	private static final String TAB_NEW_TIMER_DURATA_TOOL_TIP = "tab.new.timer.durata.tootip";
+    private static final String TAB_NEW_TIMER_DURATA_LABEL = "tab.new.timer.dirata.label";
+    private static final String TAB_NEW_TIMER_DURATA_TOOL_TIP = "tab.new.timer.durata.tootip";
 
-	private static final String TAB_NEW_TIMER_FOCUS_ON_LABEL = "tab.new.timer.focus.on.label";
-	private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP = "tab.new.timer.focus.on.textarea.tooltip";
-	private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT = "tab.new.timer.focus.on.textarea.text";
-	private static final String TAB_NEW_TIMER_BTN_START_LABEL = "tab.new.timer.btn.start.label";
+    private static final String TAB_NEW_TIMER_FOCUS_ON_LABEL = "tab.new.timer.focus.on.label";
+    private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP = "tab.new.timer.focus.on.textarea.tooltip";
+    private static final String TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT = "tab.new.timer.focus.on.textarea.text";
+    private static final String TAB_NEW_TIMER_BTN_START_LABEL = "tab.new.timer.btn.start.label";
 
-	private static final String TIMER_LOGGER_FOCUS_ON = "timerlogger.focus.on";
-	private static final String TIMER_LOGGER_TITOLO = "timerlogger.title";
+    private static final String TIMER_LOGGER_FOCUS_ON = "timerlogger.focus.on";
+    private static final String TIMER_LOGGER_TITOLO = "timerlogger.title";
 
-	public static final Logger logger = LoggerFactory
-			.getLogger(StartTimerWindow.class);
-	public static final Logger reportLogger = LoggerFactory
-			.getLogger(ApplicationInfo.REPORT_LOGGER);
+    public static final Logger logger = LoggerFactory
+            .getLogger(StartTimerWindow.class);
+    public static final Logger reportLogger = LoggerFactory
+            .getLogger(ApplicationInfo.REPORT_LOGGER);
 
-	private static final long serialVersionUID = 4105760033118242900L;
+    private static final long serialVersionUID = 4105760033118242900L;
 
-	private JTextArea taFocusOn;
-	private JTextField tfTitle;
-	private JTextField txtDurata;
+    private JTextArea taFocusOn;
+    private JTextField tfTitle;
+    private JTextField txtDurata;
 
-	private ValidatorService validatorService = null;
+    private ValidatorService validatorService = null;
 
-	public StartTimerWindow() {
-		initComponents();
-	}
+    public StartTimerWindow() {
+        initComponents();
+    }
 
-	public StartTimerWindow(String title, String note) {
-		initComponents();
-		tfTitle.setText(title);
-		taFocusOn.setText(note);
-	}
+    public StartTimerWindow(String title, String note) {
+        initComponents();
+        tfTitle.setText(title);
+        taFocusOn.setText(note);
+    }
 
-	private void initComponents() {
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+    private void initComponents() {
+        // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
 
-		JTabbedPane tabTimers = new JTabbedPane();
+        JTabbedPane tabTimers = new JTabbedPane();
 
-		tabTimers.addTab(I18N.getLabel(this.getClass(), TAB_NEW_TIMER_LABEL),
-				getPnlNewTimer());
+        tabTimers.addTab(I18N.getLabel(this.getClass(), TAB_NEW_TIMER_LABEL),
+                getPnlNewTimer());
 
-		tabTimers.addTab(I18N.getLabel(this.getClass(), TAB_TIMER_LIST_LABEL),
-				new JPanel());
+        tabTimers.addTab(I18N.getLabel(this.getClass(), TAB_TIMER_LIST_LABEL),
+                new JPanel());
 
-		ChangeListener changeListener = new TabbedPaneChangeListener();
+        ChangeListener changeListener = new TabbedPaneChangeListener();
 
-		tabTimers.addChangeListener(changeListener);
+        tabTimers.addChangeListener(changeListener);
 
-		getContentPane().add(tabTimers);
+        getContentPane().add(tabTimers);
 
-		validatorService = (ValidatorService) Register
-				.get(ValidatorService.class);
+        validatorService = (ValidatorService) Register
+                .get(ValidatorService.class);
 
-		getBasicDao();
+        getBasicDao();
 
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent evt) {
-				// do not close the application from here ...
-			}
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                // do not close the application from here ...
+            }
 
-		});
-	}
+        });
+    }
 
-	private Component getPnlNewTimer() {
-		setTitle(I18N.getLabel(getClass(), "window.title"));
-		JPanel pnlNewTimer = new JPanel();
-		LayoutManager layout = new MigLayout("flowy", "[328.00][grow,fill]",
-				"[][][][][]");
-		taFocusOn = new JTextArea();
-		taFocusOn.setWrapStyleWord(true);
-		JScrollPane spFocusOn = new JScrollPane();
-		tfTitle = new JTextField(30);
-		JButton btnStart = new JButton();
+    private Component getPnlNewTimer() {
+        setTitle(I18N.getLabel(getClass(), "window.title"));
+        JPanel pnlNewTimer = new JPanel();
+        LayoutManager layout = new MigLayout("flowy", "[328.00][grow,fill]",
+                "[][][][][]");
+        taFocusOn = new JTextArea();
+        taFocusOn.setWrapStyleWord(true);
+        JScrollPane spFocusOn = new JScrollPane();
+        tfTitle = new JTextField(30);
+        JButton btnStart = new JButton();
 
-		pnlNewTimer.setLayout(layout);
-		btnStart.setText(I18N.getLabel(this.getClass(),
-				TAB_NEW_TIMER_BTN_START_LABEL));
-		taFocusOn.setColumns(20);
-		taFocusOn.setForeground(new Color(0, 153, 0));
-		taFocusOn.setRows(5);
-		taFocusOn.setTabSize(2);
-		taFocusOn.setText(I18N.getLabel(this.getClass(),
-				TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT));
-		taFocusOn.setToolTipText(I18N.getLabel(this.getClass(),
-				TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP));
-		spFocusOn.setViewportView(taFocusOn);
-		taFocusOn.getAccessibleContext().setAccessibleName("taFocusOn");
+        pnlNewTimer.setLayout(layout);
+        btnStart.setText(I18N.getLabel(this.getClass(),
+                TAB_NEW_TIMER_BTN_START_LABEL));
+        taFocusOn.setColumns(20);
+        taFocusOn.setForeground(new Color(0, 153, 0));
+        taFocusOn.setRows(5);
+        taFocusOn.setTabSize(2);
+        taFocusOn.setText(I18N.getLabel(this.getClass(),
+                TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TEXT));
+        taFocusOn.setToolTipText(I18N.getLabel(this.getClass(),
+                TAB_NEW_TIMER_FOCUS_ON_TEXT_AREA_TOOL_TIP));
+        spFocusOn.setViewportView(taFocusOn);
+        taFocusOn.getAccessibleContext().setAccessibleName("taFocusOn");
 
-		btnStart.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				storeDataAndStartTimer();
-			}
-		});
-		btnStart.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent evt) {
-				logger.debug(evt.getKeyCode() + ", " + evt.getKeyChar());
-				if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
-					storeDataAndStartTimer();
-				}
-			}
-		});
+        btnStart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                storeDataAndStartTimer();
+            }
+        });
+        btnStart.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                logger.debug(evt.getKeyCode() + ", " + evt.getKeyChar());
+                if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
+                    storeDataAndStartTimer();
+                }
+            }
+        });
 
-		JLabel lblTitle = new JLabel(I18N.getLabel(this.getClass(),
-				TAB_NEW_TIMER_TITLE_LABEL));
+        JLabel lblTitle = new JLabel(I18N.getLabel(this.getClass(),
+                TAB_NEW_TIMER_TITLE_LABEL));
 
-		pnlNewTimer.add(lblTitle, "cell 0 0");
-		pnlNewTimer.add(tfTitle, "cell 0 1 2 1,growx");
-		JLabel lblFocusOn = new JLabel(I18N.getLabel(this.getClass(),
-				TAB_NEW_TIMER_FOCUS_ON_LABEL));
-		pnlNewTimer.add(lblFocusOn, "cell 0 2");
-		pnlNewTimer.add(spFocusOn, "cell 0 3 2 1,growx");
-		pnlNewTimer.add(btnStart, "cell 0 4 2 1,growx");
+        pnlNewTimer.add(lblTitle, "cell 0 0");
+        pnlNewTimer.add(tfTitle, "cell 0 1 2 1,growx");
+        JLabel lblFocusOn = new JLabel(I18N.getLabel(this.getClass(),
+                TAB_NEW_TIMER_FOCUS_ON_LABEL));
+        pnlNewTimer.add(lblFocusOn, "cell 0 2");
+        pnlNewTimer.add(spFocusOn, "cell 0 3 2 1,growx");
+        pnlNewTimer.add(btnStart, "cell 0 4 2 1,growx");
 
-		Box horizontalBox = Box.createHorizontalBox();
-		pnlNewTimer.add(horizontalBox, "flowx,cell 1 0");
+        Box horizontalBox = Box.createHorizontalBox();
+        pnlNewTimer.add(horizontalBox, "flowx,cell 1 0");
 
-		JLabel lblDurata = new JLabel(I18N.getLabel(this.getClass(),
-				TAB_NEW_TIMER_DURATA_LABEL));
-		lblDurata.setHorizontalAlignment(SwingConstants.RIGHT);
-		pnlNewTimer.add(lblDurata, "cell 1 0,alignx right");
-		lblDurata.setLabelFor(txtDurata);
+        JLabel lblDurata = new JLabel(I18N.getLabel(this.getClass(),
+                TAB_NEW_TIMER_DURATA_LABEL));
+        lblDurata.setHorizontalAlignment(SwingConstants.RIGHT);
+        pnlNewTimer.add(lblDurata, "cell 1 0,alignx right");
+        lblDurata.setLabelFor(txtDurata);
 
-		txtDurata = new JTextField("20");
-		txtDurata.setToolTipText(I18N.getLabel(this.getClass(),
-				TAB_NEW_TIMER_DURATA_TOOL_TIP));
-		pnlNewTimer.add(txtDurata, "cell 1 0,alignx center");
-		txtDurata.setColumns(2);
+        txtDurata = new JTextField("20");
+        txtDurata.setToolTipText(I18N.getLabel(this.getClass(),
+                TAB_NEW_TIMER_DURATA_TOOL_TIP));
+        pnlNewTimer.add(txtDurata, "cell 1 0,alignx center");
+        txtDurata.setColumns(2);
 
-		return pnlNewTimer;
-	}
+        return pnlNewTimer;
+    }
 
-	private void storeDataAndStartTimer() {
+    private void storeDataAndStartTimer() {
 
-		// prepare data to store
-		Tomato tomato = new Tomato(taFocusOn.getText());
-		tomato.setTitle(tfTitle.getText());
+        // prepare data to store
+        Tomato tomato = new Tomato(taFocusOn.getText());
+        tomato.setTitle(tfTitle.getText());
 
-		try {
-			tomato.setDuration(Integer.parseInt(txtDurata.getText()));
-		} catch (NumberFormatException ex) {
-			tomato.setDuration(1);
-		}
+        try {
+            tomato.setDuration(Integer.parseInt(txtDurata.getText()));
+        } catch (NumberFormatException ex) {
+            tomato.setDuration(1);
+        }
 
-		List<String> errorMessages = validatorService.validate(tomato);
-		int response = 0;
-		if (errorMessages.size() > 0) {
-			String message = StringUtils.join(errorMessages, "\n");
-			response = JOptionPane.showOptionDialog(null, message,
-					I18N.getLabel(this.getClass(), "error.box.title"),
-					JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-					null, new Object[] {}, null);
-		}
+        List<String> errorMessages = validatorService.validate(tomato);
+        int response = 0;
+        if (errorMessages.size() > 0) {
+            String message = StringUtils.join(errorMessages, System.getProperty("line.separator"));
+            response = JOptionPane.showOptionDialog(null, message,
+                    I18N.getLabel(this.getClass(), "error.box.title"),
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, new Object[] {}, null);
+        }
 
-		if (response > -1) {
+        if (response > -1) {
 
-			getBasicDao().save(tomato);
-			logger.debug(tomato.toString());
+            getBasicDao().save(tomato);
+            logger.debug(tomato.toString());
 
-			StringBuilder sb = new StringBuilder();
-			sb.append((new LocalDateTime()).toString("dd/MM/yyyy HH:mm"))
-					.append("\n");
-			sb.append(I18N.getLabel(this.getClass(), TIMER_LOGGER_TITOLO))
-					.append(tomato.getTitle()).append("\n");
-			sb.append(I18N.getLabel(this.getClass(), TIMER_LOGGER_FOCUS_ON))
-					.append(tomato.getFocusOn());
+            StringBuilder sb = new StringBuilder();
+//            sb.append((new LocalDateTime()).toString("dd/MM/yyyy HH:mm"))
+//                    .append(System.getProperty("line.separator"));
 
-			reportLogger.info(sb.toString());
+            sb.append(
+                    OrgModeDecorator.ORG_MODE_LEVEL_1
+                            + I18N.getLabel(this.getClass(),
+                                    TIMER_LOGGER_TITOLO))
 
-			disableNewTimerMenuItem();
+            .append(tomato.getTitle()).append(System.getProperty("line.separator"));
+            sb.append(
+                    OrgModeDecorator.ORG_MODE_LEVEL_2
+                            + I18N.getLabel(this.getClass(),
+                                    TIMER_LOGGER_FOCUS_ON)).append(
+                    tomato.getFocusOn());
 
-			startCountdown(tomato);
+            reportLogger.info(sb.toString());
 
-			UINotificationService uiNotificationService = new UINotificationService(
-					tomato);
-			Register.put(UINotificationService.class, uiNotificationService);
+            disableNewTimerMenuItem();
 
-			closeThisWindow();
-		}
-	}
+            startCountdown(tomato);
 
-	private void disableNewTimerMenuItem() {
-		TrayIcon trayIcon = (TrayIcon) Register.get(TrayIcon.class);
-		trayIcon.getPopupMenu().getItem(1).setEnabled(false);
-	}
+            UINotificationService uiNotificationService = new UINotificationService(
+                    tomato);
+            Register.put(UINotificationService.class, uiNotificationService);
 
-	private void closeThisWindow() {
-		setVisible(false);
-		dispose();
-		// WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-		// Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-	}
+            closeThisWindow();
+        }
+    }
 
-	private void startCountdown(Tomato tomato) {
-		Countdown countdown = new Countdown(tomato.getDuration());
-		Callable<JFrame> task = new OpenEndTimerWindow(tomato);
-		countdown.start(task);
-	}
+    private void disableNewTimerMenuItem() {
+        TrayIcon trayIcon = (TrayIcon) Register.get(TrayIcon.class);
+        trayIcon.getPopupMenu().getItem(1).setEnabled(false);
+    }
 
-	private HibernateBasicDaoImpl getBasicDao() {
-		HibernateBasicDaoImpl basicDao = (HibernateBasicDaoImpl) Register
-				.get(HibernateBasicDaoImpl.class);
+    private void closeThisWindow() {
+        setVisible(false);
+        dispose();
+        // WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        // Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+    }
 
-		if (basicDao != null) {
-			return basicDao;
-		} else {
+    private void startCountdown(Tomato tomato) {
+        Countdown countdown = new Countdown(tomato.getDuration());
+        Callable<JFrame> task = new OpenEndTimerWindow(tomato);
+        countdown.start(task);
+    }
 
-			basicDao = new HibernateBasicDaoImpl();
-			Register.put(HibernateBasicDaoImpl.class, basicDao);
+    private HibernateBasicDaoImpl getBasicDao() {
+        HibernateBasicDaoImpl basicDao = (HibernateBasicDaoImpl) Register
+                .get(HibernateBasicDaoImpl.class);
 
-		}
-		return basicDao;
-	}
+        if (basicDao != null) {
+            return basicDao;
+        } else {
+
+            basicDao = new HibernateBasicDaoImpl();
+            Register.put(HibernateBasicDaoImpl.class, basicDao);
+
+        }
+        return basicDao;
+    }
 }

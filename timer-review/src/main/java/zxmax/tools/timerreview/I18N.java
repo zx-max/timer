@@ -21,14 +21,14 @@ import java.util.ResourceBundle;
 
 public class I18N {
 
-	public static String getLabel(Class clazz, String key) {
+    public static String getLabel(Class clazz, String key) {
 
-		String baseName = clazz.getCanonicalName();
+        String baseName = clazz.getCanonicalName();
 
-		ResourceBundle labels = ResourceBundle.getBundle(baseName,
-				Locale.getDefault());
+        ResourceBundle labels = ResourceBundle.getBundle(baseName,
+                Locale.getDefault());
 
-		return labels.getString(key);
-	}
+        return labels.getString(key);
+    }
 
 }

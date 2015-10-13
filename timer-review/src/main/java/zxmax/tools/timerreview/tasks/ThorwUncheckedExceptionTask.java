@@ -23,14 +23,14 @@ import org.slf4j.LoggerFactory;
 
 public class ThorwUncheckedExceptionTask implements Callable<Object> {
 
-	public static final Logger logger = LoggerFactory
-			.getLogger(ThorwUncheckedExceptionTask.class);
-	public static final String BLA_BLA_BLA = "bla bla bla";
+    public static final Logger logger = LoggerFactory
+            .getLogger(ThorwUncheckedExceptionTask.class);
+    public static final String BLA_BLA_BLA = "bla bla bla";
 
-	@Override
-	public Object call() throws Exception {
-		logger.debug("call from ThorwUncheckedExceptionTask");
-		throw new RuntimeException(BLA_BLA_BLA);
-	}
+    @Override
+    public Object call() throws Exception {
+        logger.debug("call from ThorwUncheckedExceptionTask");
+        throw new RuntimeException(BLA_BLA_BLA);
+    }
 
 }

@@ -24,18 +24,18 @@ import zxmax.tools.timerreview.domain.Tomato;
 
 public class UINotificationServiceTest {
 
-	/**
-	 * Test of getToolTipMessage method, of class UINotificationService.
-	 */
-	@Test
-	public void testGetToolTipMessage() {
-		System.out.println("getToolTipMessage");
-		Tomato tomato = new Tomato("");
-		final int duration = 20;
-		tomato.setDuration(duration);
-		UINotificationService instance = new UINotificationService(tomato);
-		String result = instance.getToolTipMessage();
-		assertTrue(result.contains("min: " + duration));
-	}
+    /**
+     * Test of getToolTipMessage method, of class UINotificationService.
+     */
+    @Test
+    public void testGetToolTipMessage() {
+        System.out.println("getToolTipMessage");
+        Tomato tomato = new Tomato("");
+        final int duration = 20;
+        tomato.setDuration(duration);
+        UINotificationService instance = new UINotificationService(tomato);
+        String result = instance.getToolTipMessage();
+        assertTrue(result.contains("min: " + duration));
+    }
 
 }

@@ -27,44 +27,44 @@ import org.slf4j.LoggerFactory;
 
 public class Countdown {
 
-	public static final Logger LOGGER = LoggerFactory
-			.getLogger(Countdown.class);
+    public static final Logger LOGGER = LoggerFactory
+            .getLogger(Countdown.class);
 
-	private final long duration;
-	private final TimeUnit timeUnit;
+    private final long duration;
+    private final TimeUnit timeUnit;
 
-	private final ScheduledExecutorService executorService = Executors
-			.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService executorService = Executors
+            .newSingleThreadScheduledExecutor();
 
-	public Countdown() {
-		duration = Integer.valueOf(PropertyLoader.getProperty("duration"));
-		timeUnit = Enum.valueOf(TimeUnit.class,
-				PropertyLoader.getProperty("time.measurement.unit"));
+    public Countdown() {
+        duration = Integer.valueOf(PropertyLoader.getProperty("duration"));
+        timeUnit = Enum.valueOf(TimeUnit.class,
+                PropertyLoader.getProperty("time.measurement.unit"));
 
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info("timer: " + duration + " " + timeUnit);
-		}
-	}
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("timer: " + duration + " " + timeUnit);
+        }
+    }
 
-	public Countdown(final long duration) {
-		this.duration = duration;
-		timeUnit = TimeUnit.MINUTES;
+    public Countdown(final long duration) {
+        this.duration = duration;
+        timeUnit = TimeUnit.MINUTES;
 
-		if (LOGGER.isInfoEnabled()) {
-			LOGGER.info("timer: " + duration + " " + timeUnit);
-		}
-	}
+        if (LOGGER.isInfoEnabled()) {
+            LOGGER.info("timer: " + duration + " " + timeUnit);
+        }
+    }
 
-	public void start(final Callable task) {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("before timer");
-		}
-		executorService.schedule(task, duration, timeUnit);
+    public void start(final Callable task) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("before timer");
+        }
+        executorService.schedule(task, duration, timeUnit);
 
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("after timer");
-		}
-		executorService.shutdown();
-	}
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("after timer");
+        }
+        executorService.shutdown();
+    }
 
 }

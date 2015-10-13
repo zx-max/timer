@@ -36,40 +36,40 @@ import ch.qos.logback.core.read.ListAppender;
 //@ContextConfiguration
 public class CountdownTest /* extends AbstractJUnit4SpringContextTests */{
 
-	private ListAppender<ILoggingEvent> listAppender;
+    private ListAppender<ILoggingEvent> listAppender;
 
-	public CountdownTest() {
-		PropertyLoader
-				.loadFromClassPathAsInputStream(PropertyLoaderTest.TEST_TIMER_REVIEW_PROPERTIES_AS_PROPERTIES_FILE);
-	}
+    public CountdownTest() {
+        PropertyLoader
+                .loadFromClassPathAsInputStream(PropertyLoaderTest.TEST_TIMER_REVIEW_PROPERTIES_AS_PROPERTIES_FILE);
+    }
 
-	// http://stackoverflow.com/questions/3803184/setting-logback-appender-path-programmatically
-	@Test
-	public void should_log_exception() throws InterruptedException {
-		LoggerContext loggerContext = (LoggerContext) LoggerFactory
-				.getILoggerFactory();
-		listAppender = new ListAppender<ILoggingEvent>();
-		listAppender.start();
+    // http://stackoverflow.com/questions/3803184/setting-logback-appender-path-programmatically
+    @Test
+    public void should_log_exception() throws InterruptedException {
+        LoggerContext loggerContext = (LoggerContext) LoggerFactory
+                .getILoggerFactory();
+        listAppender = new ListAppender<ILoggingEvent>();
+        listAppender.start();
 
-		// attach the rolling file appender to the logger of your choice
-		Logger logbackLogger = loggerContext
-				.getLogger(LogExceptionAspect.class);
-		logbackLogger.addAppender(listAppender);
+        // attach the rolling file appender to the logger of your choice
+        Logger logbackLogger = loggerContext
+                .getLogger(LogExceptionAspect.class);
+        logbackLogger.addAppender(listAppender);
 
-		// OPTIONAL: print logback internal status messages
-		// StatusPrinter.print(loggerContext);
+        // OPTIONAL: print logback internal status messages
+        // StatusPrinter.print(loggerContext);
 
-		Countdown countdown = new Countdown();
-		Callable<Object> task = new ThorwUncheckedExceptionTask();
-		countdown.start(task);
-		Thread.sleep(6000);
-		assertThat(listAppender.list.size(), is(2));
-		ILoggingEvent event = listAppender.list.get(1);
-		assertTrue(LogExceptionAspect.CATCH_BLOCK.equals(event
-				.getFormattedMessage()));
-		assertTrue(ThorwUncheckedExceptionTask.BLA_BLA_BLA.equals(event
-				.getThrowableProxy().getMessage()));
-		assertNotNull(event.getThrowableProxy()
-				.getStackTraceElementProxyArray());
-	}
+        Countdown countdown = new Countdown();
+        Callable<Object> task = new ThorwUncheckedExceptionTask();
+        countdown.start(task);
+        Thread.sleep(6000);
+        assertThat(listAppender.list.size(), is(2));
+        ILoggingEvent event = listAppender.list.get(1);
+        assertTrue(LogExceptionAspect.CATCH_BLOCK.equals(event
+                .getFormattedMessage()));
+        assertTrue(ThorwUncheckedExceptionTask.BLA_BLA_BLA.equals(event
+                .getThrowableProxy().getMessage()));
+        assertNotNull(event.getThrowableProxy()
+                .getStackTraceElementProxyArray());
+    }
 }

@@ -25,29 +25,29 @@ import zxmax.tools.timerreview.gui.EndTimerWindow;
 
 public class TomatoReviewValidator extends ObjectValidator {
 
-	public TomatoReviewValidator() {
-	}
+    public TomatoReviewValidator() {
+    }
 
-	List<String> validate(Object objectToValidate) {
-		List<String> errorMessages = new ArrayList<String>();
+    List<String> validate(Object objectToValidate) {
+        List<String> errorMessages = new ArrayList<String>();
 
-		if (objectToValidate instanceof TomatoReview) {
-			TomatoReview tomatoReview = (TomatoReview) objectToValidate;
+        if (objectToValidate instanceof TomatoReview) {
+            TomatoReview tomatoReview = (TomatoReview) objectToValidate;
 
-			if (tomatoReview.getReallyDone() != null
-					&& tomatoReview.getReallyDone().length() > 500) {
-				errorMessages.add(I18N.getLabel(EndTimerWindow.class,
-						"tomatoreview.reallydone.longer.than.max"));
-			}
+            if (tomatoReview.getReallyDone() != null
+                    && tomatoReview.getReallyDone().length() > 500) {
+                errorMessages.add(I18N.getLabel(EndTimerWindow.class,
+                        "tomatoreview.reallydone.longer.than.max"));
+            }
 
-			if (tomatoReview.getProblemsRaised() != null
-					&& tomatoReview.getProblemsRaised().length() > 500) {
-				errorMessages.add(I18N.getLabel(EndTimerWindow.class,
-						"tomatoreview.problemraised.longer.than.max"));
-			}
+            if (tomatoReview.getProblemsRaised() != null
+                    && tomatoReview.getProblemsRaised().length() > 500) {
+                errorMessages.add(I18N.getLabel(EndTimerWindow.class,
+                        "tomatoreview.problemraised.longer.than.max"));
+            }
 
-		}
+        }
 
-		return errorMessages;
-	}
+        return errorMessages;
+    }
 }
