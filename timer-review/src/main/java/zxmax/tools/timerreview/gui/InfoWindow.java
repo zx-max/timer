@@ -29,168 +29,168 @@ import zxmax.tools.timerreview.domain.ApplicationInfo;
 
 public class InfoWindow extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField txtWebAddress;
-	private JTextField txtAuthorName;
-	private JTextField txtAuthorEmail;
-	private JLabel lblWebAddress;
-	private JLabel lblSoftpedia;
-	private JTextField txtSoftPediaLink;
-	private JLabel lblSourceforge;
-	private JTextField txtSourceForgeLink;
+    private JPanel contentPane;
+    private JTextField txtWebAddress;
+    private JTextField txtAuthorName;
+    private JTextField txtAuthorEmail;
+    private JLabel lblWebAddress;
+    private JLabel lblSoftpedia;
+    private JTextField txtSoftPediaLink;
+    private JLabel lblSourceforge;
+    private JTextField txtSourceForgeLink;
 
-	private JLabel lblTimerLog;
-	private JTextField txtTimerLog;
-	private JLabel lblApplicationLog;
-	private JTextField txtApplicationLog;
-	private JLabel lblApplicationVersion;
-	private JTextField txtApplicationVersion;
+    private JLabel lblTimerLog;
+    private JTextField txtTimerLog;
+    private JLabel lblApplicationLog;
+    private JTextField txtApplicationLog;
+    private JLabel lblApplicationVersion;
+    private JTextField txtApplicationVersion;
 
-	public InfoWindow() {
-		initComponents();
-	}
+    public InfoWindow() {
+        initComponents();
+    }
 
-	private void initComponents() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    private void initComponents() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		setBounds(100, 100, 720, 350);
-		setResizable(false);
-		setTitle(I18N.getLabel(getClass(), "window.title"));
+        setBounds(100, 100, 720, 350);
+        setResizable(false);
+        setTitle(I18N.getLabel(getClass(), "window.title"));
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(new MigLayout("", "[][grow]", "[][][][][]"));
 
-		addAuthorNameToContentPane("7");
+        addAuthorNameToContentPane("7");
 
-		addEmailToContentPane("6");
+        addEmailToContentPane("6");
 
-		addWebAddressToContenPane("5");
+        addWebAddressToContenPane("5");
 
-		addSoftPediaToContenPane("4");
+        addSoftPediaToContenPane("4");
 
-		addSourceForgeToContentPane("3");
+        addSourceForgeToContentPane("3");
 
-		addReportFilePathToContentPane("2");
+        addReportFilePathToContentPane("2");
 
-		addApplicationLogFilePathToContentPane("1");
+        addApplicationLogFilePathToContentPane("1");
 
-		addApplicationVersionToContentPane("0");
+        addApplicationVersionToContentPane("0");
 
-	}
+    }
 
-	private void addApplicationVersionToContentPane(String row) {
-		lblApplicationVersion = new JLabel("version");
-		txtApplicationVersion = new JTextField();
-		txtApplicationVersion.setEditable(false);
-		ApplicationInfo ai = (ApplicationInfo) Register
-				.get(ApplicationInfo.class);
-		txtApplicationVersion.setText(ai.getImplementationVersion());
+    private void addApplicationVersionToContentPane(String row) {
+        lblApplicationVersion = new JLabel("version");
+        txtApplicationVersion = new JTextField();
+        txtApplicationVersion.setEditable(false);
+        ApplicationInfo ai = (ApplicationInfo) Register
+                .get(ApplicationInfo.class);
+        txtApplicationVersion.setText(ai.getImplementationVersion());
 
-		contentPane.add(lblApplicationVersion, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
-		contentPane.add(txtApplicationVersion, "cell 1 " + row
-				+ ",growx,aligny baseline");
-	}
+        contentPane.add(lblApplicationVersion, "cell 0 " + row
+                + ",alignx left,aligny baseline");
+        contentPane.add(txtApplicationVersion, "cell 1 " + row
+                + ",growx,aligny baseline");
+    }
 
-	private void addApplicationLogFilePathToContentPane(String row) {
-		lblApplicationLog = new JLabel("log");
-		txtApplicationLog = new JTextField();
-		txtApplicationLog.setEditable(false);
-		txtApplicationLog.setText(System.getProperty("user.home")
-				+ System.getProperty("file.separator") + ".timer-review-005"
-				+ System.getProperty("file.separator") + "logs"
-				+ System.getProperty("file.separator") + "timer-review.log");
+    private void addApplicationLogFilePathToContentPane(String row) {
+        lblApplicationLog = new JLabel("log");
+        txtApplicationLog = new JTextField();
+        txtApplicationLog.setEditable(false);
+        txtApplicationLog.setText(System.getProperty("user.home")
+                + System.getProperty("file.separator") + ".timer-review"
+                + System.getProperty("file.separator") + "logs"
+                + System.getProperty("file.separator") + "timer-review.log");
 
-		contentPane.add(lblApplicationLog, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
-		contentPane.add(txtApplicationLog, "cell 1 " + row
-				+ ",growx,aligny baseline");
+        contentPane.add(lblApplicationLog, "cell 0 " + row
+                + ",alignx left,aligny baseline");
+        contentPane.add(txtApplicationLog, "cell 1 " + row
+                + ",growx,aligny baseline");
 
-	}
+    }
 
-	private void addReportFilePathToContentPane(String row) {
-		lblTimerLog = new JLabel("report");
-		txtTimerLog = new JTextField();
-		txtTimerLog.setEditable(false);
-		txtTimerLog.setText(System.getProperty("user.home")
-				+ System.getProperty("file.separator") + ".timer-review-005"
-				+ System.getProperty("file.separator") + "logs"
-				+ System.getProperty("file.separator") + "report.txt");
+    private void addReportFilePathToContentPane(String row) {
+        lblTimerLog = new JLabel("report");
+        txtTimerLog = new JTextField();
+        txtTimerLog.setEditable(false);
+        txtTimerLog.setText(System.getProperty("user.home")
+                + System.getProperty("file.separator") + ".timer-review"
+                + System.getProperty("file.separator") + "logs"
+                + System.getProperty("file.separator") + "report.txt");
 
-		contentPane.add(lblTimerLog, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
-		contentPane
-				.add(txtTimerLog, "cell 1 " + row + ",growx,aligny baseline");
+        contentPane.add(lblTimerLog, "cell 0 " + row
+                + ",alignx left,aligny baseline");
+        contentPane
+                .add(txtTimerLog, "cell 1 " + row + ",growx,aligny baseline");
 
-	}
+    }
 
-	private void addSourceForgeToContentPane(String row) {
-		lblSourceforge = new JLabel("sourceforge");
-		contentPane.add(lblSourceforge, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
+    private void addSourceForgeToContentPane(String row) {
+        lblSourceforge = new JLabel("sourceforge");
+        contentPane.add(lblSourceforge, "cell 0 " + row
+                + ",alignx left,aligny baseline");
 
-		txtSourceForgeLink = new JTextField(row);
-		txtSourceForgeLink.setEditable(false);
-		txtSourceForgeLink
-				.setText("http://sourceforge.net/projects/timerreview/");
-		contentPane.add(txtSourceForgeLink, "cell 1 " + row
-				+ ",growx,aligny baseline");
-		txtSourceForgeLink.setColumns(10);
-	}
+        txtSourceForgeLink = new JTextField(row);
+        txtSourceForgeLink.setEditable(false);
+        txtSourceForgeLink
+                .setText("http://sourceforge.net/projects/timerreview/");
+        contentPane.add(txtSourceForgeLink, "cell 1 " + row
+                + ",growx,aligny baseline");
+        txtSourceForgeLink.setColumns(10);
+    }
 
-	private void addSoftPediaToContenPane(String row) {
-		lblSoftpedia = new JLabel("softpedia:");
-		contentPane.add(lblSoftpedia, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
+    private void addSoftPediaToContenPane(String row) {
+        lblSoftpedia = new JLabel("softpedia:");
+        contentPane.add(lblSoftpedia, "cell 0 " + row
+                + ",alignx left,aligny baseline");
 
-		txtSoftPediaLink = new JTextField();
-		txtSoftPediaLink.setEditable(false);
-		txtSoftPediaLink
-				.setText("http://www.softpedia.com/get/Desktop-Enhancements/Clocks-Time-Management/Timer-review.shtml");
-		contentPane.add(txtSoftPediaLink, "cell 1 " + row
-				+ ",growx,aligny baseline");
-		txtSoftPediaLink.setColumns(10);
-	}
+        txtSoftPediaLink = new JTextField();
+        txtSoftPediaLink.setEditable(false);
+        txtSoftPediaLink
+                .setText("http://www.softpedia.com/get/Desktop-Enhancements/Clocks-Time-Management/Timer-review.shtml");
+        contentPane.add(txtSoftPediaLink, "cell 1 " + row
+                + ",growx,aligny baseline");
+        txtSoftPediaLink.setColumns(10);
+    }
 
-	private void addWebAddressToContenPane(String row) {
-		lblWebAddress = new JLabel(I18N.getLabel(getClass(), "web"));
-		contentPane.add(lblWebAddress, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
+    private void addWebAddressToContenPane(String row) {
+        lblWebAddress = new JLabel(I18N.getLabel(getClass(), "web"));
+        contentPane.add(lblWebAddress, "cell 0 " + row
+                + ",alignx left,aligny baseline");
 
-		txtWebAddress = new JTextField();
-		txtWebAddress.setToolTipText("http://www.timerreview.net/");
-		txtWebAddress.setEditable(false);
-		txtWebAddress.setText("http://www.timerreview.net/");
-		contentPane.add(txtWebAddress, "cell 1 " + row
-				+ ",growx,aligny baseline");
-		txtWebAddress.setColumns(10);
-	}
+        txtWebAddress = new JTextField();
+        txtWebAddress.setToolTipText("http://www.timerreview.net/");
+        txtWebAddress.setEditable(false);
+        txtWebAddress.setText("http://www.timerreview.net/");
+        contentPane.add(txtWebAddress, "cell 1 " + row
+                + ",growx,aligny baseline");
+        txtWebAddress.setColumns(10);
+    }
 
-	private void addEmailToContentPane(String row) {
-		JLabel lblEmail = new JLabel(I18N.getLabel(getClass(), "mail"));
-		contentPane.add(lblEmail, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
+    private void addEmailToContentPane(String row) {
+        JLabel lblEmail = new JLabel(I18N.getLabel(getClass(), "mail"));
+        contentPane.add(lblEmail, "cell 0 " + row
+                + ",alignx left,aligny baseline");
 
-		txtAuthorEmail = new JTextField();
-		txtAuthorEmail.setEditable(false);
-		txtAuthorEmail.setText("massimiliano.parentini@gmail.com");
-		contentPane.add(txtAuthorEmail, "cell 1 " + row
-				+ ",growx,aligny baseline");
-		txtAuthorEmail.setColumns(10);
-	}
+        txtAuthorEmail = new JTextField();
+        txtAuthorEmail.setEditable(false);
+        txtAuthorEmail.setText("massimiliano.parentini@gmail.com");
+        contentPane.add(txtAuthorEmail, "cell 1 " + row
+                + ",growx,aligny baseline");
+        txtAuthorEmail.setColumns(10);
+    }
 
-	private void addAuthorNameToContentPane(String row) {
-		JLabel lblAuthorName = new JLabel(I18N.getLabel(getClass(), "author"));
-		contentPane.add(lblAuthorName, "cell 0 " + row
-				+ ",alignx left,aligny baseline");
+    private void addAuthorNameToContentPane(String row) {
+        JLabel lblAuthorName = new JLabel(I18N.getLabel(getClass(), "author"));
+        contentPane.add(lblAuthorName, "cell 0 " + row
+                + ",alignx left,aligny baseline");
 
-		txtAuthorName = new JTextField();
-		txtAuthorName.setEditable(false);
-		txtAuthorName.setText("Massimiliano Parentini");
-		contentPane.add(txtAuthorName, "cell 1 " + row
-				+ ",growx,aligny baseline");
-		txtAuthorName.setColumns(10);
-	}
+        txtAuthorName = new JTextField();
+        txtAuthorName.setEditable(false);
+        txtAuthorName.setText("Massimiliano Parentini");
+        contentPane.add(txtAuthorName, "cell 1 " + row
+                + ",growx,aligny baseline");
+        txtAuthorName.setColumns(10);
+    }
 }
