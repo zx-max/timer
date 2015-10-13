@@ -58,7 +58,9 @@
 *** DONE print log for a Org mode like editor.
 	note: if you use window, you will see: ^M 
 	at the end of every line, to get rid off of that charachters, use: M-x delete-trailing-whitespace
-	
+
+
+** VERSION ???	
 *** develop "on the job" learning tool
 based on the field (TomatoReview.problemsRaised)
 link Formazione.org and hard-to-implement.org to specif tomatos. 
