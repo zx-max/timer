@@ -45,7 +45,6 @@ import javax.swing.event.ChangeListener;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -218,7 +217,8 @@ public class StartTimerWindow extends JFrame {
         List<String> errorMessages = validatorService.validate(tomato);
         int response = 0;
         if (errorMessages.size() > 0) {
-            String message = StringUtils.join(errorMessages, System.getProperty("line.separator"));
+            String message = StringUtils.join(errorMessages,
+                    System.getProperty("line.separator"));
             response = JOptionPane.showOptionDialog(null, message,
                     I18N.getLabel(this.getClass(), "error.box.title"),
                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -231,15 +231,16 @@ public class StartTimerWindow extends JFrame {
             logger.debug(tomato.toString());
 
             StringBuilder sb = new StringBuilder();
-//            sb.append((new LocalDateTime()).toString("dd/MM/yyyy HH:mm"))
-//                    .append(System.getProperty("line.separator"));
+            // sb.append((new LocalDateTime()).toString("dd/MM/yyyy HH:mm"))
+            // .append(System.getProperty("line.separator"));
 
             sb.append(
                     OrgModeDecorator.ORG_MODE_LEVEL_1
                             + I18N.getLabel(this.getClass(),
                                     TIMER_LOGGER_TITOLO))
 
-            .append(tomato.getTitle()).append(System.getProperty("line.separator"));
+            .append(tomato.getTitle())
+                    .append(System.getProperty("line.separator"));
             sb.append(
                     OrgModeDecorator.ORG_MODE_LEVEL_2
                             + I18N.getLabel(this.getClass(),

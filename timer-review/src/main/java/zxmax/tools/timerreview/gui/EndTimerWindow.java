@@ -249,7 +249,8 @@ public class EndTimerWindow extends JFrame {
             basicDao.save(review);
             StringBuffer sb = new StringBuffer();
             sb.append("[");
-            sb.append(" " + (new LocalDateTime()).toString("dd/MM/yyyy E")  + " ");
+            sb.append(" " + (new LocalDateTime()).toString("dd/MM/yyyy E")
+                    + " ");
             sb.append(tomato.getStartTime().toString("HH:mm"));
             sb.append(" - ");
             sb.append(new LocalDateTime().toString("HH:mm"));
