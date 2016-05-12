@@ -1,4 +1,4 @@
-/target
+**/target
 /sqlDataBase
 /logs
 /strange_logs.log
