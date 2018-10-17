@@ -1,0 +1,8 @@
+rootProject.name = 'timer-review-root-pom'
+include ':timer-review'
+include ':timer-review-dao'
+include ':timer-review-domain'
+
+project(':timer-review').projectDir = "$rootDir/timer-review" as File
+project(':timer-review-dao').projectDir = "$rootDir/timer-review-dao" as File
+project(':timer-review-domain').projectDir = "$rootDir/timer-review-domain" as File

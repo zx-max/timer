@@ -1,14 +1,21 @@
 **/target
 /sqlDataBase
-/logs
+**/logs
 /strange_logs.log
 /dist
 /bin
 .#*
 *.swp
+*.iml
 *~
+**/.idea
+/.gradle
+**/build
+gradlew
+gradlew.bat
+./gradle/wrapper/gradle-wrapper.jar
 .project
-/.settings
+**/.settings
 .classpath
 *.rej
 .*.rej
@@ -72,3 +79,4 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/build/
